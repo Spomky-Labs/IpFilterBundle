@@ -73,7 +73,7 @@ If you are persisting your data via the Doctrine ORM, then your classe should li
 	use Doctrine\ORM\Mapping as ORM;
 	
 	/**
-	 * Role
+	 * Ip
 	 *
 	 * @ORM\Table(name="ips")
 	 * @ORM\Entity()
@@ -135,7 +135,7 @@ If you are persisting your data via the Doctrine ORM, then your classe should li
 	    db_driver: orm       # Driver available: orm
 	    ip_class:          Acme\IpBundle\Entity\Ip
 
-If you have your own roles manager, you can use it. It just needs to implement Spomky\IpFilterBundle\Model\IpManagerInterface.
+If you have your own Ips manager, you can use it. It just needs to implement Spomky\IpFilterBundle\Model\IpManagerInterface.
 
 	# app/config/config.yml
 	spomky_ip_filter:
