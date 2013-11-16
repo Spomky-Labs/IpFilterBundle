@@ -11,6 +11,12 @@ This bundle will help you to restrict access of your application using IP addres
 This version of the bundle requires Symfony 2.1.
 It only supports Doctrine ORM.
 
+# Policies #
+
+This bundle supports two policies: blacklist and whitelist.
+If you choose blacklist, IP stored in the database will be denied.
+Fi whitelist, only IP stored in database will be granted.
+
 # Installation #
 
 Installation is a quick 4 steps process:
