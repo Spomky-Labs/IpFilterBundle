@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Symfony2 Ip Filter Bundle",
     "keywords": ["ip", "filter", "Symfony2", "bundle"],
-    "homepage": "https://github.com/Spomky/SpomkyIpFilter",
+    "homepage": "https://github.com/Spomky/SpomkyIpFilterBundle",
     "license": "MIT",
     "authors": [
         {
