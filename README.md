@@ -1,7 +1,7 @@
 Ip Filter
 =========
 
-[![Build Status](https://secure.travis-ci.org/Spomky/SpomkyIpFilter.png?branch=master)](http://travis-ci.org/Spomky/SpomkyIpFilter)
+[![Build Status](https://travis-ci.org/Spomky/SpomkyIpFilterBundle.png?branch=master)](https://travis-ci.org/Spomky/SpomkyIpFilterBundle)
 
 
 # Prerequisites #
@@ -133,14 +133,14 @@ If you are persisting your data via the Doctrine ORM, then your classe should li
 	# app/config/config.yml
 	spomky_ip_filter:
 	    db_driver: orm       # Driver available: orm
-	    role_class:          Acme\IpBundle\Entity\Ip
+	    ip_class:          Acme\IpBundle\Entity\Ip
 
 If you have your own roles manager, you can use it. It just needs to implement Spomky\IpFilterBundle\Model\IpManagerInterface.
 
 	# app/config/config.yml
 	spomky_ip_filter:
 	    ...
-	    ip_manager: my.custom.role.manager
+	    ip_manager: my.custom.ip.manager
 
 ###Change the Access Decision Strategy###
 
