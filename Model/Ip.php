@@ -2,7 +2,7 @@
 
 namespace Spomky\IpFilterBundle\Model;
 
-class Ip implements RoleInterface
+class Ip implements IpInterface
 {
     protected $ip;
     protected $authorized;
