@@ -15,6 +15,12 @@
             <argument type="service" id="spomky_ip_filter.ip_manager"/>
             <tag name="security.voter" />
         </service>
+
+        <service id="spomky_ip_filter.range_voter" class="Spomky\IpFilterBundle\Voter\RangeVoter" public="false">
+            <argument type="service" id="service_container" strict="false" />
+            <argument type="service" id="spomky_ip_filter.range_manager"/>
+            <tag name="security.voter" />
+        </service>
     </services>
 
 </container>

@@ -15,10 +15,17 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('spomky_ip_filter');
 
-        $supportedDrivers = array('orm');
+        $supportedDrivers = array(
+            'orm',
+        );
+        $supportedPolicies = array(
+            'blacklist',
+            'whitelist',
+        );
 
         $rootNode
             ->children()
+
                 ->scalarNode('db_driver')
                     ->validate()
                         ->ifNotInArray($supportedDrivers)
@@ -28,8 +35,22 @@ class Configuration implements ConfigurationInterface
                     ->isRequired()
                     ->cannotBeEmpty()
                 ->end()
+
+                ->scalarNode('policy')
+                    ->validate()
+                        ->ifNotInArray($supportedPolicies)
+                        ->thenInvalid('The policy %s is not supported. Please choose one of ' . json_encode($supportedPolicies))
+                    ->end()
+                    ->cannotBeOverwritten()
+                    ->isRequired()
+                    ->cannotBeEmpty()
+                ->end()
+
                 ->scalarNode('ip_class')->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('ip_manager')->defaultValue('spomky_ip_filter.ip_manager.default')->end()
+
+                ->scalarNode('range_class')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('range_manager')->defaultValue('spomky_ip_filter.range_manager.default')->end()
             ->end();
 
         return $treeBuilder;

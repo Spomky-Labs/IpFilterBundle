@@ -3,6 +3,8 @@ Ip Filter
 
 [![Build Status](https://travis-ci.org/Spomky/SpomkyIpFilterBundle.png?branch=master)](https://travis-ci.org/Spomky/SpomkyIpFilterBundle)
 
+This bundle will help you to restrict access of your application using IP addresses.
+
 
 # Prerequisites #
 

@@ -2,9 +2,10 @@
 
 namespace Spomky\IpFilterBundle\Model;
 
+use Spomky\IpFilterBundle\Model\RangeRepositoryInterface;
 use Doctrine\ORM\EntityManager;
 
-class IpManager implements IpManagerInterface
+class RangeManager implements RangeManagerInterface
 {
     /**
      * @var \Doctrine\ORM\EntityManager
@@ -19,6 +20,9 @@ class IpManager implements IpManagerInterface
     public function __construct(EntityManager $em, $class) {
         $this->em = $em;
         $this->repository = $em->getRepository($class);
+        if(!$this->repository instanceof RangeRepositoryInterface) {
+            throw new \Exception("The repository of class $class must implement Spomky\IpFilterBundle\Model\RangeRepositoryInterface");
+        }
     }
 
     /**
@@ -31,7 +35,7 @@ class IpManager implements IpManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function findIp($ip) {
-        return $this->getRepository()->findOneBy(array('ip'=>$ip));
+    public function findByIp($ip) {
+        return $this->getRepository()->findOneByIp($ip);
     }
 }
