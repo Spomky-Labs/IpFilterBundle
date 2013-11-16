@@ -9,6 +9,10 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument>%spomky_ip_filter.ip.class%</argument>
         </service>
+        <service id="spomky_ip_filter.range_manager.default" class="Spomky\IpFilterBundle\Model\RangeManager">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%spomky_ip_filter.range.class%</argument>
+        </service>
 
         <service id="spomky_ip_filter.ip_voter" class="Spomky\IpFilterBundle\Voter\IpVoter" public="false">
             <argument type="service" id="service_container" strict="false" />
