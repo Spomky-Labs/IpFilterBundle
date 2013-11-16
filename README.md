@@ -48,23 +48,19 @@ Finally, enable the bundle in the kernel:
 
 ##Step 3: Create model classe##
 
-This bundle needs to persist filtered IPs to a database:
+This bundle needs to persist filtered IPs and ranges to a database:
 
-Your first job, then, is to create this classe for your application.
-This classe can look and act however you want: add any properties or methods you find useful.
+Your first job, then, is to create these classes for your application.
+These classes can look and act however you want: add any properties or methods you find useful.
 
-There is just one requirements:
-
-* They must be sure that IPs are unique
-
-In the following sections, you'll see an example of how your classe should look.
+In the following sections, you'll see an example of how your classes should look.
 
 Your classe can live inside any bundle in your application.
 For example, if you work at "Acme" company, then you might create a bundle called AcmeIpBundle and place your classes in it.
 
 ###Doctrine ORM###
 
-If you are persisting your data via the Doctrine ORM, then your classe should live in the Entity namespace of your bundle and look like this to start:
+If you are persisting your data via the Doctrine ORM, then your classes should live in the Entity namespace of your bundle and look like this to start:
 
 	<?php
 	// src/Acme/IpBundle/Entity/Ip.php
@@ -113,9 +109,60 @@ If you are persisting your data via the Doctrine ORM, then your classe should li
 	        $this->ip = $ip;
 	        return $this;
 	    }
+	}
+
+-
+
+	<?php
+	// src/Acme/IpBundle/Entity/Range.php
 	
-	    public function setAuthorized($authorized) {
-	        $this->authorized = $authorized;
+	namespace Acme\IpBundle\Entity;
+	
+	use Spomky\IpFilterBundle\Model\Range as BaseRange;
+	use Doctrine\ORM\Mapping as ORM;
+	
+	/**
+	 * Range
+	 *
+	 * @ORM\Table(name="ranges")
+	 * @ORM\Entity(repositoryClass="Acme\IpBundle\Repository\RangeRepository")
+	 */
+	class Range extends BaseRange
+	{
+	    /**
+	     * @var integer $id
+	     *
+	     * @ORM\Column(name="id", type="integer")
+	     * @ORM\Id
+	     * @ORM\GeneratedValue(strategy="AUTO")
+	     */
+	    protected $id;
+	
+	    /**
+	     * @var string $start_ip
+	     *
+	     * @ORM\Column(name="start_ip", type="string", length=255)
+	     */
+	    protected $start_ip;
+	
+	    /**
+	     * @var string $end_ip
+	     *
+	     * @ORM\Column(name="end_ip", type="string", length=255)
+	     */
+	    protected $end_ip;
+	
+	    public function getId() {
+	        return $this->id;
+	    }
+	
+	    public function setIp($start_ip) {
+	        $this->start_ip = $start_ip;
+	        return $this;
+	    }
+	
+	    public function setIp($end_ip) {
+	        $this->end_ip = $end_ip;
 	        return $this;
 	    }
 	}
@@ -134,15 +181,18 @@ If you are persisting your data via the Doctrine ORM, then your classe should li
 
 	# app/config/config.yml
 	spomky_ip_filter:
-	    db_driver: orm       # Driver available: orm
-	    ip_class:          Acme\IpBundle\Entity\Ip
+	    policy:    blacklist  # Policies available: blacklist, whitelist
+	    db_driver: orm        # Driver available: orm
+	    ip_class:             Acme\IpBundle\Entity\Ip
+	    range_class:          Acme\IpBundle\Entity\Range
 
-If you have your own Ips manager, you can use it. It just needs to implement Spomky\IpFilterBundle\Model\IpManagerInterface.
+If you have your own managers, you can use them. It just needs to implement Spomky\IpFilterBundle\Model\IpManagerInterface or Spomky\IpFilterBundle\Model\RangeManagerInterface.
 
 	# app/config/config.yml
 	spomky_ip_filter:
 	    ...
 	    ip_manager: my.custom.ip.manager
+	    range_manager: my.custom.range.manager
 
 ###Change the Access Decision Strategy###
 

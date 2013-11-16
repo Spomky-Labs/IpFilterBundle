@@ -2,7 +2,7 @@
 
 namespace Spomky\IpFilterBundle\Model;
 
-class Range implements IpInterface
+class Range implements RangeInterface
 {
     protected $start_ip;
     protected $end_ip;
