@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="spomky_ip_filter.ip_manager.default" class="Spomky\IpFilterBundle\Model\IpManager">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%spomky_ip_filter.ip.class%</argument>
+        </service>
+
+        <service id="spomky_ip_filter.ip_voter" class="Spomky\IpFilterBundle\Voter\IpVoter" public="false">
+            <argument type="service" id="service_container" strict="false" />
+            <argument type="service" id="spomky_ip_filter.ip_manager"/>
+            <tag name="security.voter" />
+        </service>
+    </services>
+
+</container>

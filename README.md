@@ -1,2 +1,155 @@
-IpFilterBundle
-==============
+Ip Filter
+=========
+
+[![Build Status](https://secure.travis-ci.org/Spomky/SpomkyIpFilter.png?branch=master)](http://travis-ci.org/Spomky/SpomkyIpFilter)
+
+
+# Prerequisites #
+
+This version of the bundle requires Symfony 2.1.
+It only supports Doctrine ORM.
+
+# Installation #
+
+Installation is a quick 4 steps process:
+
+* Download SpomkyIpFilterBundle
+* Enable the Bundle
+* Create your model class
+* Configure the SpomkyIpFilterBundle
+
+##Step 1: Install SpomkyIpFilterBundle##
+
+The preferred way to install this bundle is to rely on Composer. Just check on Packagist the version you want to install (in the following example, we used "dev-master") and add it to your composer.json:
+
+	{
+	    "require": {
+	        // ...
+	        "spomky/ip-filter-bundle": "dev-master"
+	    }
+	}
+
+##Step 2: Enable the bundle##
+
+Finally, enable the bundle in the kernel:
+
+	<?php
+	// app/AppKernel.php
+	
+	public function registerBundles()
+	{
+	    $bundles = array(
+	        // ...
+	        new Spomky\IpFilterBundle\SpomkyIpFilterBundle(),
+	    );
+	}
+
+##Step 3: Create model classe##
+
+This bundle needs to persist filtered IPs to a database:
+
+Your first job, then, is to create this classe for your application.
+This classe can look and act however you want: add any properties or methods you find useful.
+
+There is just one requirements:
+
+* They must be sure that IPs are unique
+
+In the following sections, you'll see an example of how your classe should look.
+
+Your classe can live inside any bundle in your application.
+For example, if you work at "Acme" company, then you might create a bundle called AcmeIpBundle and place your classes in it.
+
+###Doctrine ORM###
+
+If you are persisting your data via the Doctrine ORM, then your classe should live in the Entity namespace of your bundle and look like this to start:
+
+	<?php
+	// src/Acme/IpBundle/Entity/Ip.php
+	
+	namespace Acme\IpBundle\Entity;
+	
+	use Spomky\IpFilterBundle\Model\Ip as BaseIp;
+	use Doctrine\ORM\Mapping as ORM;
+	
+	/**
+	 * Role
+	 *
+	 * @ORM\Table(name="ips")
+	 * @ORM\Entity()
+	 */
+	class Ip extends BaseIp
+	{
+	    /**
+	     * @var integer $id
+	     *
+	     * @ORM\Column(name="id", type="integer")
+	     * @ORM\Id
+	     * @ORM\GeneratedValue(strategy="AUTO")
+	     */
+	    protected $id;
+	
+	    /**
+	     * @var string $ip
+	     *
+	     * @ORM\Column(name="ip", type="string", length=255)
+	     */
+	    protected $ip;
+	
+	    /**
+	     * @var boolean $authorized
+	     *
+	     * @ORM\Column(name="authorized", type="boolean")
+	     */
+	    protected $authorized;
+	
+	    public function getId() {
+	        return $this->id;
+	    }
+	
+	    public function setIp($ip) {
+	        $this->ip = $ip;
+	        return $this;
+	    }
+	
+	    public function setAuthorized($authorized) {
+	        $this->authorized = $authorized;
+	        return $this;
+	    }
+	}
+
+###Propel###
+
+	Not supported yet
+
+###Doctrine ODM###
+
+	Not supported yet
+
+##Step 4: Configure your application##
+
+### Set your class and IPs manager ###
+
+	# app/config/config.yml
+	spomky_ip_filter:
+	    db_driver: orm       # Driver available: orm
+	    role_class:          Acme\IpBundle\Entity\Ip
+
+If you have your own roles manager, you can use it. It just needs to implement Spomky\IpFilterBundle\Model\IpManagerInterface.
+
+	# app/config/config.yml
+	spomky_ip_filter:
+	    ...
+	    ip_manager: my.custom.role.manager
+
+###Change the Access Decision Strategy###
+
+In order for this bundle to take effect, you need to change the default access decision strategy, which, by default, grants access if any voter grants access.
+
+In this case, choose the unanimous strategy:
+
+    # app/config/security.yml
+    security:
+        access_decision_manager:
+            strategy: unanimous
+
