@@ -4,7 +4,7 @@
  * Doctrine Extension Function
  */
 
-namespace Spomky\IpFilterBundle\Query;
+namespace Spomky\IpFilterBundle\Doctrine\Query;
 
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
