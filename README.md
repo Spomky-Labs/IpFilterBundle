@@ -4,7 +4,9 @@ Ip Filter
 [![Build Status](https://travis-ci.org/Spomky/SpomkyIpFilterBundle.png?branch=master)](https://travis-ci.org/Spomky/SpomkyIpFilterBundle)
 
 This bundle will help you to restrict access of your application using IP addresses.
+
 It supports IPv4 and IPv6 addresses.
+
 You can set ranges to allow or deny multiple IP addresses.
 
 
@@ -16,8 +18,10 @@ It only supports Doctrine ORM.
 # Policies #
 
 This bundle supports two policies: blacklist and whitelist.
+
 If you choose blacklist, IP stored in the database will be denied.
-Fi whitelist, only IP stored in database will be granted.
+
+If whitelist, only IP stored in database will be granted.
 
 # Installation #
 
@@ -82,7 +86,7 @@ If you are persisting your data via the Doctrine ORM, then your classes should l
 	 * Ip
 	 *
 	 * @ORM\Table(name="ips")
-	 * @ORM\Entity()
+	 * @ORM\Entity(repository="Spomky\IpFilterBundle\Model\IpRepository")
 	 */
 	class Ip extends BaseIp
 	{
@@ -96,9 +100,9 @@ If you are persisting your data via the Doctrine ORM, then your classes should l
 	    protected $id;
 	
 	    /**
-	     * @var string $ip
+	     * @var ipaddress $ip
 	     *
-	     * @ORM\Column(name="ip", type="string", length=39)
+	     * @ORM\Column(name="ip", type="ipaddress")
 	     */
 	    protected $ip;
 	
@@ -133,7 +137,7 @@ If you are persisting your data via the Doctrine ORM, then your classes should l
 	 * Range
 	 *
 	 * @ORM\Table(name="ranges")
-	 * @ORM\Entity(repositoryClass="Acme\IpBundle\Repository\RangeRepository")
+	 * @ORM\Entity(repositoryClass="Spomky\IpFilterBundle\Model\RangeRepository")
 	 */
 	class Range extends BaseRange
 	{
@@ -147,16 +151,16 @@ If you are persisting your data via the Doctrine ORM, then your classes should l
 	    protected $id;
 	
 	    /**
-	     * @var string $start_ip
+	     * @var ipaddress $start_ip
 	     *
-	     * @ORM\Column(name="start_ip", type="string", length=39)
+	     * @ORM\Column(name="start_ip", type="ipaddress")
 	     */
 	    protected $start_ip;
 	
 	    /**
-	     * @var string $end_ip
+	     * @var ipaddress $end_ip
 	     *
-	     * @ORM\Column(name="end_ip", type="string", length=39)
+	     * @ORM\Column(name="end_ip", type="ipaddress")
 	     */
 	    protected $end_ip;
 	
@@ -174,14 +178,6 @@ If you are persisting your data via the Doctrine ORM, then your classes should l
 	        return $this;
 	    }
 	}
-
-###Propel###
-
-	Not supported yet
-
-###Doctrine ODM###
-
-	Not supported yet
 
 ##Step 4: Configure your application##
 
