@@ -42,7 +42,7 @@ class IpVoter implements VoterInterface
             return $ip||$range?VoterInterface::ACCESS_GRANTED:VoterInterface::ACCESS_DENIED;
         }
         if( $this->policy === 'blacklist' ) {
-            return $ip?VoterInterface::ACCESS_DENIED:VoterInterface::ACCESS_ABSTAIN;
+            return $ip||$range?VoterInterface::ACCESS_DENIED:VoterInterface::ACCESS_ABSTAIN;
         }
         return VoterInterface::ACCESS_ABSTAIN;
     }
