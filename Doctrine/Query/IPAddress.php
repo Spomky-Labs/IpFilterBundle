@@ -24,21 +24,15 @@ class IPAddress extends FunctionNode
         $parser->match(Lexer::T_IDENTIFIER);
         $parser->match(Lexer::T_OPEN_PARENTHESIS);
 
-        $this->ip = $this->convertIPAddress($parser->StringPrimary());
+        $this->ip = $parser->StringPrimary();
         
         $parser->match(Lexer::T_CLOSE_PARENTHESIS);
     }
 
     public function getSql(SqlWalker $sqlWalker)
     {
-        return 'IP(' .
+        return 'INET_ATON(' .
             $this->ip->dispatch($sqlWalker) .
         ')';
-    }
-
-    private function convertIPAddress($ip) {
-
-        $result = inet_pton($ip);
-        return $result!==false?$result:null;
     }
 }
