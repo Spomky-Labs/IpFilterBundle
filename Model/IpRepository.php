@@ -13,7 +13,7 @@ class IpRepository extends EntityRepository implements IpRepositoryInterface
         $result = $this->createQueryBuilder('r')
             ->select('r.ip')
             ->where('r.ip <= :ip')
-            ->setParameter('ip', $ip)
+            ->setParameter('ip', inet_pton($ip))
             ->setMaxResults(1)
             ->getQuery()
             ->execute();
