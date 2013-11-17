@@ -3,11 +3,9 @@ Ip Filter
 
 [![Build Status](https://travis-ci.org/Spomky/SpomkyIpFilterBundle.png?branch=master)](https://travis-ci.org/Spomky/SpomkyIpFilterBundle)
 
-This bundle will help you to restrict access of your application using IP addresses.
+This bundle will help you to restrict access of your application using IP addresses and ranges of IP addresses.
 
-It supports IPv4 and IPv6 addresses.
-
-You can set ranges to allow or deny multiple IP addresses.
+It supports both IPv4 and IPv6 addresses.
 
 
 # Prerequisites #
@@ -19,9 +17,9 @@ It only supports Doctrine ORM.
 
 This bundle supports two policies: blacklist and whitelist.
 
-If you choose blacklist, IP stored in the database will be denied.
+If you choose blacklist, all requests from an IP or an IP in a range stored in the database will be denied.
 
-If whitelist, only IP stored in database will be granted.
+If whitelist, only those stored in database will be granted.
 
 # Installation #
 
@@ -58,7 +56,7 @@ Finally, enable the bundle in the kernel:
 	    );
 	}
 
-##Step 3: Create model classe##
+##Step 3: Create IP and Range classes##
 
 This bundle needs to persist filtered IPs and ranges to a database:
 
@@ -70,9 +68,11 @@ In the following sections, you'll see an example of how your classes should look
 Your classe can live inside any bundle in your application.
 For example, if you work at "Acme" company, then you might create a bundle called AcmeIpBundle and place your classes in it.
 
-###Doctrine ORM###
+Ip Repository and Range Repository classes are important. You can use those provided wwith this bundle or extend them to include your own classes.
 
-If you are persisting your data via the Doctrine ORM, then your classes should live in the Entity namespace of your bundle and look like this to start:
+The IP field type must be "ipaddress".
+
+###Ip class:###
 
 	<?php
 	// src/Acme/IpBundle/Entity/Ip.php
@@ -105,13 +105,6 @@ If you are persisting your data via the Doctrine ORM, then your classes should l
 	     * @ORM\Column(name="ip", type="ipaddress")
 	     */
 	    protected $ip;
-	
-	    /**
-	     * @var boolean $authorized
-	     *
-	     * @ORM\Column(name="authorized", type="boolean")
-	     */
-	    protected $authorized;
 	
 	    public function getId() {
 	        return $this->id;
@@ -168,12 +161,12 @@ If you are persisting your data via the Doctrine ORM, then your classes should l
 	        return $this->id;
 	    }
 	
-	    public function setIp($start_ip) {
+	    public function setStartIp($start_ip) {
 	        $this->start_ip = $start_ip;
 	        return $this;
 	    }
 	
-	    public function setIp($end_ip) {
+	    public function setEndIp($end_ip) {
 	        $this->end_ip = $end_ip;
 	        return $this;
 	    }
@@ -181,7 +174,7 @@ If you are persisting your data via the Doctrine ORM, then your classes should l
 
 ##Step 4: Configure your application##
 
-### Set your class and IPs manager ###
+### Set your classes and managers ###
 
 	# app/config/config.yml
 	spomky_ip_filter:
@@ -209,7 +202,7 @@ In this case, choose the unanimous strategy:
         access_decision_manager:
             strategy: unanimous
 
-###Add IP Addresses support for Doctrine ###
+###Add DQL custom expression support ###
 
 	# app/config/config.yml
     orm:
@@ -218,4 +211,4 @@ In this case, choose the unanimous strategy:
             default:
                 dql:
                     string_functions:
-                        ip_address: Spomky\IpFilterBundle\Query\IPAddress
+                        conv: Spomky\IpFilterBundle\Query\Convert
