@@ -2,6 +2,7 @@
 
 namespace Spomky\IpFilterBundle\Model;
 
+use Spomky\IpFilterBundle\Model\IpRepositoryInterface;
 use Doctrine\ORM\EntityManager;
 
 class IpManager implements IpManagerInterface
@@ -19,6 +20,8 @@ class IpManager implements IpManagerInterface
     public function __construct(EntityManager $em, $class) {
         $this->em = $em;
         $this->repository = $em->getRepository($class);
+        if(!$this->repository instanceof IpRepositoryInterface) {
+            throw new \Exception("The repository of class $class must implement Spomky\IpFilterBundle\Model\IpRepositoryInterface");
     }
 
     /**
@@ -32,6 +35,6 @@ class IpManager implements IpManagerInterface
      * {@inheritdoc}
      */
     public function findIp($ip) {
-        return $this->getRepository()->findOneBy(array('ip'=>$ip));
+        return $this->getRepository()->findOneByIp($ip);
     }
 }

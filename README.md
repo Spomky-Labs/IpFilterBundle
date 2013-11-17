@@ -96,7 +96,7 @@ If you are persisting your data via the Doctrine ORM, then your classes should l
 	    /**
 	     * @var string $ip
 	     *
-	     * @ORM\Column(name="ip", type="string", length=255)
+	     * @ORM\Column(name="ip", type="string", length=39)
 	     */
 	    protected $ip;
 	
@@ -147,14 +147,14 @@ If you are persisting your data via the Doctrine ORM, then your classes should l
 	    /**
 	     * @var string $start_ip
 	     *
-	     * @ORM\Column(name="start_ip", type="string", length=255)
+	     * @ORM\Column(name="start_ip", type="string", length=39)
 	     */
 	    protected $start_ip;
 	
 	    /**
 	     * @var string $end_ip
 	     *
-	     * @ORM\Column(name="end_ip", type="string", length=255)
+	     * @ORM\Column(name="end_ip", type="string", length=39)
 	     */
 	    protected $end_ip;
 	
