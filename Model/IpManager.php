@@ -22,6 +22,7 @@ class IpManager implements IpManagerInterface
         $this->repository = $em->getRepository($class);
         if(!$this->repository instanceof IpRepositoryInterface) {
             throw new \Exception("The repository of class $class must implement Spomky\IpFilterBundle\Model\IpRepositoryInterface");
+        }
     }
 
     /**

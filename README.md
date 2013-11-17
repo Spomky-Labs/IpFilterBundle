@@ -4,6 +4,8 @@ Ip Filter
 [![Build Status](https://travis-ci.org/Spomky/SpomkyIpFilterBundle.png?branch=master)](https://travis-ci.org/Spomky/SpomkyIpFilterBundle)
 
 This bundle will help you to restrict access of your application using IP addresses.
+It supports IPv4 and IPv6 addresses.
+You can set ranges to allow or deny multiple IP addresses.
 
 
 # Prerequisites #
@@ -211,3 +213,13 @@ In this case, choose the unanimous strategy:
         access_decision_manager:
             strategy: unanimous
 
+###Add IP Addresses support for Doctrine ###
+
+	# app/config/config.yml
+    orm:
+        #...
+        entity_managers:
+            default:
+                dql:
+                    string_functions:
+                        ip_address: Spomky\IpFilterBundle\Query\IPAddress
