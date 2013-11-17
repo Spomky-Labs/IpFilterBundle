@@ -25,11 +25,11 @@ class IpAddress extends Type
      
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        return ($value === null) ? null : inet_ntop($value);
+        return ($value === null) ? null : inet_pton($value);
     }
      
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-        return ($value === null) ? null : inet_pton($value);
+        return ($value === null) ? null : inet_ntop($value);
     }
 }
