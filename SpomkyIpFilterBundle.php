@@ -10,9 +10,9 @@ class SpomkyIpFilterBundle extends Bundle
 {
     public function boot() {
 
-        Type::addType('geometry', 'geoloc\HelloBundle\ORM\GeometryType');
+        Type::addType('ipaddress', 'Spomky\IpFilterBundle\Doctrine\Type\IpAddress');
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         $conn = $em->getConnection();
-        $conn->getDatabasePlatform()->registerDoctrineTypeMapping('geometry', 'geometry');
+        $conn->getDatabasePlatform()->registerDoctrineTypeMapping('ipaddress', 'ipaddress');
     }
 }

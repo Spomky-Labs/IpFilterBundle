@@ -3,6 +3,7 @@
 namespace Spomky\IpFilterBundle\Doctrine\Type;
  
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Types\Type;
  
 /**
 * Type that maps an Ip Address SQL to php objects
@@ -19,7 +20,7 @@ class IpAddress extends Type
      
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {
-        return $platform->getDoctrineTypeMapping('VARBINARY(16)');
+        return $platform->getDoctrineTypeMapping('VARBINARY');
     }
      
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
