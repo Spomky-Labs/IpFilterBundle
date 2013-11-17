@@ -12,7 +12,7 @@ class IpRepository extends EntityRepository implements IpRepositoryInterface
 
         $result = $this->createQueryBuilder('r')
             ->select('r.ip')
-            ->where('CONV(r.ip,16,10) <= CONV(:ip,16,10)')
+            ->where('CONV(r.ip,16,10) = CONV(:ip,16,10)')
             ->setParameter('ip', bin2hex(inet_pton($ip)))
             ->setMaxResults(1)
             ->getQuery()
