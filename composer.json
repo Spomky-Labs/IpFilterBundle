@@ -2,7 +2,7 @@
     "name": "spomky/ip-filter-bundle",
     "type": "symfony-bundle",
     "description": "Symfony2 Ip Filter Bundle",
-    "keywords": ["ip", "filter", "Symfony2", "bundle"],
+    "keywords": ["ip", "ipv4", "ipv6", "environment", "range", "filter", "Symfony2", "bundle"],
     "homepage": "https://github.com/Spomky/SpomkyIpFilterBundle",
     "license": "MIT",
     "authors": [
