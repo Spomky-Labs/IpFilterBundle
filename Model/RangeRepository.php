@@ -14,7 +14,7 @@ class RangeRepository extends EntityRepository implements RangeRepositoryInterfa
             ->select('r.start_ip, r.end_ip')
             ->where('CONV(r.start_ip,16,10) <= CONV(:ip,16,10)')
             ->andWhere('CONV(r.end_ip,16,10) >= CONV(:ip,16,10)')
-            ->andWhere('environment = :environment OR environment is NULL')
+            ->andWhere('r.environment = :environment OR r.environment is NULL')
             ->setParameter('ip', bin2hex(inet_pton($ip)))
             ->setParameter('environment', $environment)
             ->setMaxResults(1)
