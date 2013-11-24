@@ -53,7 +53,6 @@ class Network {
         }
         
         $mask = substr(preg_replace("/([A-f0-9]{4})/", "$1:", $_hexMask), 0, -1);
-        var_dump($mask);
 
         $ip_bin = $this->dtr_pton($ip);
         $mask_bin = $this->dtr_pton($mask);
