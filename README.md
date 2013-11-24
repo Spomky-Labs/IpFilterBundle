@@ -106,12 +106,24 @@ The IP field type must be `ipaddress`.
 	     */
 	    protected $ip;
 	
+	    /**
+	     * @var string $environment
+	     *
+	     * @ORM\Column(name="environment", type="string", length=10, nullable=true)
+	     */
+	    protected $environment;
+	
 	    public function getId() {
 	        return $this->id;
 	    }
 	
 	    public function setIp($ip) {
 	        $this->ip = $ip;
+	        return $this;
+	    }
+	
+	    public function setEnvironment($environment) {
+	        $this->environment = $environment;
 	        return $this;
 	    }
 	}
@@ -157,6 +169,13 @@ The IP field type must be `ipaddress`.
 	     */
 	    protected $end_ip;
 	
+	    /**
+	     * @var string $environment
+	     *
+	     * @ORM\Column(name="environment", type="string", length=10, nullable=true)
+	     */
+	    protected $environment;
+	
 	    public function getId() {
 	        return $this->id;
 	    }
@@ -168,6 +187,11 @@ The IP field type must be `ipaddress`.
 	
 	    public function setEndIp($end_ip) {
 	        $this->end_ip = $end_ip;
+	        return $this;
+	    }
+	
+	    public function setEnvironment($environment) {
+	        $this->environment = $environment;
 	        return $this;
 	    }
 	}

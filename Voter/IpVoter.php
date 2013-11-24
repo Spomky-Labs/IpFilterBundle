@@ -5,18 +5,22 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
+use Symfony\Component\HttpKernel\Kernel;
+
 use Spomky\IpFilterBundle\Model\IpManagerInterface;
 use Spomky\IpFilterBundle\Model\RangeManagerInterface;
 
 class IpVoter implements VoterInterface
 {
+    protected $kernel;
     protected $container;
     protected $im;
     protected $rm;
     protected $policy;
 
-    public function __construct(ContainerInterface $container, IpManagerInterface $im, RangeManagerInterface $rm) {
+    public function __construct(Kernel $kernel, ContainerInterface $container, IpManagerInterface $im, RangeManagerInterface $rm) {
 
+        $this->kernel = $kernel;
         $this->container = $container;
         $this->im        = $im;
         $this->rm        = $rm;
@@ -35,9 +39,10 @@ class IpVoter implements VoterInterface
 
     public function vote(TokenInterface $token, $object, array $attributes) {
         
-        $request = $this->container->get('request');
-        $ip = $this->im->findIp( $request->getClientIp() );
-        $range = $this->rm->findByIp( $request->getClientIp() );
+        $client = $this->container->get('request')->getClientIp();
+        $env = $this->kernel->getEnvironment();
+        $ip = $this->im->findIp( $client, $env );
+        $range = $this->rm->findByIp( $client, $env );
         if( $this->policy === 'whitelist' ) {
             return $ip||$range?VoterInterface::ACCESS_GRANTED:VoterInterface::ACCESS_DENIED;
         }

@@ -8,12 +8,14 @@ use Spomky\IpFilterBundle\Model\IpRepositoryInterface;
 
 class IpRepository extends EntityRepository implements IpRepositoryInterface
 {
-    public function findOneByIp($ip){
+    public function findOneByIp($ip, $environment){
 
         $result = $this->createQueryBuilder('r')
             ->select('r.ip')
             ->where('CONV(r.ip,16,10) = CONV(:ip,16,10)')
+            ->andWhere('environment = :environment OR environment is NULL')
             ->setParameter('ip', bin2hex(inet_pton($ip)))
+            ->setParameter('environment', $environment)
             ->setMaxResults(1)
             ->getQuery()
             ->execute();

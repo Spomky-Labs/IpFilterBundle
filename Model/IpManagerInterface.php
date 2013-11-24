@@ -4,5 +4,5 @@ namespace Spomky\IpFilterBundle\Model;
 
 interface IpManagerInterface
 {
-    public function findIp($ip);
+    public function findIp($ip, $environment);
 }

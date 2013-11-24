@@ -35,7 +35,7 @@ class RangeManager implements RangeManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function findByIp($ip) {
-        return $this->getRepository()->findOneByIp($ip);
+    public function findByIp($ip, $environment) {
+        return $this->getRepository()->findOneByIp($ip, $environment);
     }
 }
