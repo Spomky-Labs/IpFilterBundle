@@ -7,4 +7,5 @@ interface RangeInterface
     public function getStartIp();
     public function getEndIp();
     public function getEnvironment();
+    public function isAuthorized();
 }

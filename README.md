@@ -5,21 +5,19 @@ Ip Filter
 
 This bundle will help you to restrict access of your application using `IP addresses` and `ranges of IP addresses`.
 
-It supports both `IPv4` and `IPv6` addresses.
+It supports both `IPv4` and `IPv6` addresses and multiple environments.
 
+For example, you can grant access of a range of addresses from `192.168.1.1` to `192.168.1.100` on `dev` and `test` environments and deny all others.
 
 # Prerequisites #
 
 This version of the bundle requires `Symfony 2.1`.
 It only supports `Doctrine ORM`.
 
-# Policies #
+# Policy #
 
-This bundle supports two policies: **blacklist** and **whitelist**.
-
-If you choose blacklist, all requests from an IP or an IP in a range stored in the database will be denied.
-
-If whitelist, only those stored in database will be granted.
+Please note that authorized IPs have a higher priority than unauthorized ones.
+For example, if range `192.168.1.10` to `192.168.1.100` is **unauthorized** and `192.168.1.20` is **authorized**, `192.168.1.20` will be granted. 
 
 # Installation #
 
@@ -113,6 +111,13 @@ The IP field type must be `ipaddress`.
 	     */
 	    protected $environment;
 	
+	    /**
+	     * @var boolean $authorized
+	     *
+	     * @ORM\Column(name="authorized", type="boolean")
+	     */
+	    protected $authorized;
+	
 	    public function getId() {
 	        return $this->id;
 	    }
@@ -124,6 +129,11 @@ The IP field type must be `ipaddress`.
 	
 	    public function setEnvironment($environment) {
 	        $this->environment = $environment;
+	        return $this;
+	    }
+	
+	    public function setAuthorized($authorized) {
+	        $this->authorized = $authorized;
 	        return $this;
 	    }
 	}
@@ -176,6 +186,13 @@ The IP field type must be `ipaddress`.
 	     */
 	    protected $environment;
 	
+	    /**
+	     * @var boolean $authorized
+	     *
+	     * @ORM\Column(name="authorized", type="boolean")
+	     */
+	    protected $authorized;
+	
 	    public function getId() {
 	        return $this->id;
 	    }
@@ -194,6 +211,11 @@ The IP field type must be `ipaddress`.
 	        $this->environment = $environment;
 	        return $this;
 	    }
+	
+	    public function setAuthorized($authorized) {
+	        $this->authorized = $authorized;
+	        return $this;
+	    }
 	}
 
 ##Step 4: Configure your application##
@@ -202,7 +224,6 @@ The IP field type must be `ipaddress`.
 
 	# app/config/config.yml
 	spomky_ip_filter:
-	    policy:    blacklist  # Policies available: blacklist, whitelist
 	    db_driver: orm        # Driver available: orm
 	    ip_class:             Acme\IpBundle\Entity\Ip
 	    range_class:          Acme\IpBundle\Entity\Range
@@ -237,18 +258,13 @@ In this case, choose the unanimous strategy:
                     string_functions:
                         conv: Spomky\IpFilterBundle\Query\Convert
 
-# How to use?#
+# How to #
 
-You just have to store your IP addresses using standard way.
+## Small example ##
 
-With the following example, IPs
+How to grant access for `192.168.1.10` on `dev` and `test` environments and deny all others?
 
-* from `192.168.1.10` to `192.168.1.99` on `dev` and `test` environments
-* and `192.168.2.100` on all environments
 
- are `denied` (if **blacklist** policy) or `granted` (if **whitelist** policy)
-
-	
 	<?php
 	// src/Acme/IpBundle/Controller/IpController.php
 	
@@ -256,22 +272,25 @@ With the following example, IPs
 	
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 	
-	use Spomky\MyRolesBundle\Entity\Ip;
-	use Spomky\MyRolesBundle\Entity\Range;
+	use Acme\IpBundle\Entity\Ip;
+	use Acme\IpBundle\Entity\Range;
 	
 	class IpController extends Controller
 	{
 	    public function addAction()
 	    {
-			//Create a range and an IP
-	        $range = new Range;
-	        $range->setStartIp('192.168.1.10');
-	        $range->setEndIp('192.168.1.99');
-	        $range->setEnvironment('dev,test');
-
+			//Create your IP
 	        $ip = new Ip;
-	        $ip->setIp('192.168.2.100');
-	        $ip->setEnvironment(null);
+	        $ip->setIp('192.168.1.10');
+	        $ip->setEnvironment('dev,test');
+	        $ip->setAuthorized(true);
+
+			//Create your range
+	        $range = new Range;
+	        $range->setStartIp('0.0.0.1');
+	        $range->setEndIp('255.255.254');
+	        $range->setEnvironment('dev,test');
+	        $range->setAuthorized(false);
 	
 			//Get Doctrine entity manager
 	        $em = $this->getDoctrine()->getManager();
@@ -284,3 +303,60 @@ With the following example, IPs
 	        $em->flush();
 	    }
 	}
+
+## Network support ##
+
+Network can be supported using a Range object. You just need to get first and last IP addresses.
+This bundle provides a range calculator, so you can easily extend your range entity using it.
+
+	<?php
+	// src/Acme/IpBundle/Entity/Range.php
+	
+	namespace Acme\IpBundle\Entity;
+	
+	use Spomky\IpFilterBundle\Model\Range as BaseRange;
+	use Doctrine\ORM\Mapping as ORM;
+
+	use Spomky\IpFilterBundle\Tool\Network;
+	
+	…
+		public function setNetwork($network) {
+			$n = new Network;
+			$range = $n->getRange($network);
+			$this->setStartIp($range['start']);
+			$this->setEndIp($range['end']);
+        }
+	…
+
+Now, you can allow or deny a whole network. In the following example, we will deny access of all IP addresses except our local network.
+
+This tool supports both IPv4 and IPv6 addresses too.
+
+	//All IP addresses
+	$all = new Range;
+	$all->setNetwork('0.0.0.0/0');
+	$all->setEnvironment('dev,test');
+	$all->setAuthorized(false);
+
+	/My local network (IPv4)
+	$local = new Range;
+	$local->setNetwork('192.168.0.0/16');
+	$local->setEnvironment('dev,test');
+	$local->setAuthorized(true);
+
+	/Another local network (IPv6)
+	$local_6 = new Range;
+	$local_6->setNetwork('fe80::/64');
+	$local_6->setEnvironment('dev,test');
+	$local_6->setAuthorized(true);
+	
+	//Get Doctrine entity manager
+	$em = $this->getDoctrine()->getManager();
+	
+	//Persist entities
+	$em->persist($all);
+	$em->persist($local);
+	$em->persist($local_6);
+	
+	//And flush
+	$em->flush();

@@ -18,10 +18,6 @@ class Configuration implements ConfigurationInterface
         $supportedDrivers = array(
             'orm',
         );
-        $supportedPolicies = array(
-            'blacklist',
-            'whitelist',
-        );
 
         $rootNode
             ->children()
@@ -30,16 +26,6 @@ class Configuration implements ConfigurationInterface
                     ->validate()
                         ->ifNotInArray($supportedDrivers)
                         ->thenInvalid('The driver %s is not supported. Please choose one of ' . json_encode($supportedDrivers))
-                    ->end()
-                    ->cannotBeOverwritten()
-                    ->isRequired()
-                    ->cannotBeEmpty()
-                ->end()
-
-                ->scalarNode('policy')
-                    ->validate()
-                        ->ifNotInArray($supportedPolicies)
-                        ->thenInvalid('The policy %s is not supported. Please choose one of ' . json_encode($supportedPolicies))
                     ->end()
                     ->cannotBeOverwritten()
                     ->isRequired()

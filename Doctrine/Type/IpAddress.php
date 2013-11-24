@@ -30,6 +30,8 @@ class IpAddress extends Type
      
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
+        if( function_exists('hex2bin') ) // PHP 5.4+
+            return ($value === null) ? null : hex2bin($value);
         return ($value === null) ? null : inet_ntop(pack("H*",$value));
     }
 }

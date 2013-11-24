@@ -7,6 +7,7 @@ class Range implements RangeInterface
     protected $start_ip;
     protected $end_ip;
     protected $environment;
+    protected $authorized;
 
     public function getStartIp() {
         return $this->start_ip;
@@ -18,5 +19,9 @@ class Range implements RangeInterface
 
     public function getEnvironment() {
         return $this->environment;
+    }
+
+    public function isAuthorized() {
+        return $this->authorized;
     }
 }

@@ -20,8 +20,6 @@ class SpomkyIpFilterExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load(sprintf('%s.xml', $config['db_driver']));
 
-        $container->setParameter('spomky_ip_filter.policy', $config['policy']);
-
         $container->setAlias('spomky_ip_filter.ip_manager', $config['ip_manager']);
         $container->setParameter('spomky_ip_filter.ip.class', $config['ip_class']);
 

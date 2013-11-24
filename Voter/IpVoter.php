@@ -20,11 +20,10 @@ class IpVoter implements VoterInterface
 
     public function __construct(Kernel $kernel, ContainerInterface $container, IpManagerInterface $im, RangeManagerInterface $rm) {
 
-        $this->kernel = $kernel;
+        $this->kernel    = $kernel;
         $this->container = $container;
         $this->im        = $im;
         $this->rm        = $rm;
-        $this->policy    = $container->getParameter('spomky_ip_filter.policy');
     }
 
     public function supportsAttribute($attribute) {
@@ -41,14 +40,31 @@ class IpVoter implements VoterInterface
         
         $client = $this->container->get('request')->getClientIp();
         $env = $this->kernel->getEnvironment();
-        $ip = $this->im->findIp( $client, $env );
-        $range = $this->rm->findByIp( $client, $env );
-        if( $this->policy === 'whitelist' ) {
-            return $ip||$range?VoterInterface::ACCESS_GRANTED:VoterInterface::ACCESS_DENIED;
+
+        $ips = $this->im->findIp( $client, $env );
+        $ranges = $this->rm->findByIp( $client, $env );
+        
+        if( count($ips) === 0 || count($ranges) === 0 ) {
+
+            return VoterInterface::ACCESS_ABSTAIN;
         }
-        if( $this->policy === 'blacklist' ) {
-            return $ip||$range?VoterInterface::ACCESS_DENIED:VoterInterface::ACCESS_ABSTAIN;
+
+        $authorized = false;
+
+        foreach ($ips as $ip) {
+            if( $ip->isAuthorized() ) {
+                $authorized = true;
+                break;
+            }
         }
-        return VoterInterface::ACCESS_ABSTAIN;
+
+        foreach ($ranges as $range) {
+            if( $range->isAuthorized() ) {
+                $authorized = true;
+                break;
+            }
+        }
+
+        return $authorized?VoterInterface::ACCESS_GRANTED:VoterInterface::ACCESS_DENIED;
     }
 }
