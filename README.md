@@ -247,17 +247,6 @@ In this case, choose the unanimous strategy:
         access_decision_manager:
             strategy: unanimous
 
-###Add DQL custom expression support ###
-
-	# app/config/config.yml
-    orm:
-        #...
-        entity_managers:
-            default:
-                dql:
-                    string_functions:
-                        conv: Spomky\IpFilterBundle\Query\Convert
-
 # How to #
 
 ## Small example ##

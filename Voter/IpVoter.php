@@ -44,27 +44,23 @@ class IpVoter implements VoterInterface
         $ips = $this->im->findIp( $client, $env );
         $ranges = $this->rm->findByIp( $client, $env );
         
-        if( count($ips) === 0 || count($ranges) === 0 ) {
+        if( count($ips) === 0 && count($ranges) === 0 ) {
 
             return VoterInterface::ACCESS_ABSTAIN;
         }
 
-        $authorized = false;
-
         foreach ($ips as $ip) {
             if( $ip->isAuthorized() ) {
-                $authorized = true;
-                break;
+                return VoterInterface::ACCESS_GRANTED;
             }
         }
 
         foreach ($ranges as $range) {
             if( $range->isAuthorized() ) {
-                $authorized = true;
-                break;
+                return VoterInterface::ACCESS_GRANTED;
             }
         }
 
-        return $authorized?VoterInterface::ACCESS_GRANTED:VoterInterface::ACCESS_DENIED;
+        return VoterInterface::ACCESS_DENIED;
     }
 }
