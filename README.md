@@ -243,8 +243,8 @@ You just have to store your IP addresses using standard way.
 
 With the following example, IPs
 
-* from `192.168.1.10` to `192.168.1.99`
-* and `192.168.2.100`
+* from `192.168.1.10` to `192.168.1.99` on `dev` and `test` environments
+* and `192.168.2.100` on all environments
 
  are `denied` (if **blacklist** policy) or `granted` (if **whitelist** policy)
 
@@ -267,9 +267,11 @@ With the following example, IPs
 	        $range = new Range;
 	        $range->setStartIp('192.168.1.10');
 	        $range->setEndIp('192.168.1.99');
+	        $range->setEnvironment('dev,test');
 
 	        $ip = new Ip;
 	        $ip->setIp('192.168.2.100');
+	        $ip->setEnvironment(null);
 	
 			//Get Doctrine entity manager
 	        $em = $this->getDoctrine()->getManager();
