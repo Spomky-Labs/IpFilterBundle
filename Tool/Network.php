@@ -1,6 +1,6 @@
 <?php
 
-namespace Spomky\MyRolesBundle\Tool;
+namespace Spomky\IpFilterBundle\Tool;
 
 class Network {
 
