@@ -8,7 +8,7 @@ use Spomky\IpFilterBundle\Model\IpRepositoryInterface;
 
 class IpRepository extends EntityRepository implements IpRepositoryInterface
 {
-    public function findOneByIp($ip, $environment){
+    public function findByIp($ip, $environment){
 
         return $this->createQueryBuilder('r')
             ->where('r.ip = :ip')

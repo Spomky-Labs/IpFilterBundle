@@ -4,5 +4,5 @@ namespace Spomky\IpFilterBundle\Model;
 
 interface RangeRepositoryInterface
 {
-    public function findOneByIp($ip, $environment);
+    public function findByIp($ip, $environment);
 }

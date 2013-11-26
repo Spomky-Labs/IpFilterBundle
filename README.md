@@ -349,3 +349,61 @@ This tool supports both IPv4 and IPv6 addresses too.
 	
 	//And flush
 	$em->flush();
+
+## app_dev.php ##
+
+In the Symfony2 Standard Edition, `app_dev.php` restrict access of the `dev` environment:
+
+	…
+	if (isset($_SERVER['HTTP_CLIENT_IP'])
+	    || isset($_SERVER['HTTP_X_FORWARDED_FOR'])
+	    || !in_array(@$_SERVER['REMOTE_ADDR'], array('127.0.0.1', 'fe80::1', '::1'))
+	) {
+	    header('HTTP/1.0 403 Forbidden');
+	    exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
+	}
+…
+
+You can do exactly the same using this bundle:
+
+	//All IP addresses are denied
+	$all = new Range;
+	$all->setNetwork('0.0.0.0/0');
+	$all->setEnvironment('dev');
+	$all->setAuthorized(false);
+
+	$all6 = new Range;
+	$all6->setNetwork('::/0');
+	$all6->setEnvironment('dev');
+	$all6->setAuthorized(false);
+
+	//127.0.0.1 (IPv4 localhost)
+    $localhost = new Ip;
+    $localhost->setIp('127.0.0.1');
+    $localhost->setEnvironment('dev');
+    $localhost->setAuthorized(true);
+
+	//::1 (IPv6 localhost)
+    $localhost6 = new Ip;
+    $localhost6->setIp('::1');
+    $localhost6->setEnvironment('dev');
+    $localhost6->setAuthorized(true);
+
+	//fe80::1 (IPv6 local link)
+    $locallink6 = new Ip;
+    $locallink6->setIp('fe80::1');
+    $locallink6->setEnvironment('dev');
+    $locallink6->setAuthorized(true);
+	
+	//Get Doctrine entity manager
+	$em = $this->getDoctrine()->getManager();
+	
+	//Persist entities
+	$em->persist($all);
+	$em->persist($all6);
+	$em->persist($localhost);
+	$em->persist($localhost6);
+	$em->persist($locallink6);
+
+	//And flush
+	$em->flush();

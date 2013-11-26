@@ -36,6 +36,6 @@ class IpManager implements IpManagerInterface
      * {@inheritdoc}
      */
     public function findIp($ip, $environment) {
-        return $this->getRepository()->findOneByIp($ip, $environment);
+        return $this->getRepository()->findByIp($ip, $environment);
     }
 }
