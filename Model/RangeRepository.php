@@ -5,11 +5,10 @@ namespace Spomky\IpFilterBundle\Model;
 use Doctrine\ORM\EntityRepository;
 use Spomky\IpFilterBundle\Model\RangeRepositoryInterface;
 
-
 class RangeRepository extends EntityRepository implements RangeRepositoryInterface
 {
-    public function findByIp($ip, $environment){
-
+    public function findByIp($ip, $environment)
+    {
         return $this->createQueryBuilder('r')
             ->where('r.start_ip <= :ip')
             ->andWhere('r.end_ip >= :ip')

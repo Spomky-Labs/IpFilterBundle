@@ -8,15 +8,18 @@ class Ip implements IpInterface
     protected $environment;
     protected $authorized;
 
-    public function getIp() {
+    public function getIp()
+    {
         return $this->ip;
     }
 
-    public function getEnvironment() {
+    public function getEnvironment()
+    {
         return $this->environment;
     }
 
-    public function isAuthorized() {
+    public function isAuthorized()
+    {
         return $this->authorized;
     }
 }

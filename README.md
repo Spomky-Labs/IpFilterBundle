@@ -2,6 +2,8 @@ Ip Filter
 =========
 
 [![Build Status](https://travis-ci.org/Spomky/SpomkyIpFilterBundle.png?branch=master)](https://travis-ci.org/Spomky/SpomkyIpFilterBundle)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/Spomky/SpomkyIpFilterBundle/badges/quality-score.png?s=0efa430fe0181ddc440501ff995c7e94cf15aa28)](https://scrutinizer-ci.com/g/Spomky/SpomkyIpFilterBundle/)
+[![Code Coverage](https://scrutinizer-ci.com/g/Spomky/SpomkyIpFilterBundle/badges/coverage.png?s=a942daa4e0ecb71504a3e8b8c0e80e2ba144b308)](https://scrutinizer-ci.com/g/Spomky/SpomkyIpFilterBundle/)
 
 This bundle will help you to restrict access of your application using `IP addresses` and `ranges of IP addresses`.
 

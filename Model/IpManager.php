@@ -17,10 +17,11 @@ class IpManager implements IpManagerInterface
      */
     protected $repository;
 
-    public function __construct(EntityManager $em, $class) {
+    public function __construct(EntityManager $em, $class)
+    {
         $this->em = $em;
         $this->repository = $em->getRepository($class);
-        if(!$this->repository instanceof IpRepositoryInterface) {
+        if (!$this->repository instanceof IpRepositoryInterface) {
             throw new \Exception("The repository of class $class must implement Spomky\IpFilterBundle\Model\IpRepositoryInterface");
         }
     }
@@ -28,14 +29,16 @@ class IpManager implements IpManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function getRepository() {
+    public function getRepository()
+    {
         return $this->repository;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findIp($ip, $environment) {
+    public function findIp($ip, $environment)
+    {
         return $this->getRepository()->findByIp($ip, $environment);
     }
 }

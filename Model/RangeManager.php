@@ -17,10 +17,11 @@ class RangeManager implements RangeManagerInterface
      */
     protected $repository;
 
-    public function __construct(EntityManager $em, $class) {
+    public function __construct(EntityManager $em, $class)
+    {
         $this->em = $em;
         $this->repository = $em->getRepository($class);
-        if(!$this->repository instanceof RangeRepositoryInterface) {
+        if (!$this->repository instanceof RangeRepositoryInterface) {
             throw new \Exception("The repository of class $class must implement Spomky\IpFilterBundle\Model\RangeRepositoryInterface");
         }
     }
@@ -28,14 +29,16 @@ class RangeManager implements RangeManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function getRepository() {
+    public function getRepository()
+    {
         return $this->repository;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findByIp($ip, $environment) {
+    public function findByIp($ip, $environment)
+    {
         return $this->getRepository()->findByIp($ip, $environment);
     }
 }
