@@ -13,7 +13,7 @@ For example, you can grant access of a range of addresses from `192.168.1.1` to 
 
 # Prerequisites #
 
-This version of the bundle requires `Symfony 2.1`.
+This version of the bundle requires `Symfony 2.4`.
 It only supports `Doctrine ORM`.
 
 # Policy #

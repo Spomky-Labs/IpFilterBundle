@@ -16,7 +16,7 @@
 
         <service id="spomky_ip_filter.ip_voter" class="Spomky\IpFilterBundle\Voter\IpVoter" public="false">
             <argument type="service" id="kernel" />
-            <argument type="service" id="service_container" strict="false" />
+            <argument type="service" id="request_stack" />
             <argument type="service" id="spomky_ip_filter.ip_manager"/>
             <argument type="service" id="spomky_ip_filter.range_manager"/>
             <tag name="security.voter" />
