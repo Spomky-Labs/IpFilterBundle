@@ -7,6 +7,8 @@ Ip Filter
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/1b7fe376-73e5-41aa-9646-8be3ad514a7d/big.png)](https://insight.sensiolabs.com/projects/1b7fe376-73e5-41aa-9646-8be3ad514a7d)
 
+[![Dependency Status](https://www.versioneye.com/user/projects/52caa8d4ec137551e4000226/badge.png)](https://www.versioneye.com/user/projects/52caa8d4ec137551e4000226)
+
 This bundle will help you to restrict access of your application using `IP addresses` and `ranges of IP addresses`.
 
 It supports both `IPv4` and `IPv6` addresses and multiple environments.
