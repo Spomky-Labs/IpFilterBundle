@@ -48,7 +48,7 @@ class IpFilterTest extends AbstractTestCase
         $client = static::createClient();
 
         try {
-            $crawler = $client->request(
+            $client->request(
                 'GET',
                 '/',
                 array(),

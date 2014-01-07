@@ -15,7 +15,7 @@ class SpomkyTestExtension extends Extension
         $processor     = new Processor();
         $configuration = new Configuration($container->get('kernel.debug'));
 
-        $config = $processor->processConfiguration($configuration, $configs);
+        $processor->processConfiguration($configuration, $configs);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('managers.xml');
