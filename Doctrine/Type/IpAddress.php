@@ -20,7 +20,7 @@ class IpAddress extends Type
 
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {
-        return $platform->getDoctrineTypeMapping('VARBINARY');
+        return $platform->getDoctrineTypeMapping('VARCHAR');
     }
 
     public function convertToDatabaseValue($value, AbstractPlatform $platform)

@@ -30,16 +30,9 @@ abstract class AbstractTestCase extends WebTestCase
      */
     protected $debug = true;
 
-    /**
-     * @var \Symfony\Bundle\FrameworkBundle\Console\Application
-     */
-    protected static $application;
-
 
     public function __construct($name = null, array $data = array(), $dataName = '')
     {
-        //$fs = new Filesystem();
-        //$fs->remove(sys_get_temp_dir().'/SpomkyTestBundle');
 
         parent::__construct($name, $data, $dataName);
 
@@ -52,9 +45,6 @@ abstract class AbstractTestCase extends WebTestCase
         }
 
         $this->container = static::$kernel->getContainer();
-
-        self::runCommand('doctrine:database:create');
-        self::runCommand('doctrine:schema:update --force');
     }
 
     protected static function createKernel(array $options = array())
@@ -69,24 +59,5 @@ abstract class AbstractTestCase extends WebTestCase
     {
         static::$kernel = null;
         parent::tearDown();
-    }
-
-    protected static function runCommand($command)
-    {
-        $command = sprintf('%s --quiet --no-interaction', $command);
-
-        return self::getApplication()->run(new StringInput($command));
-    }
-
-    protected static function getApplication()
-    {
-        if (null === self::$application) {
-            $client = static::createClient();
-
-            self::$application = new Application($client->getKernel());
-            self::$application->setAutoExit(false);
-        }
-
-        return self::$application;
     }
 }

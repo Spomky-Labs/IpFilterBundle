@@ -5,15 +5,29 @@ php:
   - 5.4
   - 5.5
 
+env:
+    - SYMFONY_VERSION=~2.1
+    - SYMFONY_VERSION=~2.2
+    - SYMFONY_VERSION=~2.3
+    - SYMFONY_VERSION=~2.4
+    - SYMFONY_VERSION=dev-master
+
 before_script:
-  - curl -s http://getcomposer.org/installer | php
-  - php composer.phar install --dev --no-interaction
+    - curl -s http://getcomposer.org/installer | php
+    - php composer.phar install --dev --no-interaction
+    - composer require symfony/security-bundle:${SYMFONY_VERSION}
+    - composer require symfony/finder:${SYMFONY_VERSION}
+    - composer require symfony/class-loader:${SYMFONY_VERSION}
+    - composer require symfony/yaml:${SYMFONY_VERSION}
+    - composer require symfony/browser-ki"${SYMFONY_VERSION}
+    - composer require symfony/expression-language:${SYMFONY_VERSION}
+    - composer install --dev --prefer-source
 
 phpunit: phpunit --prefer-dist --dev
 
 script:
-  - mkdir -p build/logs
-  - php vendor/bin/phpunit -c phpunit.xml.dist
+    - mkdir -p build/logs
+    - php vendor/bin/phpunit -c phpunit.xml.dist
 
 after_script:
-  - php vendor/bin/coveralls -v
+    - php vendor/bin/coveralls -v

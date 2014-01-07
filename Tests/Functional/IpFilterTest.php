@@ -10,7 +10,8 @@ class IpFilterTest extends AbstractTestCase
 {
     protected function setUp()
     {
-        self::runCommand('doctrine:fixtures:load');
+        $fs = new Filesystem();
+        $fs->remove(sys_get_temp_dir().'/SpomkyTestBundle');
     }
 
     public function testServicesAndObjects() {

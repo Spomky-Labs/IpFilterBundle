@@ -17,7 +17,7 @@ spomky_ip_filter:
 doctrine:
     dbal:
         driver: pdo_sqlite
-        path: %kernel.cache_dir%/data.sqlite
+        path: %kernel.root_dir%/data.sqlite
     orm:
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
