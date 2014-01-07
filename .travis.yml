@@ -19,7 +19,7 @@ before_script:
     - composer require symfony/finder:${SYMFONY_VERSION}
     - composer require symfony/class-loader:${SYMFONY_VERSION}
     - composer require symfony/yaml:${SYMFONY_VERSION}
-    - composer require symfony/browser-ki"${SYMFONY_VERSION}
+    - composer require symfony/browser-kit:${SYMFONY_VERSION}
     - composer require symfony/expression-language:${SYMFONY_VERSION}
     - composer install --dev --prefer-source
 
