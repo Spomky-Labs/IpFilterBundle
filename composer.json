@@ -23,7 +23,7 @@
         "symfony/class-loader": "~2.1",
         "symfony/yaml": "~2.1",
         "doctrine/doctrine-bundle": "~1.0",
-        "symfony/browser-kit":"2.1.2",
+        "symfony/browser-kit":"~2.4",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "symfony/expression-language": "~2.4"
     },
