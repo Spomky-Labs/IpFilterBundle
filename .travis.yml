@@ -7,7 +7,6 @@ php:
 
 env:
     - SYMFONY_VERSION=2.4.*
-    - SYMFONY_VERSION=2.5.*-dev
 
 before_script:
     - curl -s http://getcomposer.org/installer | php
