@@ -1,5 +1,8 @@
 <?php
 
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Input\ArrayInput;
+
 function executeCommand($application, $command, array $options = array()) {
     $options["--env"] = "test";
     $options["--no-interaction"] = true;
@@ -39,8 +42,6 @@ $loader = require $autoloadFile;
 
 require_once __DIR__ . '/Functional/AppKernel.php';
 
-use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Component\Console\Input\ArrayInput;
 
 $kernel = new Spomky\IpFilterBundle\Tests\Functional\AppKernel('test', true); // create a "test" kernel
 $kernel->boot();
