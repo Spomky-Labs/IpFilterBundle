@@ -6,11 +6,11 @@ php:
     - 5.5
 
 env:
-    - SYMFONY_VERSION=>=2.1,<2.1-dev
-    - SYMFONY_VERSION=>=2.2,<2.2-dev
-    - SYMFONY_VERSION=>=2.3,<2.3-dev
-    - SYMFONY_VERSION=>=2.4,<2.4-dev
-    - SYMFONY_VERSION=dev-master
+    - SYMFONY_VERSION=">=2.1,<2.1-dev"
+    - SYMFONY_VERSION=">=2.2,<2.2-dev"
+    - SYMFONY_VERSION=">=2.3,<2.3-dev"
+    - SYMFONY_VERSION=">=2.4,<2.4-dev"
+    - SYMFONY_VERSION="dev-master"
 
 before_script:
     - curl -s http://getcomposer.org/installer | php
