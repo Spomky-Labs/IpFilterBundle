@@ -9,9 +9,12 @@ class SpomkyIpFilterBundle extends Bundle
 {
     public function boot()
     {
-        Type::addType('ipaddress', 'Spomky\IpFilterBundle\Doctrine\Type\IpAddress');
-        $em = $this->container->get('doctrine.orm.default_entity_manager');
-        $conn = $em->getConnection();
-        $conn->getDatabasePlatform()->registerDoctrineTypeMapping('ipaddress', 'ipaddress');
+        $types = Type::getTypesMap();
+        if(!isset($types['ipaddress'])) {
+            Type::addType('ipaddress', 'Spomky\IpFilterBundle\Doctrine\Type\IpAddress');
+    
+            $em = $this->container->get('doctrine.orm.entity_manager');
+            $em->getConnection()->getDatabasePlatform()->registerDoctrineTypeMapping('ipaddress', 'ipaddress');
+        }
     }
 }

@@ -90,7 +90,7 @@ The IP field type must be `ipaddress`.
 	 * Ip
 	 *
 	 * @ORM\Table(name="ips")
-	 * @ORM\Entity(repository="Spomky\IpFilterBundle\Model\IpRepository")
+	 * @ORM\Entity(repositoryClass="Spomky\IpFilterBundle\Model\IpRepository")
 	 */
 	class Ip extends BaseIp
 	{
@@ -242,16 +242,24 @@ If you have your own managers, you can use them. It just needs to implement `Spo
 	    ip_manager: my.custom.ip.manager
 	    range_manager: my.custom.range.manager
 
-###Change the Access Decision Strategy###
+###Security Strategy###
 
 In order for this bundle to take effect, you need to change the default access decision strategy, which, by default, grants access if any voter grants access.
 
-In this case, choose the unanimous strategy:
+You also need to place your site behind a firewall rule.
 
     # app/config/security.yml
     security:
         access_decision_manager:
             strategy: unanimous
+	…
+    firewalls: 
+        my_site:
+            pattern: ^/
+            anonymous: ~
+
+    access_control:
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
 # How to #
 

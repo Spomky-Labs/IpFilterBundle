@@ -2,6 +2,8 @@
 
 namespace Spomky\IpFilterBundle\Model;
 
+use Spomky\IpFilterBundle\Model\RangeInterface;
+
 class Range implements RangeInterface
 {
     protected $start_ip;

@@ -10,24 +10,23 @@ class Network
 
         if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
 
-            if( $cidr < 0 || $cidr > 32 )
-                throw new \Exception("Invalid network, IPv4 CIDR must be between 0 and 32.");
-
             return $this->getIPv4Range($ip, $cidr);
         }
 
         if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
 
-            if( $cidr < 0 || $cidr > 128 )
-                throw new \Exception("Invalid network, IPv6 CIDR must be between 0 and 128.");
-
             return $this->getIPv6Range($ip, $cidr);
         }
+
         throw new \Exception("Invalid IP/CIDR combination supplied");
     }
 
     private function getIPv4Range($ip, $cidr)
     {
+
+        if( $cidr < 0 || $cidr > 32 )
+            throw new \Exception("Invalid network, IPv4 CIDR must be between 0 and 32.");
+
         $ipLong = ip2long( $ip );
         $ipMaskLong = bindec( str_repeat("1", $cidr ) . str_repeat("0", 32-$cidr ) );
         $network = $ipLong & $ipMaskLong;
@@ -41,6 +40,10 @@ class Network
 
     private function getIPv6Range($ip, $cidr)
     {
+
+        if( $cidr < 0 || $cidr > 128 )
+            throw new \Exception("Invalid network, IPv6 CIDR must be between 0 and 128.");
+        
         $hosts    = 128 - $cidr;
         $networks = 128 - $hosts;
 
