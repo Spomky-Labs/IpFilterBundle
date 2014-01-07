@@ -19,7 +19,7 @@
         "phpunit/phpunit": "3.7.*",
         "satooshi/php-coveralls": "dev-master",
         "doctrine/doctrine-bundle": "~1.0",
-        "doctrine/doctrine-fixtures-bundle": "dev-master",
+        "doctrine/doctrine-fixtures-bundle": "dev-master"
     },
     "suggest": {
     },
