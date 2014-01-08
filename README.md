@@ -269,43 +269,36 @@ How to grant access for `192.168.1.10` on `dev` and `test` environments and deny
 
 
 	<?php
-	// src/Acme/IpBundle/Controller/IpController.php
-	
-	namespace Spomky\MyRolesBundle\Controller;
-	
-	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 	
 	use Acme\IpBundle\Entity\Ip;
 	use Acme\IpBundle\Entity\Range;
+
+	//Create your IP
+	$ip = new Ip;
+	$ip->setIp('192.168.1.10');
+	$ip->setEnvironment('dev,test');
+	$ip->setAuthorized(true);
+
+	//Create your range
+	$range = new Range;
+	$range->setStartIp('0.0.0.1');
+	$range->setEndIp('255.255.254');
+	$range->setEnvironment('dev,test');
+	$range->setAuthorized(false);
 	
-	class IpController extends Controller
-	{
-	    public function addAction()
-	    {
-			//Create your IP
-	        $ip = new Ip;
-	        $ip->setIp('192.168.1.10');
-	        $ip->setEnvironment('dev,test');
-	        $ip->setAuthorized(true);
+	//Get your managers
+    $ip_manager = $container->get("spomky_ip_filter.ip_manager");
+    $range_manager = $container->get("spomky_ip_filter.range_manager");
 
-			//Create your range
-	        $range = new Range;
-	        $range->setStartIp('0.0.0.1');
-	        $range->setEndIp('255.255.254');
-	        $range->setEnvironment('dev,test');
-	        $range->setAuthorized(false);
-	
-			//Get Doctrine entity manager
-	        $em = $this->getDoctrine()->getManager();
 
-			//Persist entities
-	        $em->persist($range);
-	        $em->persist($ip);
+	// TIPS: create your own managers to handle the following method in a nicer way. e.g.: $ip_manager->save($ip)
+	//Persist entities
+	$ip_manager->getRepository()->persist($ip);
+	$range_manager->getRepository()->persist($range);
 
-			//And flush
-	        $em->flush();
-	    }
-	}
+	//And flush
+	$ip_manager->getRepository()->flush();
+	$range_manager->getRepository()->flush();
 
 ## Network support ##
 
