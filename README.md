@@ -234,7 +234,7 @@ The IP field type must be `ipaddress`.
 	    ip_class:             Acme\IpBundle\Entity\Ip
 	    range_class:          Acme\IpBundle\Entity\Range
 
-If you have your own managers, you can use them. It just needs to implement `Spomky\IpFilterBundle\Model\IpManagerInterface` or `Spomky\IpFilterBundle\Model\RangeManagerInterface`.
+If you have your own managers, you can use them. They just need to implement `Spomky\IpFilterBundle\Model\IpManagerInterface` or `Spomky\IpFilterBundle\Model\RangeManagerInterface`.
 
 	# app/config/config.yml
 	spomky_ip_filter:
@@ -312,8 +312,6 @@ How to grant access for `192.168.1.10` on `dev` and `test` environments and deny
 Network can be supported using a Range object. You just need to get first and last IP addresses.
 This bundle provides a range calculator, so you can easily extend your range entity using it.
 
-It supports both IPv4 and IPv6.
-
 	<?php
 	// src/Acme/IpBundle/Entity/Range.php
 	
@@ -334,8 +332,6 @@ It supports both IPv4 and IPv6.
 	…
 
 Now, you can allow or deny a whole network. In the following example, we will deny access of all IP addresses except our local network.
-
-This tool supports both IPv4 and IPv6 addresses too.
 
 	//All IP addresses
 	$all = new Range;
