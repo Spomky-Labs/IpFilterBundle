@@ -36,7 +36,7 @@ class IpAddress extends Type
                 return $platform->getDoctrineTypeMapping('BYTEA');
                 break;
             default:
-                throw new \Exception("");
+                throw new \Exception("Database platform '".$platform->getName()."' not supported.");
                 break;
         }
     }
