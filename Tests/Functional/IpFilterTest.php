@@ -42,9 +42,23 @@ class IpFilterTest extends AbstractTestCase
     }
 
     /**
-     * @dataProvider getAccess
+     * @dataProvider getIPV4Access
      */
-    public function testAccess($from,$exception = null) {
+    public function testIPV4Access($from,$exception = null) {
+
+        $this->logicAcces($from,$exception);
+    }
+
+    /**
+     * @dataProvider getIPV6Access
+     */
+    public function testIPV6Access($from,$exception = null) {
+
+        $this->logicAcces($from,$exception);
+    }
+
+
+    protected function logicAcces($from,$exception = null) {
 
         $client = static::createClient();
 
@@ -73,7 +87,7 @@ class IpFilterTest extends AbstractTestCase
         }
     }
 
-    public function getAccess() {
+    public function getIPV4Access() {
 
         return array(
             array(
@@ -128,6 +142,51 @@ class IpFilterTest extends AbstractTestCase
             ),
             array(
                 '192.168.2.201',
+            ),
+        );
+    }
+
+    public function getIPV6Access() {
+
+        return array(
+            array(
+                '::1',
+            ),
+            array(
+                'fe80:2:0',
+            ),
+            array(
+                'fe80:2:10',
+                'Symfony\Component\Security\Core\Exception\InsufficientAuthenticationException',
+            ),
+            array(
+                'fe80:2:11',
+                'Symfony\Component\Security\Core\Exception\InsufficientAuthenticationException',
+            ),
+            array(
+                'fe80:2:12',
+            ),
+
+            array(
+                'fe80::0',
+                'Symfony\Component\Security\Core\Exception\InsufficientAuthenticationException',
+            ),
+            array(
+                'fe80::f9',
+                'Symfony\Component\Security\Core\Exception\InsufficientAuthenticationException',
+            ),
+            array(
+                'fe80::fa',
+            ),
+            array(
+                'fe80::fb',
+            ),
+            array(
+                'fe80::fc',
+                'Symfony\Component\Security\Core\Exception\InsufficientAuthenticationException',
+            ),
+            array(
+                'fe80::1:0',
             ),
         );
     }

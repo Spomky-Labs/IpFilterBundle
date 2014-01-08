@@ -13,6 +13,7 @@ class LoadIpData implements FixtureInterface
      */
     public function load(ObjectManager $manager)
     {
+        //IPV4
         $ip1 = new Ip();
         $ip1->setIp('192.168.1.1');
         $ip1->setAuthorized(false);
@@ -28,6 +29,25 @@ class LoadIpData implements FixtureInterface
 
         $ip3 = new Ip();
         $ip3->setIp('192.168.1.20');
+        $ip3->setAuthorized(false);
+        $ip3->setEnvironment('test');
+
+        //IPV6
+        $ip3 = new Ip();
+        $ip3->setIp('fe80:2:0');
+        $ip3->setAuthorized(false);
+
+        $ip3 = new Ip();
+        $ip3->setIp('fe80:2:0');
+        $ip3->setAuthorized(true);
+        $ip3->setEnvironment('test');
+
+        $ip3 = new Ip();
+        $ip3->setIp('fe80:2:10');
+        $ip3->setAuthorized(false);
+
+        $ip3 = new Ip();
+        $ip3->setIp('fe80:2:11');
         $ip3->setAuthorized(false);
         $ip3->setEnvironment('test');
 

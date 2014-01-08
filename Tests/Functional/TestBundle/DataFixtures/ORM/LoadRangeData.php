@@ -13,6 +13,7 @@ class LoadRangeData implements FixtureInterface
      */
     public function load(ObjectManager $manager)
     {
+        //IPV4
         $range1 = new Range();
         $range1->setStartIp('192.168.2.1');
         $range1->setEndIp('192.168.2.100');
@@ -29,9 +30,24 @@ class LoadRangeData implements FixtureInterface
         $range2_1->setAuthorized(true);
         $range2_1->setEnvironment('test');
 
+        //IPV6
+        $range3 = new Range();
+        $range3->setStartIp('fe80::0');
+        $range3->setEndIp('fe80::ff');
+        $range3->setAuthorized(false);
+        $range3->setEnvironment('test');
+
+        $range4 = new Range();
+        $range4->setStartIp('fe80::fa');
+        $range4->setEndIp('fe80::fb');
+        $range4->setAuthorized(false);
+        $range4->setEnvironment('test');
+
         $manager->persist($range1);
         $manager->persist($range2);
         $manager->persist($range2_1);
+        $manager->persist($range3);
+        $manager->persist($range4);
         
         $manager->flush();
     }
