@@ -23,7 +23,6 @@ class IpAddress extends Type
         switch ($platform->getName()) {
             case 'sqlite':
                 return $platform->getDoctrineTypeMapping('VARCHAR');
-                break;
             case 'mysql':
             case 'oracle':
             case 'drizzle':
@@ -31,13 +30,10 @@ class IpAddress extends Type
             case 'sqlanywhere':
             case 'mssql':
                 return $platform->getDoctrineTypeMapping('VARBINARY');
-                break;
             case 'postgresql':
                 return $platform->getDoctrineTypeMapping('BYTEA');
-                break;
             default:
                 throw new \Exception("Database platform '".$platform->getName()."' not supported.");
-                break;
         }
     }
 
