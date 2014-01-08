@@ -20,7 +20,10 @@ class IpAddress extends Type
 
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {
-        return $platform->getDoctrineTypeMapping('VARCHAR');
+        if( 'sqlite' === $platform->getName()) {
+            return $platform->getDoctrineTypeMapping('VARCHAR');
+        }
+        return $platform->getDoctrineTypeMapping('VARBINARY');
     }
 
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
