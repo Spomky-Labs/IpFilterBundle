@@ -153,18 +153,18 @@ class IpFilterTest extends AbstractTestCase
                 '::1',
             ),
             array(
-                'fe80:2:0',
+                'fe80::2:0',
             ),
             array(
-                'fe80:2:10',
+                'fe80::2:10',
                 'Symfony\Component\Security\Core\Exception\InsufficientAuthenticationException',
             ),
             array(
-                'fe80:2:11',
+                'fe80::2:11',
                 'Symfony\Component\Security\Core\Exception\InsufficientAuthenticationException',
             ),
             array(
-                'fe80:2:12',
+                'fe80::2:12',
             ),
 
             array(

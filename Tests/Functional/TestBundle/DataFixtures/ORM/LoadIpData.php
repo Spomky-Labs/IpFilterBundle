@@ -33,28 +33,33 @@ class LoadIpData implements FixtureInterface
         $ip3->setEnvironment('test');
 
         //IPV6
-        $ip3 = new Ip();
-        $ip3->setIp('fe80:2:0');
-        $ip3->setAuthorized(false);
+        $ip4 = new Ip();
+        $ip4->setIp('fe80::2:0');
+        $ip4->setAuthorized(false);
 
-        $ip3 = new Ip();
-        $ip3->setIp('fe80:2:0');
-        $ip3->setAuthorized(true);
-        $ip3->setEnvironment('test');
+        $ip5 = new Ip();
+        $ip5->setIp('fe80::2:0');
+        $ip5->setAuthorized(true);
+        $ip5->setEnvironment('test');
 
-        $ip3 = new Ip();
-        $ip3->setIp('fe80:2:10');
-        $ip3->setAuthorized(false);
+        $ip6 = new Ip();
+        $ip6->setIp('fe80::2:10');
+        $ip6->setAuthorized(false);
 
-        $ip3 = new Ip();
-        $ip3->setIp('fe80:2:11');
-        $ip3->setAuthorized(false);
-        $ip3->setEnvironment('test');
+        $ip7 = new Ip();
+        $ip7->setIp('fe80::2:11');
+        $ip7->setAuthorized(false);
+        $ip7->setEnvironment('test');
 
         $manager->persist($ip1);
         $manager->persist($ip1_1);
         $manager->persist($ip2);
         $manager->persist($ip3);
+
+        $manager->persist($ip4);
+        $manager->persist($ip5);
+        $manager->persist($ip6);
+        $manager->persist($ip7);
         
         $manager->flush();
     }

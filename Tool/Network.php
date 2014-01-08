@@ -4,24 +4,30 @@ namespace Spomky\IpFilterBundle\Tool;
 
 class Network
 {
-    public function getRange($network)
+    public static function getRange($network)
     {
-        list($ip, $cidr) = explode('/', $network);
+        try {
+
+            list($ip, $cidr) = explode('/', $network);
+        } catch(\Exception $e) {
+
+            throw new \Exception("Invalid IP/CIDR combination supplied");
+        }
 
         if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
 
-            return $this->getIPv4Range($ip, $cidr);
+            return self::getIPv4Range($ip, $cidr);
         }
 
         if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
 
-            return $this->getIPv6Range($ip, $cidr);
+            return self::getIPv6Range($ip, $cidr);
         }
 
         throw new \Exception("Invalid IP/CIDR combination supplied");
     }
 
-    private function getIPv4Range($ip, $cidr)
+    protected static function getIPv4Range($ip, $cidr)
     {
 
         if( $cidr < 0 || $cidr > 32 )
@@ -35,10 +41,13 @@ class Network
         return array(
             'start' => long2ip($network+1),
             'end' => long2ip($broadcast -1),
+            'network' => long2ip($network),
+            'mask' => long2ip($ipMaskLong),
+            'broadcast' => long2ip($broadcast),
         );
     }
 
-    private function getIPv6Range($ip, $cidr)
+    protected static function getIPv6Range($ip, $cidr)
     {
 
         if( $cidr < 0 || $cidr > 128 )
@@ -57,24 +66,24 @@ class Network
 
         $mask = substr(preg_replace("/([A-f0-9]{4})/", "$1:", $_hexMask), 0, -1);
 
-        $ip_bin = $this->dtr_pton($ip);
-        $mask_bin = $this->dtr_pton($mask);
+        $ip_bin = self::dtr_pton($ip);
+        $mask_bin = self::dtr_pton($mask);
 
         $network = $ip_bin & $mask_bin;
         $broadcast = $ip_bin | ~ $mask_bin;
 
         return array(
-            'start' => $this->dtr_ntop($network),
-            'end' => $this->dtr_ntop($broadcast),
+            'start' => self::dtr_ntop($network),
+            'end' => self::dtr_ntop($broadcast),
         );
     }
 
-    private function dtr_pton($ip)
+    protected static function dtr_pton($ip)
     {
         return current( unpack( "A16", inet_pton( $ip ) ) );
     }
 
-    private function dtr_ntop($str)
+    protected static function dtr_ntop($str)
     {
         return inet_ntop( pack( "A".strlen( $str ) , $str ) );
     }

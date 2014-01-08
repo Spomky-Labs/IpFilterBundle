@@ -4,7 +4,7 @@ namespace Spomky\IpFilterBundle\Model;
 
 use Spomky\IpFilterBundle\Model\RangeInterface;
 
-class Range implements RangeInterface
+abstract class Range implements RangeInterface
 {
     protected $start_ip;
     protected $end_ip;
@@ -18,7 +18,7 @@ class Range implements RangeInterface
 
     public function getEndIp()
     {
-        return $this->Range;
+        return $this->end_ip;
     }
 
     public function getEnvironment()

@@ -40,7 +40,7 @@ class LoadRangeData implements FixtureInterface
         $range4 = new Range();
         $range4->setStartIp('fe80::fa');
         $range4->setEndIp('fe80::fb');
-        $range4->setAuthorized(false);
+        $range4->setAuthorized(true);
         $range4->setEnvironment('test');
 
         $manager->persist($range1);

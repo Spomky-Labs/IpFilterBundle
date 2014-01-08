@@ -312,6 +312,8 @@ How to grant access for `192.168.1.10` on `dev` and `test` environments and deny
 Network can be supported using a Range object. You just need to get first and last IP addresses.
 This bundle provides a range calculator, so you can easily extend your range entity using it.
 
+It supports both IPv4 and IPv6.
+
 	<?php
 	// src/Acme/IpBundle/Entity/Range.php
 	
@@ -324,8 +326,8 @@ This bundle provides a range calculator, so you can easily extend your range ent
 	
 	…
 		public function setNetwork($network) {
-			$n = new Network;
-			$range = $n->getRange($network);
+
+			$range = Network::getRange($network);
 			$this->setStartIp($range['start']);
 			$this->setEndIp($range['end']);
         }

@@ -4,7 +4,7 @@ namespace Spomky\IpFilterBundle\Model;
 
 use Spomky\IpFilterBundle\Model\IpInterface;
 
-class Ip implements IpInterface
+abstract class Ip implements IpInterface
 {
     protected $ip;
     protected $environment;
