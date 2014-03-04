@@ -12,6 +12,9 @@ class SpomkyIpFilterExtension extends Extension
 {
     private $alias;
  
+     /**
+     * @param string $alias
+     */
     public function __construct($alias)
     {
         $this->alias = $alias;
@@ -34,6 +37,9 @@ class SpomkyIpFilterExtension extends Extension
         $container->setParameter('spomky_ip_filter.range.class', $config['range_class']);
     }
 
+    /**
+     * @return string
+     */
     public function getAlias()
     {
         return $this->alias;

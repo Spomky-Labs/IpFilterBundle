@@ -2,12 +2,9 @@
 namespace Spomky\IpFilterBundle\Voter;
 
 use Symfony\Component\HttpFoundation\RequestStack;
-
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-
 use Symfony\Component\HttpKernel\Kernel;
-
 use Spomky\IpFilterBundle\Model\IpManagerInterface;
 use Spomky\IpFilterBundle\Model\RangeManagerInterface;
 

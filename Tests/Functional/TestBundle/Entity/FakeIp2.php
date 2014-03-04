@@ -2,7 +2,6 @@
 
 namespace Spomky\IpFilterBundle\Tests\Functional\TestBundle\Entity;
 
-use Spomky\IpFilterBundle\Model\Ip as BaseIp;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,23 +40,4 @@ class FakeIp2
      * @ORM\Column(type="boolean")
      */
     protected $authorized;
-
-    public function getId() {
-        return $this->id;
-    }
-
-    public function setIp($ip) {
-        $this->ip = $ip;
-        return $this;
-    }
-
-    public function setEnvironment($environment) {
-        $this->environment = $environment;
-        return $this;
-    }
-
-    public function setAuthorized($authorized) {
-        $this->authorized = $authorized;
-        return $this;
-    }
 }

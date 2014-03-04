@@ -2,16 +2,9 @@
 
 namespace Spomky\IpFilterBundle\Tests\Functional;
 
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
-use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
-use Doctrine\Common\DataFixtures\Loader;
-
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
-
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\Filesystem\Filesystem;
-
 use Spomky\IpFilterBundle\Tests\Functional\AppKernel;
 
 
@@ -39,6 +32,9 @@ abstract class AbstractTestCase extends WebTestCase
         );
     }
 
+    /**
+     * @param string $command
+     */
     protected static function executeCommand($command, array $options = array()) {
         $options["--env"] = static::$environment;
         $options["--no-interaction"] = true;

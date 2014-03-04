@@ -12,6 +12,9 @@ class SpomkyTestExtension extends Extension
 {
     private $alias;
  
+    /**
+     * @param string $alias
+     */
     public function __construct($alias)
     {
         $this->alias = $alias;

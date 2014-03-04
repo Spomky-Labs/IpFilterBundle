@@ -3,10 +3,7 @@
 namespace Spomky\IpFilterBundle\Tests\Functional;
 
 use Spomky\IpFilterBundle\Tests\Functional\AbstractTestCase;
-
 use Symfony\Bundle\FrameworkBundle\Console\Application;
-
-use Symfony\Component\Filesystem\Filesystem;
 
 class WrongIpEntities1Test extends AbstractTestCase
 {

@@ -22,6 +22,8 @@ For example, you can grant access of a range of addresses from `192.168.1.1` to 
 This version of the bundle requires `Symfony 2.4`.
 It only supports `Doctrine ORM`.
 
+At has been tested using `PHP 5.3` to `PHP 5.5` and `Symfony 2.4` and `Symfony 2.5 (unstable)`.
+
 # Policy #
 
 Please note that authorized IPs have a higher priority than unauthorized ones.

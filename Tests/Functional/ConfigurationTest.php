@@ -3,7 +3,6 @@
 namespace Spomky\IpFilterBundle\Tests\Functional;
 
 use Matthias\SymfonyConfigTest\PhpUnit\AbstractConfigurationTestCase;
-
 use Spomky\IpFilterBundle\DependencyInjection\Configuration;
 
 class ConfigurationTest extends AbstractConfigurationTestCase

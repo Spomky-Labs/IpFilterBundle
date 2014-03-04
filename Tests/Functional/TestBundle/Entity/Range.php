@@ -2,7 +2,7 @@
 
 namespace Spomky\IpFilterBundle\Tests\Functional\TestBundle\Entity;
 
-use Spomky\IpFilterBundle\Model\Range as BaseRange;
+use Spomky\IpFilterBundle\Tests\Functional\TestBundle\Entity\AbstractRange;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity(repositoryClass="Spomky\IpFilterBundle\Model\RangeRepository")
  */
-class Range extends BaseRange
+class Range extends AbstractRange
 {
     /**
      * @var integer $id
@@ -48,28 +48,4 @@ class Range extends BaseRange
      * @ORM\Column(type="boolean")
      */
     protected $authorized;
-
-    public function getId() {
-        return $this->id;
-    }
-
-    public function setStartIp($start_ip) {
-        $this->start_ip = $start_ip;
-        return $this;
-    }
-
-    public function setEndIp($end_ip) {
-        $this->end_ip = $end_ip;
-        return $this;
-    }
-
-    public function setEnvironment($environment) {
-        $this->environment = $environment;
-        return $this;
-    }
-
-    public function setAuthorized($authorized) {
-        $this->authorized = $authorized;
-        return $this;
-    }
 }

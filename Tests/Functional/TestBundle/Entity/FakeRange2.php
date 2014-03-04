@@ -2,7 +2,6 @@
 
 namespace Spomky\IpFilterBundle\Tests\Functional\TestBundle\Entity;
 
-use Spomky\IpFilterBundle\Model\Range as BaseRange;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -48,28 +47,4 @@ class FakeRange2
      * @ORM\Column(type="boolean")
      */
     protected $authorized;
-
-    public function getId() {
-        return $this->id;
-    }
-
-    public function setStartIp($start_ip) {
-        $this->start_ip = $start_ip;
-        return $this;
-    }
-
-    public function setEndIp($end_ip) {
-        $this->end_ip = $end_ip;
-        return $this;
-    }
-
-    public function setEnvironment($environment) {
-        $this->environment = $environment;
-        return $this;
-    }
-
-    public function setAuthorized($authorized) {
-        $this->authorized = $authorized;
-        return $this;
-    }
 }

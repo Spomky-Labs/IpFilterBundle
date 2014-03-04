@@ -78,6 +78,9 @@ class Network
         );
     }
 
+    /**
+     * @param string $str
+     */
     protected static function convertBinaryToPrintable($str)
     {
         return inet_ntop( pack( "A".strlen( $str ) , $str ) );
