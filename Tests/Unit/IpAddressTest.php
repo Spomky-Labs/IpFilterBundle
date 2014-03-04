@@ -16,6 +16,9 @@ class IpAddressTest extends \PHPUnit_Framework_TestCase
         $obj->setEnvironment($environment);
         $obj->setAuthorized($authorized);
 
+        $this->assertInstanceOf('\Spomky\IpFilterBundle\Model\IpInterface', $obj);
+        $this->assertInstanceOf('\Spomky\IpFilterBundle\Model\Ip', $obj);
+
         $this->assertEquals($obj->getIp(), $ip);
         $this->assertEquals($obj->getEnvironment(), $environment);
         $this->assertEquals($obj->isAuthorized(), $authorized);

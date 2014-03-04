@@ -28,20 +28,20 @@ class LoadRangeData implements FixtureInterface
         $range2_1->setStartIp('192.168.2.120');
         $range2_1->setEndIp('192.168.2.121');
         $range2_1->setAuthorized(true);
-        $range2_1->setEnvironment('test');
+        $range2_1->setEnvironment('test1,test2,test3');
 
         //IPV6
         $range3 = new Range();
         $range3->setStartIp('fe80::0');
         $range3->setEndIp('fe80::ff');
         $range3->setAuthorized(false);
-        $range3->setEnvironment('test');
+        $range3->setEnvironment('test1,test2,test3');
 
         $range4 = new Range();
         $range4->setStartIp('fe80::fa');
         $range4->setEndIp('fe80::fb');
         $range4->setAuthorized(true);
-        $range4->setEnvironment('test');
+        $range4->setEnvironment('test1,test2,test3');
 
         $manager->persist($range1);
         $manager->persist($range2);

@@ -47,7 +47,7 @@ class IpAddress extends Type
     {
         if( function_exists('hex2bin') ) {
             // PHP 5.4+
-            return ($value === null) ? null : hex2bin($value);
+            return ($value === null) ? null : inet_ntop(hex2bin($value));
         }
 
         return ($value === null) ? null : inet_ntop(pack("H*",$value));

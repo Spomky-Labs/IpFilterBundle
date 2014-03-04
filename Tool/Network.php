@@ -58,7 +58,7 @@ class Network
 
         $_m = str_repeat("1", $networks).str_repeat("0", $hosts);
 
-        $_hexMask = null;
+        $_hexMask = '';
         foreach ( str_split( $_m, 4) as $segment) {
 
             $_hexMask .= base_convert( $segment, 2, 16);
@@ -66,21 +66,16 @@ class Network
 
         $mask = substr(preg_replace("/([A-f0-9]{4})/", "$1:", $_hexMask), 0, -1);
 
-        $ip_bin = self::convertPrintableToBinary($ip);
-        $mask_bin = self::convertPrintableToBinary($mask);
+        $ip_bin = inet_pton($ip);
+        $mask_bin = inet_pton($mask);
 
         $network = $ip_bin & $mask_bin;
-        $broadcast = $ip_bin | ~($mask_bin);
+        $broadcast = $ip_bin | ~$mask_bin;
 
         return array(
             'start' => self::convertBinaryToPrintable($network),
             'end' => self::convertBinaryToPrintable($broadcast),
         );
-    }
-
-    protected static function convertPrintableToBinary($ip)
-    {
-        return current( unpack( "A16", inet_pton( $ip ) ) );
     }
 
     protected static function convertBinaryToPrintable($str)

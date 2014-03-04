@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity(repositoryClass="Spomky\IpFilterBundle\Model\RangeRepository")
  */
-class Range extends BaseRange
+class FakeRange2
 {
     /**
      * @var integer $id

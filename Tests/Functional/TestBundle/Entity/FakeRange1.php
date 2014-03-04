@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Range
  *
- * @ORM\Entity(repositoryClass="Spomky\IpFilterBundle\Model\RangeRepository")
+ * @ORM\Entity()
  */
-class Range extends BaseRange
+class FakeRange1 extends BaseRange
 {
     /**
      * @var integer $id

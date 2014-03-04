@@ -4,14 +4,40 @@ namespace Spomky\IpFilterBundle\Tests\Functional;
 
 use Spomky\IpFilterBundle\Tests\Functional\AbstractTestCase;
 
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+
 use Symfony\Component\Filesystem\Filesystem;
 
 class IpFilterTest extends AbstractTestCase
 {
+    public static function setUpBeforeClass()
+    {
+        parent::setUpBeforeClass();
+        static::$environment = 'test1';
+        static::$debug = true;
+
+        static::$kernel = self::createKernel(array(
+            'environment' => static::$environment,
+            'debug' => static::$debug,
+        ));
+
+        static::$application = new Application(static::$kernel);
+        static::$application->setAutoExit(false);
+
+        self::deleteDatabase();
+        
+        self::executeCommand('doctrine:database:create');
+        self::executeCommand('doctrine:schema:create');
+
+        self::executeCommand('doctrine:fixtures:load');
+
+        self::backupDatabase();
+    }
+
     protected function setUp()
     {
-        $fs = new Filesystem();
-        $fs->remove(sys_get_temp_dir().'/SpomkyTestBundle');
+        parent::setUp();
+        $this->restoreDatabase();
     }
 
     public function testServicesAndObjects() {
@@ -46,7 +72,7 @@ class IpFilterTest extends AbstractTestCase
      */
     public function testIPV4Access($from,$exception = null) {
 
-        $this->logicAcces($from,$exception);
+        $this->logicAccess($from,$exception);
     }
 
     /**
@@ -54,11 +80,11 @@ class IpFilterTest extends AbstractTestCase
      */
     public function testIPV6Access($from,$exception = null) {
 
-        $this->logicAcces($from,$exception);
+        $this->logicAccess($from,$exception);
     }
 
 
-    protected function logicAcces($from,$exception = null) {
+    protected function logicAccess($from,$exception = null) {
 
         $client = static::createClient();
 

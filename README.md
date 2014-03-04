@@ -1,7 +1,7 @@
 Ip Filter
 =========
 
-[![Build Status](https://travis-ci.org/Spomky-Labs/SpomkyIpFilterBundle.png?branch=master)](https://travis-ci.org/Spomky-Labs/SpomkyIpFilterBundle)
+[![Build Status](https://travis-ci.org/Spomky-Labs/SpomkyIpFilterBundle.png?branch=PHP-5.4-&-5.5-Support)](https://travis-ci.org/Spomky-Labs/SpomkyIpFilterBundle)
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/Spomky-Labs/SpomkyIpFilterBundle/badges/quality-score.png?s=801f9afe962a2ef962fa13e5bba55d2e57aa68f8)](https://scrutinizer-ci.com/g/Spomky-Labs/SpomkyIpFilterBundle/)
 [![Code Coverage](https://scrutinizer-ci.com/g/Spomky-Labs/SpomkyIpFilterBundle/badges/coverage.png?s=1dcac5b56c9321b1b010d1205ae44519441952c9)](https://scrutinizer-ci.com/g/Spomky-Labs/SpomkyIpFilterBundle/)
 
@@ -74,7 +74,7 @@ In the following sections, you'll see an example of how your classes should look
 Your classe can live inside any bundle in your application.
 For example, if you work at "Acme" company, then you might create a bundle called `AcmeIpBundle` and place your classes in it.
 
-Ip Repository and Range Repository classes are important. You can use those provided with this bundle or extend them to include your own classes.
+`IpRepository` and `RangeRepository` classes are important. You can use those provided with this bundle or extend them to include your own classes, but you must implement `Spomky\IpFilterBundle\Model\IpRepositoryInterface` and `Spomky\IpFilterBundle\Model\RangeRepositoryInterface`.
 
 The IP field type must be `ipaddress`.
 

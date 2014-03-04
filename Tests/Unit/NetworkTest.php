@@ -93,6 +93,15 @@ class NetworkTest extends \PHPUnit_Framework_TestCase
                 "Invalid network, IPv4 CIDR must be between 0 and 32."
             ),
             array(
+                '101.105.12.45/-1',
+                null,
+                null,
+                null,
+                null,
+                null,
+                "Invalid network, IPv4 CIDR must be between 0 and 32."
+            ),
+            array(
                 'fe80::10/64',
                 'fe80::',
                 'fe80::ffff:ffff:ffff:ffff',
@@ -102,6 +111,15 @@ class NetworkTest extends \PHPUnit_Framework_TestCase
             ),
             array(
                 'fe80::10/129',
+                null,
+                null,
+                null,
+                null,
+                null,
+                "Invalid network, IPv6 CIDR must be between 0 and 128."
+            ),
+            array(
+                'fe80:1000:ffee::1234/-10',
                 null,
                 null,
                 null,
