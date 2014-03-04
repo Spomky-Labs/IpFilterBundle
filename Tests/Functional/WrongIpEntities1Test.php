@@ -8,18 +8,14 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 
 use Symfony\Component\Filesystem\Filesystem;
 
-class WrongEntities1Test extends AbstractTestCase
+class WrongIpEntities1Test extends AbstractTestCase
 {
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();
         static::$environment = 'test2';
-        static::$debug = true;
 
-        static::$kernel = self::createKernel(array(
-            'environment' => static::$environment,
-            'debug' => static::$debug,
-        ));
+        static::$kernel = self::createKernel();
 
         static::$application = new Application(static::$kernel);
         static::$application->setAutoExit(false);

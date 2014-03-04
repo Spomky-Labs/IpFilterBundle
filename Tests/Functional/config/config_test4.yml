@@ -9,15 +9,15 @@ framework:
 
 spomky_ip_filter:
     db_driver: orm
-    ip_class: \Spomky\IpFilterBundle\Tests\Functional\TestBundle\Entity\FakeIp2
+    ip_class: \Spomky\IpFilterBundle\Tests\Functional\TestBundle\Entity\Ip
     ip_manager: spomky_test.ip_manager
-    range_class: \Spomky\IpFilterBundle\Tests\Functional\TestBundle\Entity\Range
+    range_class: \Spomky\IpFilterBundle\Tests\Functional\TestBundle\Entity\FakeRange1
     range_manager: spomky_test.range_manager
 
 doctrine:
     dbal:
         driver: pdo_sqlite
-        path: %kernel.root_dir%/data.test3.sqlite
+        path: %kernel.root_dir%/data.test4.sqlite
     orm:
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true

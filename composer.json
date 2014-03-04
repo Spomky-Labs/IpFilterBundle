@@ -25,6 +25,7 @@
         "symfony/browser-kit": "~2.4",
         "symfony/expression-language": "~2.4",
         "doctrine/doctrine-bundle": "~1.0",
+        "matthiasnoback/symfony-config-test": "0.*",
         "doctrine/doctrine-fixtures-bundle": "dev-master"
     },
     "suggest": {

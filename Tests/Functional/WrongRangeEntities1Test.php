@@ -8,18 +8,14 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 
 use Symfony\Component\Filesystem\Filesystem;
 
-class WrongEntities2Test extends AbstractTestCase
+class WrongRangeEntities1Test extends AbstractTestCase
 {
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();
-        static::$environment = 'test3';
-        static::$debug = true;
+        static::$environment = 'test4';
 
-        static::$kernel = self::createKernel(array(
-            'environment' => static::$environment,
-            'debug' => static::$debug,
-        ));
+        static::$kernel = self::createKernel();
 
         static::$application = new Application(static::$kernel);
         static::$application->setAutoExit(false);
@@ -57,7 +53,7 @@ class WrongEntities2Test extends AbstractTestCase
             $this->fail('The expected exception was not thrown');
 
         } catch (\Exception $e) {
-            $this->assertEquals('The Ip class \Spomky\IpFilterBundle\Tests\Functional\TestBundle\Entity\FakeIp2 must implement Spomky\IpFilterBundle\Model\IpInterface', $e->getMessage());
+            $this->assertEquals('The repository of class \Spomky\IpFilterBundle\Tests\Functional\TestBundle\Entity\FakeRange1 must implement Spomky\IpFilterBundle\Model\RangeRepositoryInterface', $e->getMessage());
         }
     }
 }

@@ -14,12 +14,8 @@ class IpFilterTest extends AbstractTestCase
     {
         parent::setUpBeforeClass();
         static::$environment = 'test1';
-        static::$debug = true;
 
-        static::$kernel = self::createKernel(array(
-            'environment' => static::$environment,
-            'debug' => static::$debug,
-        ));
+        static::$kernel = self::createKernel();
 
         static::$application = new Application(static::$kernel);
         static::$application->setAutoExit(false);
