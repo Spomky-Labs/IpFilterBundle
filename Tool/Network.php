@@ -72,17 +72,6 @@ class Network
         $network = $ip_bin & $mask_bin;
         $broadcast = $ip_bin | ~($mask_bin);
 
-        var_dump('ip:'.$ip);
-        var_dump('_m:'.$_m);
-        var_dump('_hexMask:'.$_hexMask);
-        var_dump('mask:'.$mask);
-        var_dump('hosts:'.$hosts);
-        var_dump('networks:'.$networks);
-        var_dump('ip_bin:'.$ip_bin);
-        var_dump('mask_bin:'.$mask_bin);
-        var_dump('network:'.$network);
-        var_dump('broadcast:'.$broadcast);
-
         return array(
             'start' => self::convertBinaryToPrintable($network),
             'end' => self::convertBinaryToPrintable($broadcast),

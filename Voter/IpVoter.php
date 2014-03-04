@@ -44,10 +44,12 @@ class IpVoter implements VoterInterface
             throw new \Exception('No request found.');
         }
 
+        $ip = $request->getClientIp();
+
         $env = $this->kernel->getEnvironment();
 
-        $ips = $this->im->findIp( $request->getClientIp(), $env );
-        $ranges = $this->rm->findByIp( $request->getClientIp(), $env );
+        $ips = $this->im->findIp($ip , $env);
+        $ranges = $this->rm->findByIp($ip , $env);
 
         if ( count($ips) === 0 && count($ranges) === 0 ) {
             return VoterInterface::ACCESS_ABSTAIN;
