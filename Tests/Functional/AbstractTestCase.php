@@ -27,11 +27,6 @@ abstract class AbstractTestCase extends WebTestCase
      */
     protected static $environment;
 
-    /**
-     * @var bool
-     */
-    protected static $debug;
-
     protected static function createKernel(array $options = array())
     {
         if (null === static::$class) {
@@ -39,8 +34,8 @@ abstract class AbstractTestCase extends WebTestCase
         }
 
         return new AppKernel(
-            isset($options['environment']) ? $options['environment'] : static::$environment,
-            isset($options['debug']) ? $options['debug'] : static::$debug
+            static::$environment,
+            true
         );
     }
 

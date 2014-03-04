@@ -11,7 +11,7 @@ spomky_ip_filter:
     db_driver: orm
     ip_class: \Spomky\IpFilterBundle\Tests\Functional\TestBundle\Entity\FakeIp1
     ip_manager: spomky_test.ip_manager
-    range_class: \Spomky\IpFilterBundle\Tests\Functional\TestBundle\Entity\FakeRange1
+    range_class: \Spomky\IpFilterBundle\Tests\Functional\TestBundle\Entity\Range
     range_manager: spomky_test.range_manager
 
 doctrine:
