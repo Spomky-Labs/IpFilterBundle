@@ -11,12 +11,6 @@ Ip Filter
 
 [![Latest Stable Version](https://poser.pugx.org/spomky-labs/ip-filter-bundle/v/stable.png)](https://packagist.org/packages/spomky-labs/ip-filter-bundle) [![Total Downloads](https://poser.pugx.org/spomky-labs/ip-filter-bundle/downloads.png)](https://packagist.org/packages/spomky-labs/ip-filter-bundle) [![Latest Unstable Version](https://poser.pugx.org/spomky-labs/ip-filter-bundle/v/unstable.png)](https://packagist.org/packages/spomky-labs/ip-filter-bundle) [![License](https://poser.pugx.org/spomky-labs/ip-filter-bundle/license.png)](https://packagist.org/packages/spomky-labs/ip-filter-bundle)
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/1b7fe376-73e5-41aa-9646-8be3ad514a7d/big.png)](https://insight.sensiolabs.com/projects/1b7fe376-73e5-41aa-9646-8be3ad514a7d)
-
-[![Dependency Status](https://www.versioneye.com/user/projects/52caa8d4ec137551e4000226/badge.png)](https://www.versioneye.com/user/projects/52caa8d4ec137551e4000226)
-
-[![Latest Stable Version](https://poser.pugx.org/spomky-labs/ip-filter-bundle/v/stable.png)](https://packagist.org/packages/spomky-labs/ip-filter-bundle) [![Total Downloads](https://poser.pugx.org/spomky-labs/ip-filter-bundle/downloads.png)](https://packagist.org/packages/spomky-labs/ip-filter-bundle) [![Latest Unstable Version](https://poser.pugx.org/spomky-labs/ip-filter-bundle/v/unstable.png)](https://packagist.org/packages/spomky-labs/ip-filter-bundle) [![License](https://poser.pugx.org/spomky-labs/ip-filter-bundle/license.png)](https://packagist.org/packages/spomky-labs/ip-filter-bundle)
-
 This bundle will help you to restrict access of your application using `IP addresses` and `ranges of IP addresses`.
 
 It supports both `IPv4` and `IPv6` addresses and multiple environments.
