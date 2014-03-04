@@ -7,57 +7,66 @@ use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Loader;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Component\Console\Input\StringInput;
+use Symfony\Component\Console\Input\ArrayInput;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Filesystem\Filesystem;
+
+use Spomky\IpFilterBundle\Tests\Functional\AppKernel;
 
 
 abstract class AbstractTestCase extends WebTestCase
 {
     /**
-     * @var \Symfony\Component\DependencyInjection\Container
+     * @var \Symfony\Bundle\FrameworkBundle\Console\Application
      */
-    protected $container;
+    protected static $application;
 
     /**
      * @var string
      */
-    protected $environment = 'test';
+    protected static $environment;
 
     /**
      * @var bool
      */
-    protected $debug = true;
-
-
-    public function __construct($name = null, array $data = array(), $dataName = '')
-    {
-
-        parent::__construct($name, $data, $dataName);
-
-        if (!static::$kernel) {
-            static::$kernel = self::createKernel(array(
-                'environment' => $this->environment,
-                'debug'       => $this->debug
-            ));
-            static::$kernel->boot();
-        }
-
-        $this->container = static::$kernel->getContainer();
-    }
+    protected static $debug;
 
     protected static function createKernel(array $options = array())
     {
-        $env = @$options['environment'] ?: 'test';
-        $debug = @$options['debug'] ?: 'true';
+        if (null === static::$class) {
+            static::$class = '\Spomky\IpFilterBundle\Tests\Functional\AppKernel';
+        }
 
-        return new AppKernel($env, $debug);
+        return new AppKernel(
+            isset($options['environment']) ? $options['environment'] : static::$environment,
+            isset($options['debug']) ? $options['debug'] : static::$debug
+        );
     }
 
-    protected function tearDown()
-    {
-        static::$kernel = null;
-        parent::tearDown();
+    protected static function executeCommand($command, array $options = array()) {
+        $options["--env"] = static::$environment;
+        $options["--no-interaction"] = true;
+        $options["--quiet"] = true;
+        $options = array_merge($options, array('command' => $command));
+
+        static::$application->run(new ArrayInput($options));
+    }
+
+    protected static function deleteDatabase() {
+        $folder = __DIR__;
+        foreach(array('/data.'.static::$environment.'.sqlite','/data.'.static::$environment.'.sqlite.bak') as $file){
+            if(file_exists($folder . $file)) {
+                unlink($folder . $file);
+            }
+        }
+    }
+
+    protected static function backupDatabase() {
+        copy(__DIR__ . '/data.'.static::$environment.'.sqlite', __DIR__ . '/data.'.static::$environment.'.sqlite.bak');
+    }
+
+    protected static function restoreDatabase() {
+        copy(__DIR__ . '/data.'.static::$environment.'.sqlite.bak', __DIR__ . '/data.'.static::$environment.'.sqlite');
     }
 }

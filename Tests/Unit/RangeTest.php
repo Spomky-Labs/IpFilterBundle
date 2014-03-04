@@ -17,6 +17,9 @@ class RangeTest extends \PHPUnit_Framework_TestCase
         $obj->setEnvironment($environment);
         $obj->setAuthorized($authorized);
 
+        $this->assertInstanceOf('\Spomky\IpFilterBundle\Model\RangeInterface', $obj);
+        $this->assertInstanceOf('\Spomky\IpFilterBundle\Model\Range', $obj);
+
         $this->assertEquals($obj->getStartIp(), $start_ip);
         $this->assertEquals($obj->getEndIp(), $end_ip);
         $this->assertEquals($obj->getEnvironment(), $environment);

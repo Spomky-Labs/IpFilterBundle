@@ -74,7 +74,7 @@ In the following sections, you'll see an example of how your classes should look
 Your classe can live inside any bundle in your application.
 For example, if you work at "Acme" company, then you might create a bundle called `AcmeIpBundle` and place your classes in it.
 
-Ip Repository and Range Repository classes are important. You can use those provided with this bundle or extend them to include your own classes.
+`IpRepository` and `RangeRepository` classes are important. You can use those provided with this bundle or extend them to include your own classes, but you must implement `Spomky\IpFilterBundle\Model\IpRepositoryInterface` and `Spomky\IpFilterBundle\Model\RangeRepositoryInterface`.
 
 The IP field type must be `ipaddress`.
 

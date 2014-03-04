@@ -1,2 +1,2 @@
 vendor/
-Tests/Functional/data.sqlite*
+Tests/Functional/data*.sqlite*

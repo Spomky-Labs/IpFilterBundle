@@ -2,20 +2,20 @@
 
 namespace Spomky\IpFilterBundle\Tests\Functional\TestBundle\Entity;
 
-use Spomky\IpFilterBundle\Model\Range as BaseRange;
+use Spomky\IpFilterBundle\Model\Ip as BaseIp;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Range
+ * Ip
  *
- * @ORM\Entity(repositoryClass="Spomky\IpFilterBundle\Model\RangeRepository")
+ * @ORM\Entity(repositoryClass="Spomky\IpFilterBundle\Model\IpRepository")
  */
-class Range extends BaseRange
+class FakeIp2
 {
     /**
      * @var integer $id
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -26,14 +26,7 @@ class Range extends BaseRange
      *
      * @ORM\Column(type="ipaddress")
      */
-    protected $start_ip;
-
-    /**
-     * @var string $ip
-     *
-     * @ORM\Column(type="ipaddress")
-     */
-    protected $end_ip;
+    protected $ip;
 
     /**
      * @var string $environment
@@ -53,13 +46,8 @@ class Range extends BaseRange
         return $this->id;
     }
 
-    public function setStartIp($start_ip) {
-        $this->start_ip = $start_ip;
-        return $this;
-    }
-
-    public function setEndIp($end_ip) {
-        $this->end_ip = $end_ip;
+    public function setIp($ip) {
+        $this->ip = $ip;
         return $this;
     }
 

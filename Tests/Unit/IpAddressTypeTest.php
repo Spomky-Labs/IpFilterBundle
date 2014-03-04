@@ -82,53 +82,42 @@ class IpAddressTypeTest extends \PHPUnit_Framework_TestCase
     public function dataSQLConvert()
     {
         $platforms = array(
-            '\Doctrine\DBAL\Platforms\DB2Platform' => array('127.0.0.1','7f000001'),
-            '\Doctrine\DBAL\Platforms\DrizzlePlatform' => array('127.0.0.1','7f000001'),
-            '\Doctrine\DBAL\Platforms\MySqlPlatform' => array('127.0.0.1','7f000001'),
-            '\Doctrine\DBAL\Platforms\OraclePlatform' => array('127.0.0.1','7f000001'),
-            '\Doctrine\DBAL\Platforms\PostgreSqlPlatform' => array('127.0.0.1','7f000001'),
-            '\Doctrine\DBAL\Platforms\SQLAzurePlatform' => array('127.0.0.1','7f000001'),
-            '\Doctrine\DBAL\Platforms\SQLServer2005Platform' => array('127.0.0.1','7f000001'),
-            '\Doctrine\DBAL\Platforms\SQLServer2008Platform' => array('127.0.0.1','7f000001'),
-            '\Doctrine\DBAL\Platforms\SQLServer2012Platform' => array('127.0.0.1','7f000001'),
-            '\Doctrine\DBAL\Platforms\SQLServerPlatform' => array('127.0.0.1','7f000001'),
-            '\Doctrine\DBAL\Platforms\SqlitePlatform' => array('127.0.0.1','7f000001'),
-            '\Doctrine\DBAL\Platforms\MySQL57Platform' => array('127.0.0.1','7f000001'),
-            '\Doctrine\DBAL\Platforms\PostgreSQL91Platform' => array('127.0.0.1','7f000001'),
-            '\Doctrine\DBAL\Platforms\PostgreSQL92Platform' => array('127.0.0.1','7f000001'),
-            '\Doctrine\DBAL\Platforms\SQLAnywhere11Platform' => array('127.0.0.1','7f000001'),
-            '\Doctrine\DBAL\Platforms\SQLAnywhere12Platform' => array('127.0.0.1','7f000001'),
-            '\Doctrine\DBAL\Platforms\SQLAnywhere16Platform' => array('127.0.0.1','7f000001'),
-            '\Doctrine\DBAL\Platforms\SQLAnywherePlatform' => array('127.0.0.1','7f000001'),
+            '\Doctrine\DBAL\Platforms\DB2Platform',
+            '\Doctrine\DBAL\Platforms\DrizzlePlatform',
+            '\Doctrine\DBAL\Platforms\MySqlPlatform',
+            '\Doctrine\DBAL\Platforms\OraclePlatform',
+            '\Doctrine\DBAL\Platforms\PostgreSqlPlatform',
+            '\Doctrine\DBAL\Platforms\SQLAzurePlatform',
+            '\Doctrine\DBAL\Platforms\SQLServer2005Platform',
+            '\Doctrine\DBAL\Platforms\SQLServer2008Platform',
+            '\Doctrine\DBAL\Platforms\SQLServer2012Platform',
+            '\Doctrine\DBAL\Platforms\SQLServerPlatform',
+            '\Doctrine\DBAL\Platforms\SqlitePlatform',
+            '\Doctrine\DBAL\Platforms\MySQL57Platform',
+            '\Doctrine\DBAL\Platforms\PostgreSQL91Platform',
+            '\Doctrine\DBAL\Platforms\PostgreSQL92Platform',
+            '\Doctrine\DBAL\Platforms\SQLAnywhere11Platform',
+            '\Doctrine\DBAL\Platforms\SQLAnywhere12Platform',
+            '\Doctrine\DBAL\Platforms\SQLAnywhere16Platform',
+            '\Doctrine\DBAL\Platforms\SQLAnywherePlatform',
+        );
 
-            '\Doctrine\DBAL\Platforms\DB2Platform' => array('fe80::abcd:0:1234:5678','fe80000000000000abcd000012345678'),
-            '\Doctrine\DBAL\Platforms\DrizzlePlatform' => array('fe80::abcd:0:1234:5678','fe80000000000000abcd000012345678'),
-            '\Doctrine\DBAL\Platforms\MySqlPlatform' => array('fe80::abcd:0:1234:5678','fe80000000000000abcd000012345678'),
-            '\Doctrine\DBAL\Platforms\OraclePlatform' => array('fe80::abcd:0:1234:5678','fe80000000000000abcd000012345678'),
-            '\Doctrine\DBAL\Platforms\PostgreSqlPlatform' => array('fe80::abcd:0:1234:5678','fe80000000000000abcd000012345678'),
-            '\Doctrine\DBAL\Platforms\SQLAzurePlatform' => array('fe80::abcd:0:1234:5678','fe80000000000000abcd000012345678'),
-            '\Doctrine\DBAL\Platforms\SQLServer2005Platform' => array('fe80::abcd:0:1234:5678','fe80000000000000abcd000012345678'),
-            '\Doctrine\DBAL\Platforms\SQLServer2008Platform' => array('fe80::abcd:0:1234:5678','fe80000000000000abcd000012345678'),
-            '\Doctrine\DBAL\Platforms\SQLServer2012Platform' => array('fe80::abcd:0:1234:5678','fe80000000000000abcd000012345678'),
-            '\Doctrine\DBAL\Platforms\SQLServerPlatform' => array('fe80::abcd:0:1234:5678','fe80000000000000abcd000012345678'),
-            '\Doctrine\DBAL\Platforms\SqlitePlatform' => array('fe80::abcd:0:1234:5678','fe80000000000000abcd000012345678'),
-            '\Doctrine\DBAL\Platforms\MySQL57Platform' => array('fe80::abcd:0:1234:5678','fe80000000000000abcd000012345678'),
-            '\Doctrine\DBAL\Platforms\PostgreSQL91Platform' => array('fe80::abcd:0:1234:5678','fe80000000000000abcd000012345678'),
-            '\Doctrine\DBAL\Platforms\PostgreSQL92Platform' => array('fe80::abcd:0:1234:5678','fe80000000000000abcd000012345678'),
-            '\Doctrine\DBAL\Platforms\SQLAnywhere11Platform' => array('fe80::abcd:0:1234:5678','fe80000000000000abcd000012345678'),
-            '\Doctrine\DBAL\Platforms\SQLAnywhere12Platform' => array('fe80::abcd:0:1234:5678','fe80000000000000abcd000012345678'),
-            '\Doctrine\DBAL\Platforms\SQLAnywhere16Platform' => array('fe80::abcd:0:1234:5678','fe80000000000000abcd000012345678'),
-            '\Doctrine\DBAL\Platforms\SQLAnywherePlatform' => array('fe80::abcd:0:1234:5678','fe80000000000000abcd000012345678'),
+        $values = array(
+            array(null, null),
+            array('127.0.0.1','7f000001'),
+            array('fe80::abcd:0:1234:5678','fe80000000000000abcd000012345678'),
         );
 
         $test_cases = array();
-        foreach ($platforms as $key => $value) {
-            if (class_exists($key)) {
-                $test_cases[] = array(
-                    new $key,
-                    $value[0],
-                    $value[1],
-                );
+        foreach ($platforms as $platform) {
+            if (class_exists($platform)) {
+                foreach ($values as $value) {
+                    $test_cases[] = array(
+                        new $platform,
+                        $value[0],
+                        $value[1],
+                    );
+                }
             }
         }
 

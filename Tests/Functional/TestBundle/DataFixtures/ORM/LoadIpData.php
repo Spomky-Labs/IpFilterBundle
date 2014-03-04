@@ -21,7 +21,7 @@ class LoadIpData implements FixtureInterface
         $ip1_1 = new Ip();
         $ip1_1->setIp('192.168.1.1');
         $ip1_1->setAuthorized(true);
-        $ip1_1->setEnvironment('test');
+        $ip1_1->setEnvironment('test1,test2,test3');
 
         $ip2 = new Ip();
         $ip2->setIp('192.168.1.2');
@@ -30,7 +30,7 @@ class LoadIpData implements FixtureInterface
         $ip3 = new Ip();
         $ip3->setIp('192.168.1.20');
         $ip3->setAuthorized(false);
-        $ip3->setEnvironment('test');
+        $ip3->setEnvironment('test1,test2,test3');
 
         //IPV6
         $ip4 = new Ip();
@@ -40,7 +40,7 @@ class LoadIpData implements FixtureInterface
         $ip5 = new Ip();
         $ip5->setIp('fe80::2:0');
         $ip5->setAuthorized(true);
-        $ip5->setEnvironment('test');
+        $ip5->setEnvironment('test1,test2,test3');
 
         $ip6 = new Ip();
         $ip6->setIp('fe80::2:10');
@@ -49,7 +49,7 @@ class LoadIpData implements FixtureInterface
         $ip7 = new Ip();
         $ip7->setIp('fe80::2:11');
         $ip7->setAuthorized(false);
-        $ip7->setEnvironment('test');
+        $ip7->setEnvironment('test1,test2,test3');
 
         $manager->persist($ip1);
         $manager->persist($ip1_1);

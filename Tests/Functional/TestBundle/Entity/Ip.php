@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Ip
  *
- * @ORM\Table(name="ips")
  * @ORM\Entity(repositoryClass="Spomky\IpFilterBundle\Model\IpRepository")
  */
 class Ip extends BaseIp
