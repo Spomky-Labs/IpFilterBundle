@@ -4,7 +4,7 @@ namespace Spomky\IpFilterBundle\Tests\Functional\TestBundle\Entity;
 
 use Spomky\IpFilterBundle\Model\Ip as BaseIp;
 
-class AbstractIp extends BaseIp
+abstract class AbstractIp extends BaseIp
 {
     protected $id;
 

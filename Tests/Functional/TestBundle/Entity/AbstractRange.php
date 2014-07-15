@@ -4,7 +4,7 @@ namespace Spomky\IpFilterBundle\Tests\Functional\TestBundle\Entity;
 
 use Spomky\IpFilterBundle\Model\Range as BaseRange;
 
-class AbstractRange extends BaseRange
+abstract class AbstractRange extends BaseRange
 {
     protected $id;
 
