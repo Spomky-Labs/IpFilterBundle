@@ -2,7 +2,6 @@
 
 namespace Spomky\IpFilterBundle\Model;
 
-use Spomky\IpFilterBundle\Model\RangeInterface;
 
 abstract class Range implements RangeInterface
 {

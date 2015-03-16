@@ -19,6 +19,7 @@ abstract class AbstractIp extends BaseIp
     public function setIp($ip)
     {
         $this->ip = $ip;
+
         return $this;
     }
 
@@ -28,6 +29,7 @@ abstract class AbstractIp extends BaseIp
     public function setEnvironment($environment)
     {
         $this->environment = $environment;
+
         return $this;
     }
 
@@ -37,6 +39,7 @@ abstract class AbstractIp extends BaseIp
     public function setAuthorized($authorized)
     {
         $this->authorized = $authorized;
+
         return $this;
     }
 }

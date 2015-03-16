@@ -11,7 +11,7 @@ use Symfony\Component\Config\FileLocator;
 class SpomkyTestExtension extends Extension
 {
     private $alias;
- 
+
     /**
      * @param string $alias
      */
@@ -19,7 +19,7 @@ class SpomkyTestExtension extends Extension
     {
         $this->alias = $alias;
     }
-    
+
     public function load(array $configs, ContainerBuilder $container)
     {
         $processor     = new Processor();

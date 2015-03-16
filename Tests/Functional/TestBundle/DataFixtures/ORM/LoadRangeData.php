@@ -48,7 +48,7 @@ class LoadRangeData implements FixtureInterface
         $manager->persist($range2_1);
         $manager->persist($range3);
         $manager->persist($range4);
-        
+
         $manager->flush();
     }
 }

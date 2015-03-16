@@ -5,7 +5,7 @@ if (!is_file($autoloadFile = __DIR__.'/../vendor/autoload.php')) {
 }
 
 /**
- * @var ClassLoader $loader
+ * @var ClassLoader
  */
 $loader = require $autoloadFile;
 \Doctrine\Common\Annotations\AnnotationRegistry::registerLoader('class_exists');

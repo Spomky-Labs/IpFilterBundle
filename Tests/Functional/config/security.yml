@@ -16,7 +16,7 @@ security:
                     user: { password: userpass, roles: [ 'ROLE_USER' ] }
                     admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
 
-    firewalls: 
+    firewalls:
         test:
             pattern: ^/
             #security: false

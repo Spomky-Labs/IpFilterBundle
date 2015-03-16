@@ -13,7 +13,7 @@ class IpAddressTypeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($obj->getName(), IpAddress::IPADDRESS);
     }
-    
+
     /**
      * @dataProvider dataSQLDeclaration
      */
@@ -54,12 +54,12 @@ class IpAddressTypeTest extends \PHPUnit_Framework_TestCase
         foreach ($platforms as $key => $value) {
             if (class_exists($key)) {
                 $test_cases[] = array(
-                    new $key,
+                    new $key(),
                     $value,
                 );
             }
         }
-        
+
         return $test_cases;
     }
 
@@ -113,7 +113,7 @@ class IpAddressTypeTest extends \PHPUnit_Framework_TestCase
             if (class_exists($platform)) {
                 foreach ($values as $value) {
                     $test_cases[] = array(
-                        new $platform,
+                        new $platform(),
                         $value[0],
                         $value[1],
                     );

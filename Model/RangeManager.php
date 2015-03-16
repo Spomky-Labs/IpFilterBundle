@@ -2,8 +2,6 @@
 
 namespace Spomky\IpFilterBundle\Model;
 
-use Spomky\IpFilterBundle\Model\RangeRepositoryInterface;
-use Spomky\IpFilterBundle\Model\RangeManagerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class RangeManager implements RangeManagerInterface
@@ -21,11 +19,11 @@ class RangeManager implements RangeManagerInterface
     public function __construct(RegistryInterface $registry, $class)
     {
         $this->manager = $registry->getManager();
-        
-        if (!in_array('Spomky\\IpFilterBundle\\Model\\RangeInterface', class_implements($class)) ) {
+
+        if (!in_array('Spomky\\IpFilterBundle\\Model\\RangeInterface', class_implements($class))) {
             throw new \Exception("The Range class $class must implement Spomky\IpFilterBundle\Model\RangeInterface");
         }
-        
+
         $this->repository = $this->getManager()->getRepository($class);
         if (!$this->repository instanceof RangeRepositoryInterface) {
             throw new \Exception("The repository of class $class must implement Spomky\IpFilterBundle\Model\RangeRepositoryInterface");

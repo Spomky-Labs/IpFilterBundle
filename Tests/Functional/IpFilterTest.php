@@ -2,7 +2,6 @@
 
 namespace Spomky\IpFilterBundle\Tests\Functional;
 
-use Spomky\IpFilterBundle\Tests\Functional\AbstractTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 
 class IpFilterTest extends AbstractTestCase
@@ -18,7 +17,7 @@ class IpFilterTest extends AbstractTestCase
         static::$application->setAutoExit(false);
 
         self::deleteDatabase();
-        
+
         self::executeCommand('doctrine:database:create');
         self::executeCommand('doctrine:schema:create');
 
@@ -33,8 +32,8 @@ class IpFilterTest extends AbstractTestCase
         $this->restoreDatabase();
     }
 
-    public function testServicesAndObjects() {
-
+    public function testServicesAndObjects()
+    {
         $client = static::createClient();
         $container = $client->getContainer();
         $ip_manager = $container->get("spomky_ip_filter.ip_manager");
@@ -63,22 +62,21 @@ class IpFilterTest extends AbstractTestCase
     /**
      * @dataProvider getIPV4Access
      */
-    public function testIPV4Access($from,$exception = null) {
-
-        $this->logicAccess($from,$exception);
+    public function testIPV4Access($from, $exception = null)
+    {
+        $this->logicAccess($from, $exception);
     }
 
     /**
      * @dataProvider getIPV6Access
      */
-    public function testIPV6Access($from,$exception = null) {
-
-        $this->logicAccess($from,$exception);
+    public function testIPV6Access($from, $exception = null)
+    {
+        $this->logicAccess($from, $exception);
     }
 
-
-    protected function logicAccess($from,$exception = null) {
-
+    protected function logicAccess($from, $exception = null)
+    {
         $client = static::createClient();
 
         try {
@@ -106,8 +104,8 @@ class IpFilterTest extends AbstractTestCase
         }
     }
 
-    public function getIPV4Access() {
-
+    public function getIPV4Access()
+    {
         return array(
             array(
                 '127.0.0.1',
@@ -165,8 +163,8 @@ class IpFilterTest extends AbstractTestCase
         );
     }
 
-    public function getIPV6Access() {
-
+    public function getIPV6Access()
+    {
         return array(
             array(
                 '::1',

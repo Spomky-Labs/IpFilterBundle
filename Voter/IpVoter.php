@@ -37,7 +37,7 @@ class IpVoter implements VoterInterface
     public function vote(TokenInterface $token, $object, array $attributes)
     {
         $request = $this->request_stack->getCurrentRequest();
-        if( !$request ) {
+        if (!$request) {
             throw new \Exception('No request found.');
         }
 
@@ -45,21 +45,21 @@ class IpVoter implements VoterInterface
 
         $env = $this->kernel->getEnvironment();
 
-        $ips = $this->im->findIp($ip , $env);
-        $ranges = $this->rm->findByIp($ip , $env);
+        $ips = $this->im->findIp($ip, $env);
+        $ranges = $this->rm->findByIp($ip, $env);
 
-        if ( count($ips) === 0 && count($ranges) === 0 ) {
+        if (count($ips) === 0 && count($ranges) === 0) {
             return VoterInterface::ACCESS_ABSTAIN;
         }
 
         foreach ($ips as $ip) {
-            if ( $ip->isAuthorized() ) {
+            if ($ip->isAuthorized()) {
                 return VoterInterface::ACCESS_GRANTED;
             }
         }
 
         foreach ($ranges as $range) {
-            if ( $range->isAuthorized() ) {
+            if ($range->isAuthorized()) {
                 return VoterInterface::ACCESS_GRANTED;
             }
         }

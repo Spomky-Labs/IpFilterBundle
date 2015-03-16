@@ -60,7 +60,7 @@ class LoadIpData implements FixtureInterface
         $manager->persist($ip5);
         $manager->persist($ip6);
         $manager->persist($ip7);
-        
+
         $manager->flush();
     }
 }

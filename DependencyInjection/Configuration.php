@@ -8,8 +8,8 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 class Configuration implements ConfigurationInterface
 {
     private $alias;
- 
-     /**
+
+    /**
      * @param string $alias
      */
     public function __construct($alias)
@@ -35,7 +35,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('db_driver')
                     ->validate()
                         ->ifNotInArray($supportedDrivers)
-                        ->thenInvalid('The driver %s is not supported. Please choose one of ' . json_encode($supportedDrivers))
+                        ->thenInvalid('The driver %s is not supported. Please choose one of '.json_encode($supportedDrivers))
                     ->end()
                     ->cannotBeOverwritten()
                     ->isRequired()

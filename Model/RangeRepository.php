@@ -3,7 +3,6 @@
 namespace Spomky\IpFilterBundle\Model;
 
 use Doctrine\ORM\EntityRepository;
-use Spomky\IpFilterBundle\Model\RangeRepositoryInterface;
 
 /**
  * @method \Doctrine\Common\Collections\ArrayCollection() findByIp(string $ip, string $environment)

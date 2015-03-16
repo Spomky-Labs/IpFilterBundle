@@ -7,7 +7,6 @@ use Spomky\IpFilterBundle\Tests\Functional\TestBundle\DependencyInjection\Spomky
 
 class SpomkyTestBundle extends Bundle
 {
-
     public function getContainerExtension()
     {
         return new SpomkyTestExtension('spomky_test');

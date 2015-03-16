@@ -2,8 +2,6 @@
 
 namespace Spomky\IpFilterBundle\Model;
 
-use Spomky\IpFilterBundle\Model\IpRepositoryInterface;
-use Spomky\IpFilterBundle\Model\IpManagerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class IpManager implements IpManagerInterface
@@ -21,8 +19,8 @@ class IpManager implements IpManagerInterface
     public function __construct(RegistryInterface $registry, $class)
     {
         $this->manager = $registry->getManager();
-        
-        if (!in_array('Spomky\\IpFilterBundle\\Model\\IpInterface', class_implements($class)) ) {
+
+        if (!in_array('Spomky\\IpFilterBundle\\Model\\IpInterface', class_implements($class))) {
             throw new \Exception("The Ip class $class must implement Spomky\IpFilterBundle\Model\IpInterface");
         }
 

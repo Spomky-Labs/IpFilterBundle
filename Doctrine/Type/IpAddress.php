@@ -6,9 +6,10 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
 
 /**
-* Type that maps an Ip Address SQL to php objects
-* @author Florent Morselli
-*/
+ * Type that maps an Ip Address SQL to php objects.
+ *
+ * @author Florent Morselli
+ */
 class IpAddress extends Type
 {
     const IPADDRESS = 'ipaddress';
@@ -45,11 +46,11 @@ class IpAddress extends Type
 
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-        if( function_exists('hex2bin') ) {
+        if (function_exists('hex2bin')) {
             // PHP 5.4+
             return ($value === null) ? null : inet_ntop(hex2bin($value));
         }
 
-        return ($value === null) ? null : inet_ntop(pack("H*",$value));
+        return ($value === null) ? null : inet_ntop(pack("H*", $value));
     }
 }

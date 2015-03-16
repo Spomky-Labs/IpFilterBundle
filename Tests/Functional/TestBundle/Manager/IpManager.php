@@ -10,7 +10,8 @@ class IpManager extends BaseIpManager
     public function create()
     {
         $class = $this->getRepository()->getClassName();
-        return new $class;
+
+        return new $class();
     }
 
     public function save(IpInterface $ip)

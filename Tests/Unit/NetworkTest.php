@@ -4,7 +4,6 @@ namespace Spomky\IpFilterBundle\Tests\Unit;
 
 use Spomky\IpFilterBundle\Tool\Network;
 
-
 class NetworkTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -18,15 +17,15 @@ class NetworkTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($begin_expected, $result['start']);
             $this->assertEquals($end_expected, $result['end']);
 
-            if(isset($result['network'])) {
+            if (isset($result['network'])) {
                 $this->assertEquals($network_expected, $result['network']);
             }
 
-            if(isset($result['broadcast'])) {
+            if (isset($result['broadcast'])) {
                 $this->assertEquals($broadcast_expected, $result['broadcast']);
             }
 
-            if(isset($result['mask'])) {
+            if (isset($result['mask'])) {
                 $this->assertEquals($mask_expected, $result['mask']);
             }
 
@@ -34,8 +33,7 @@ class NetworkTest extends \PHPUnit_Framework_TestCase
                 $this->fail('The expected exception was not thrown');
             }
         } catch (\Exception $e) {
-            
-            if(!$exception_message) {
+            if (!$exception_message) {
                 throw $e;
             }
             $this->assertEquals($exception_message, $e->getMessage());
@@ -55,7 +53,7 @@ class NetworkTest extends \PHPUnit_Framework_TestCase
                 null,
                 null,
                 null,
-                "Invalid IP/CIDR combination supplied"
+                "Invalid IP/CIDR combination supplied",
             ),
             array(
                 'hip/hop',
@@ -64,7 +62,7 @@ class NetworkTest extends \PHPUnit_Framework_TestCase
                 null,
                 null,
                 null,
-                "Invalid IP/CIDR combination supplied"
+                "Invalid IP/CIDR combination supplied",
             ),
 
             array(
@@ -90,7 +88,7 @@ class NetworkTest extends \PHPUnit_Framework_TestCase
                 null,
                 null,
                 null,
-                "Invalid network, IPv4 CIDR must be between 0 and 32."
+                "Invalid network, IPv4 CIDR must be between 0 and 32.",
             ),
             array(
                 '101.105.12.45/-1',
@@ -99,7 +97,7 @@ class NetworkTest extends \PHPUnit_Framework_TestCase
                 null,
                 null,
                 null,
-                "Invalid network, IPv4 CIDR must be between 0 and 32."
+                "Invalid network, IPv4 CIDR must be between 0 and 32.",
             ),
             array(
                 'fe80::10/64',
@@ -116,7 +114,7 @@ class NetworkTest extends \PHPUnit_Framework_TestCase
                 null,
                 null,
                 null,
-                "Invalid network, IPv6 CIDR must be between 0 and 128."
+                "Invalid network, IPv6 CIDR must be between 0 and 128.",
             ),
             array(
                 'fe80:1000:ffee::1234/-10',
@@ -125,7 +123,7 @@ class NetworkTest extends \PHPUnit_Framework_TestCase
                 null,
                 null,
                 null,
-                "Invalid network, IPv6 CIDR must be between 0 and 128."
+                "Invalid network, IPv6 CIDR must be between 0 and 128.",
             ),
             array(
                 'fec0::0000/10',

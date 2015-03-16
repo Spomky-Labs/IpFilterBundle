@@ -11,15 +11,15 @@ use Symfony\Component\Config\FileLocator;
 class SpomkyIpFilterExtension extends Extension
 {
     private $alias;
- 
-     /**
+
+    /**
      * @param string $alias
      */
     public function __construct($alias)
     {
         $this->alias = $alias;
     }
-    
+
     public function load(array $configs, ContainerBuilder $container)
     {
         $processor     = new Processor();

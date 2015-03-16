@@ -6,20 +6,24 @@ use Spomky\IpFilterBundle\Model\Ip;
 
 class IpStub extends Ip
 {
-    public function setIp($ip) {
+    public function setIp($ip)
+    {
         $this->ip = $ip;
+
         return $this;
     }
 
-    public function setEnvironment($environment) {
+    public function setEnvironment($environment)
+    {
         $this->environment = $environment;
+
         return $this;
-        
     }
 
-    public function setAuthorized($authorized) {
+    public function setAuthorized($authorized)
+    {
         $this->authorized = $authorized;
-        return $this;
 
+        return $this;
     }
 }

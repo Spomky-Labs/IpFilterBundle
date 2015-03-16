@@ -2,18 +2,17 @@
 
 namespace Spomky\IpFilterBundle\Tests\Functional\TestBundle\Entity;
 
-use Spomky\IpFilterBundle\Tests\Functional\TestBundle\Entity\AbstractRange;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Range
+ * Range.
  *
  * @ORM\Entity(repositoryClass="Spomky\IpFilterBundle\Model\RangeRepository")
  */
 class Range extends AbstractRange
 {
     /**
-     * @var integer $id
+     * @var integer
      *
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -22,28 +21,28 @@ class Range extends AbstractRange
     protected $id;
 
     /**
-     * @var string $ip
+     * @var string
      *
      * @ORM\Column(type="ipaddress")
      */
     protected $start_ip;
 
     /**
-     * @var string $ip
+     * @var string
      *
      * @ORM\Column(type="ipaddress")
      */
     protected $end_ip;
 
     /**
-     * @var string $environment
+     * @var string
      *
      * @ORM\Column(type="string", length=10, nullable=true)
      */
     protected $environment;
 
     /**
-     * @var boolean $authorized
+     * @var boolean
      *
      * @ORM\Column(type="boolean")
      */

@@ -2,7 +2,6 @@
 
 namespace Spomky\IpFilterBundle\Tests\Functional;
 
-use Spomky\IpFilterBundle\Tests\Functional\AbstractTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 
 class WrongIpEntities1Test extends AbstractTestCase
@@ -18,7 +17,7 @@ class WrongIpEntities1Test extends AbstractTestCase
         static::$application->setAutoExit(false);
 
         self::deleteDatabase();
-        
+
         self::executeCommand('doctrine:database:create');
         self::executeCommand('doctrine:schema:create');
 
@@ -33,8 +32,8 @@ class WrongIpEntities1Test extends AbstractTestCase
         $this->restoreDatabase();
     }
 
-    public function testAccess() {
-
+    public function testAccess()
+    {
         $client = static::createClient();
 
         try {
@@ -48,7 +47,6 @@ class WrongIpEntities1Test extends AbstractTestCase
                 )
             );
             $this->fail('The expected exception was not thrown');
-
         } catch (\Exception $e) {
             $this->assertEquals('The repository of class \Spomky\IpFilterBundle\Tests\Functional\TestBundle\Entity\FakeIp1 must implement Spomky\IpFilterBundle\Model\IpRepositoryInterface', $e->getMessage());
         }

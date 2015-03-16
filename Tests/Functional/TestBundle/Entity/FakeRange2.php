@@ -5,14 +5,14 @@ namespace Spomky\IpFilterBundle\Tests\Functional\TestBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Range
+ * Range.
  *
  * @ORM\Entity(repositoryClass="Spomky\IpFilterBundle\Model\RangeRepository")
  */
 class FakeRange2
 {
     /**
-     * @var integer $id
+     * @var integer
      *
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -21,28 +21,28 @@ class FakeRange2
     protected $id;
 
     /**
-     * @var string $ip
+     * @var string
      *
      * @ORM\Column(type="ipaddress")
      */
     protected $start_ip;
 
     /**
-     * @var string $ip
+     * @var string
      *
      * @ORM\Column(type="ipaddress")
      */
     protected $end_ip;
 
     /**
-     * @var string $environment
+     * @var string
      *
      * @ORM\Column(type="string", length=10, nullable=true)
      */
     protected $environment;
 
     /**
-     * @var boolean $authorized
+     * @var boolean
      *
      * @ORM\Column(type="boolean")
      */

@@ -2,7 +2,6 @@
 
 namespace Spomky\IpFilterBundle\Model;
 
-use Spomky\IpFilterBundle\Model\IpInterface;
 
 abstract class Ip implements IpInterface
 {

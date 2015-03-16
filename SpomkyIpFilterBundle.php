@@ -11,9 +11,9 @@ class SpomkyIpFilterBundle extends Bundle
     public function boot()
     {
         $types = Type::getTypesMap();
-        if(!isset($types['ipaddress'])) {
+        if (!isset($types['ipaddress'])) {
             Type::addType('ipaddress', 'Spomky\IpFilterBundle\Doctrine\Type\IpAddress');
-    
+
             $em = $this->container->get('doctrine.orm.entity_manager');
             $em->getConnection()->getDatabasePlatform()->registerDoctrineTypeMapping('ipaddress', 'ipaddress');
         }

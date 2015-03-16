@@ -81,9 +81,9 @@ class ConfigurationTest extends AbstractConfigurationTestCase
                     array('range_class' => 'my_range_class'),
                 ),
                 array(
-                    'db_driver'=> 'orm',
-                    'ip_class'=> 'my_ip_class',
-                    'range_class'=> 'my_range_class',
+                    'db_driver' => 'orm',
+                    'ip_class' => 'my_ip_class',
+                    'range_class' => 'my_range_class',
                     'ip_manager' => 'spomky_ip_filter.ip_manager.default',
                     'range_manager' => 'spomky_ip_filter.range_manager.default',
 
@@ -98,9 +98,9 @@ class ConfigurationTest extends AbstractConfigurationTestCase
                     array('range_manager' => 'my_range_manager'),
                 ),
                 array(
-                    'db_driver'=> 'orm',
-                    'ip_class'=> 'my_ip_class',
-                    'range_class'=> 'my_range_class',
+                    'db_driver' => 'orm',
+                    'ip_class' => 'my_ip_class',
+                    'range_class' => 'my_range_class',
                     'ip_manager' => 'my_ip_manager',
                     'range_manager' => 'my_range_manager',
 
