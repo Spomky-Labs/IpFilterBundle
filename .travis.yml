@@ -13,7 +13,8 @@ matrix:
 
 env:
     - SYMFONY_VERSION=2.4.*
-    - SYMFONY_VERSION=2.5.*@dev
+    - SYMFONY_VERSION=2.5.*
+    - SYMFONY_VERSION=2.6.*
 
 before_script:
     - curl -s http://getcomposer.org/installer | php
@@ -25,7 +26,7 @@ before_script:
     - php composer.phar require symfony/expression-language:${SYMFONY_VERSION} --no-update
     - php composer.phar require symfony/framework-bundle:${SYMFONY_VERSION} --no-update
     - php composer.phar require symfony/event-dispatcher:${SYMFONY_VERSION} --no-update
-    - php composer.phar update --dev --no-interaction
+    - php composer.phar update --no-interaction
 
 phpunit: php vendor/bin/phpunit
 

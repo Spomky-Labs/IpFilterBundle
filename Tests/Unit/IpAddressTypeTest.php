@@ -21,7 +21,7 @@ class IpAddressTypeTest extends \PHPUnit_Framework_TestCase
     {
         $obj = Type::getType('ipaddress');
 
-        $this->assertEquals($obj->getSQLDeclaration(array(), $platform), $expected_type);
+        $this->assertEquals($expected_type, $obj->getSQLDeclaration(array(), $platform));
     }
 
     /**
@@ -32,22 +32,22 @@ class IpAddressTypeTest extends \PHPUnit_Framework_TestCase
         $platforms = array(
             '\Doctrine\DBAL\Platforms\DB2Platform' => 'string',
             '\Doctrine\DBAL\Platforms\DrizzlePlatform' => 'string',
-            '\Doctrine\DBAL\Platforms\MySqlPlatform' => 'blob',
+            '\Doctrine\DBAL\Platforms\MySqlPlatform' => 'binary',
             '\Doctrine\DBAL\Platforms\OraclePlatform' => 'blob',
             '\Doctrine\DBAL\Platforms\PostgreSqlPlatform' => 'blob',
-            '\Doctrine\DBAL\Platforms\SQLAzurePlatform' => 'blob',
-            '\Doctrine\DBAL\Platforms\SQLServer2005Platform' => 'blob',
-            '\Doctrine\DBAL\Platforms\SQLServer2008Platform' => 'blob',
-            '\Doctrine\DBAL\Platforms\SQLServer2012Platform' => 'blob',
-            '\Doctrine\DBAL\Platforms\SQLServerPlatform' => 'blob',
+            '\Doctrine\DBAL\Platforms\SQLAzurePlatform' => 'binary',
+            '\Doctrine\DBAL\Platforms\SQLServer2005Platform' => 'binary',
+            '\Doctrine\DBAL\Platforms\SQLServer2008Platform' => 'binary',
+            '\Doctrine\DBAL\Platforms\SQLServer2012Platform' => 'binary',
+            '\Doctrine\DBAL\Platforms\SQLServerPlatform' => 'binary',
             '\Doctrine\DBAL\Platforms\SqlitePlatform' => 'string',
-            '\Doctrine\DBAL\Platforms\MySQL57Platform' => 'blob',
+            '\Doctrine\DBAL\Platforms\MySQL57Platform' => 'binary',
             '\Doctrine\DBAL\Platforms\PostgreSQL91Platform' => 'blob',
             '\Doctrine\DBAL\Platforms\PostgreSQL92Platform' => 'blob',
-            '\Doctrine\DBAL\Platforms\SQLAnywhere11Platform' => 'blob',
-            '\Doctrine\DBAL\Platforms\SQLAnywhere12Platform' => 'blob',
-            '\Doctrine\DBAL\Platforms\SQLAnywhere16Platform' => 'blob',
-            '\Doctrine\DBAL\Platforms\SQLAnywherePlatform' => 'blob',
+            '\Doctrine\DBAL\Platforms\SQLAnywhere11Platform' => 'binary',
+            '\Doctrine\DBAL\Platforms\SQLAnywhere12Platform' => 'binary',
+            '\Doctrine\DBAL\Platforms\SQLAnywhere16Platform' => 'binary',
+            '\Doctrine\DBAL\Platforms\SQLAnywherePlatform' => 'binary',
         );
 
         $test_cases = array();
