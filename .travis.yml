@@ -19,6 +19,20 @@ env:
 
 before_script:
     - curl -s http://getcomposer.org/installer | php
+    - php composer.phar require symfony/console:${SYMFONY_VERSION} --no-update
+    - php composer.phar require symfony/debug:${SYMFONY_VERSION} --no-update
+    - php composer.phar require symfony/http-foundation:${SYMFONY_VERSION} --no-update
+    - php composer.phar require symfony/http-kernel:${SYMFONY_VERSION} --no-update
+    - php composer.phar require symfony/security:${SYMFONY_VERSION} --no-update
+    - php composer.phar require symfony/templating:${SYMFONY_VERSION} --no-update
+    - php composer.phar require symfony/doctrine-bridge:${SYMFONY_VERSION} --no-update
+    - php composer.phar require symfony/translation:${SYMFONY_VERSION} --no-update
+    - php composer.phar require symfony/stopwatch:${SYMFONY_VERSION} --no-update
+    - php composer.phar require symfony/routing:${SYMFONY_VERSION} --no-update
+    - php composer.phar require symfony/filesystem:${SYMFONY_VERSION} --no-update
+    - php composer.phar require symfony/config:${SYMFONY_VERSION} --no-update
+    - php composer.phar require symfony/dependency-injection:${SYMFONY_VERSION} --no-update
+    - php composer.phar require symfony/dom-crawler:${SYMFONY_VERSION} --no-update
     - php composer.phar require symfony/security-bundle:${SYMFONY_VERSION} --no-update
     - php composer.phar require symfony/finder:${SYMFONY_VERSION} --no-update
     - php composer.phar require symfony/class-loader:${SYMFONY_VERSION} --no-update
