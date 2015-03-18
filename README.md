@@ -5,11 +5,12 @@ Ip Filter
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/Spomky-Labs/SpomkyIpFilterBundle/badges/quality-score.png?s=801f9afe962a2ef962fa13e5bba55d2e57aa68f8)](https://scrutinizer-ci.com/g/Spomky-Labs/SpomkyIpFilterBundle/)
 [![Code Coverage](https://scrutinizer-ci.com/g/Spomky-Labs/SpomkyIpFilterBundle/badges/coverage.png?s=1dcac5b56c9321b1b010d1205ae44519441952c9)](https://scrutinizer-ci.com/g/Spomky-Labs/SpomkyIpFilterBundle/)
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/1b7fe376-73e5-41aa-9646-8be3ad514a7d/big.png)](https://insight.sensiolabs.com/projects/1b7fe376-73e5-41aa-9646-8be3ad514a7d)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/db8b8cee-6f7c-4e50-8058-4d6edcbc636b/big.png)](https://insight.sensiolabs.com/projects/db8b8cee-6f7c-4e50-8058-4d6edcbc636b)
 
-[![Dependency Status](https://www.versioneye.com/user/projects/530b140aec1375fc8d000011/badge.png)](https://www.versioneye.com/user/projects/530b140aec1375fc8d000011)
-
-[![Latest Stable Version](https://poser.pugx.org/spomky-labs/ip-filter-bundle/v/stable.png)](https://packagist.org/packages/spomky-labs/ip-filter-bundle) [![Total Downloads](https://poser.pugx.org/spomky-labs/ip-filter-bundle/downloads.png)](https://packagist.org/packages/spomky-labs/ip-filter-bundle) [![Latest Unstable Version](https://poser.pugx.org/spomky-labs/ip-filter-bundle/v/unstable.png)](https://packagist.org/packages/spomky-labs/ip-filter-bundle) [![License](https://poser.pugx.org/spomky-labs/ip-filter-bundle/license.png)](https://packagist.org/packages/spomky-labs/ip-filter-bundle)
+[![Latest Stable Version](https://poser.pugx.org/spomky-labs/ip-filter-bundle/v/stable.png)](https://packagist.org/packages/spomky-labs/ip-filter-bundle)
+[![Total Downloads](https://poser.pugx.org/spomky-labs/ip-filter-bundle/downloads.png)](https://packagist.org/packages/spomky-labs/ip-filter-bundle)
+[![Latest Unstable Version](https://poser.pugx.org/spomky-labs/ip-filter-bundle/v/unstable.png)](https://packagist.org/packages/spomky-labs/ip-filter-bundle)
+[![License](https://poser.pugx.org/spomky-labs/ip-filter-bundle/license.png)](https://packagist.org/packages/spomky-labs/ip-filter-bundle)
 
 This bundle will help you to restrict access of your application using `IP addresses` and `ranges of IP addresses`.
 
