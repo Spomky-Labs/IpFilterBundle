@@ -51,11 +51,4 @@ interface RangeInterface
      */
     public function setAuthorized($authorized);
 
-    /**
-     * @param string $network The network with CIDR (e.g. 0.0.0.0/0, 192.168.0.0/24, fe80::/64)
-     *
-     * @return self
-     */
-    public function setNetwork($network);
-
 }

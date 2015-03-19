@@ -2,6 +2,7 @@
 
 namespace SpomkyLabs\IpFilterBundle\Model;
 
+use SpomkyLabs\IpFilterBundle\Tool\Network;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class RangeManager implements RangeManagerInterface
@@ -42,6 +43,16 @@ class RangeManager implements RangeManagerInterface
             ->setParameter('environment', "%$environment%")
             ->getQuery()
             ->execute();
+    }
+
+    public function createRangeFromNetwork($network)
+    {
+        $range = $this->createRange();
+        $values = Network::getRange($network);
+        $range->setStartIp($values['start']);
+        $range->setEndIp($values['end']);
+
+        return $range;
     }
 
     /**

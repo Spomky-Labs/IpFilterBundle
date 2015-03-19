@@ -229,23 +229,20 @@ This bundle provides a range calculator, so you can easily extend your range ent
 $range_manager = $this->container->get('sl_ip_filter.range_manager');
 
 //All addresses (IPv4)
-$range1 = $range_manager->createRange();
-$range1->setNetwork('0.0.0.0/0')
-       ->setEnvironment('dev,test')
+$range1 = $range_manager->createRangeFromNetwork('0.0.0.0/0');
+$range1->setEnvironment('dev,test')
        ->setAuthorized(false);
 $range_manager->saveRange($range1);
 
 //My local network (IPv4)
-$range2 = $range_manager->createRange();
-$range2->setNetwork('192.168.0.0/16')
-       ->setEnvironment('dev,test')
+$range2 = $range_manager->createRangeFromNetwork('192.168.0.0/16');
+$range2->setEnvironment('dev,test')
        ->setAuthorized(true);
 $range_manager->saveRange($range2);
 
 //Another local network (IPv6)
-$range3 = $range_manager->createRange();
-$range3->setNetwork('fe80::/64')
-       ->setEnvironment('dev,test')
+$range3 = $range_manager->createRangeFromNetwork('fe80::/64');
+$range3->setEnvironment('dev,test')
        ->setAuthorized(true);
 $range_manager->saveRange($range3);
 ```

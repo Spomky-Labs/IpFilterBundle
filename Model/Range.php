@@ -3,7 +3,6 @@
 namespace SpomkyLabs\IpFilterBundle\Model;
 
 use SpomkyLabs\IpFilterBundle\Tool\IpConverter;
-use SpomkyLabs\IpFilterBundle\Tool\Network;
 
 class Range implements RangeInterface
 {
@@ -56,15 +55,6 @@ class Range implements RangeInterface
     public function setAuthorized($authorized)
     {
         $this->authorized = $authorized;
-
-        return $this;
-    }
-
-    public function setNetwork($network)
-    {
-        $range = Network::getRange($network);
-        $this->setStartIp($range['start']);
-        $this->setEndIp($range['end']);
 
         return $this;
     }

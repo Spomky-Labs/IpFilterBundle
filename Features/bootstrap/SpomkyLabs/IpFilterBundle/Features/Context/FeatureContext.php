@@ -18,7 +18,7 @@ class FeatureContext extends MinkContext implements SnippetAcceptingContext
      * @var null|\Exception
      */
     private $exception = null;
-    
+
     /**
      * @var \SpomkyLabs\IpFilterBundle\Features\Context\RequestBuilder
      */
