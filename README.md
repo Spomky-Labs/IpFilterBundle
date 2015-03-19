@@ -1,11 +1,11 @@
 Ip Filter Bundle
 ================
 
-[![Build Status](https://travis-ci.org/Spomky-Labs/SpomkyLabsIpFilterBundle.png?branch=master)](https://travis-ci.org/Spomky-Labs/SpomkyLabsIpFilterBundle)
-[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/Spomky-Labs/SpomkyLabsIpFilterBundle/badges/quality-score.png?s=801f9afe962a2ef962fa13e5bba55d2e57aa68f8)](https://scrutinizer-ci.com/g/Spomky-Labs/SpomkyLabsIpFilterBundle/)
+[![Build Status](https://travis-ci.org/Spomky-Labs/IpFilterBundle.png?branch=master)](https://travis-ci.org/Spomky-Labs/IpFilterBundle)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/Spomky-Labs/IpFilterBundle/badges/quality-score.png?s=801f9afe962a2ef962fa13e5bba55d2e57aa68f8)](https://scrutinizer-ci.com/g/Spomky-Labs/IpFilterBundle/)
 [![HHVM Status](http://hhvm.h4cc.de/badge/spomky-labs/ip-filter-bundle.png)](http://hhvm.h4cc.de/package/spomky-labs/ip-filter-bundle)
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/db8b8cee-6f7c-4e50-8058-4d6edcbc636b/big.png)](https://insight.sensiolabs.com/projects/db8b8cee-6f7c-4e50-8058-4d6edcbc636b)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/a9c8daca-709b-4798-98f8-9a4adc592c4e/big.png)](https://insight.sensiolabs.com/projects/a9c8daca-709b-4798-98f8-9a4adc592c4e)
 
 [![Latest Stable Version](https://poser.pugx.org/spomky-labs/ip-filter-bundle/v/stable.png)](https://packagist.org/packages/spomky-labs/ip-filter-bundle)
 [![Total Downloads](https://poser.pugx.org/spomky-labs/ip-filter-bundle/downloads.png)](https://packagist.org/packages/spomky-labs/ip-filter-bundle)
@@ -235,14 +235,14 @@ $range1->setNetwork('0.0.0.0/0')
        ->setAuthorized(false);
 $range_manager->saveRange($range1);
 
-/My local network (IPv4)
+//My local network (IPv4)
 $range2 = $range_manager->createRange();
 $range2->setNetwork('192.168.0.0/16')
        ->setEnvironment('dev,test')
        ->setAuthorized(true);
 $range_manager->saveRange($range2);
 
-/Another local network (IPv6)
+//Another local network (IPv6)
 $range3 = $range_manager->createRange();
 $range3->setNetwork('fe80::/64')
        ->setEnvironment('dev,test')

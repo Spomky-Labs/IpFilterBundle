@@ -49,13 +49,6 @@ class IpVoter implements VoterInterface
         $ips = $this->im->findIpAddress($from, $env);
         $ranges = $this->rm->findByIpAddress($from, $env);
 
-        if (count($ips)) {
-            var_dump($ips);
-        }
-        if (count($ranges)) {
-            var_dump($ranges);
-        }
-
         if (count($ips) === 0 && count($ranges) === 0) {
             return VoterInterface::ACCESS_ABSTAIN;
         }
