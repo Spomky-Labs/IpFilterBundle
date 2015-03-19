@@ -12,16 +12,16 @@ Feature: A server restrict access on resources
     Given my IP address is 'fe80::2:0'
     When I "GET" the request to "https://local.dev/"
     Then I should be granted
-    And print last response
+    And I should see "Hello world!"
 
   Scenario: I want to access on a resource and my IP is authorized
     Given my IP address is '192.168.1.12'
     When I "GET" the request to "https://local.dev/"
     Then I should be granted
-    And print last response
+    And I should see "Hello world!"
 
   Scenario: I want to access on a resource and my IP is authorized
     Given my IP address is '192.168.1.22'
     When I "GET" the request to "https://local.dev/"
     Then I should be granted
-    And print last response
+    And I should see "Hello world!"

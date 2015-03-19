@@ -8,7 +8,7 @@ interface RangeManagerInterface
      * @param string $ip
      * @param string $environment
      *
-     * @return null|\SpomkyLabs\IpFilterBundle\Model\RangeInterface[]
+     * @return \SpomkyLabs\IpFilterBundle\Model\RangeInterface[]
      */
     public function findByIpAddress($ip, $environment);
 

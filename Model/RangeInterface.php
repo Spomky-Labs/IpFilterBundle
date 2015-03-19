@@ -25,7 +25,7 @@ interface RangeInterface
      *
      * @return self
      */
-    public function setEndIp($end_ip0);
+    public function setEndIp($end_ip);
 
     /**
      * @return array

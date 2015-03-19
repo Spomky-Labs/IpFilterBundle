@@ -167,8 +167,6 @@ class RequestBuilder
         if (count($this->content_parameter) > 0) {
             return http_build_query($this->content_parameter);
         }
-
-        return;
     }
 
     public function getRequest()

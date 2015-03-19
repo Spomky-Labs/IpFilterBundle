@@ -15,13 +15,10 @@ class FeatureContext extends MinkContext implements SnippetAcceptingContext
     use KernelDictionary;
 
     /**
-     * @var null|string
-     */
-    private $result = null;
-    /**
      * @var null|\Exception
      */
     private $exception = null;
+    
     /**
      * @var \SpomkyLabs\IpFilterBundle\Features\Context\RequestBuilder
      */
@@ -73,7 +70,7 @@ class FeatureContext extends MinkContext implements SnippetAcceptingContext
      */
     public function theRequestIsNotSecured()
     {
-        $this->request_builder->addServer('HTTPS', 'off');
+        $this->request_builder->addServerParameter('HTTPS', 'off');
     }
 
     /**
@@ -81,7 +78,7 @@ class FeatureContext extends MinkContext implements SnippetAcceptingContext
      */
     public function theRequestIsSecured()
     {
-        $this->request_builder->addServer('HTTPS', 'on');
+        $this->request_builder->addServerParameter('HTTPS', 'on');
     }
 
     /**

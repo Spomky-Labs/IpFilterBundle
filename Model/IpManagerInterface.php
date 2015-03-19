@@ -8,7 +8,7 @@ interface IpManagerInterface
      * @param string $ip
      * @param string $environment
      *
-     * @return null|\SpomkyLabs\IpFilterBundle\Model\Ip[]
+     * @return \SpomkyLabs\IpFilterBundle\Model\Ip[]
      */
     public function findIpAddress($ip, $environment);
 

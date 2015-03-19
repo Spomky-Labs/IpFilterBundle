@@ -12,6 +12,11 @@ class RangeManager implements RangeManagerInterface
     protected $entity_manager;
 
     /**
+     * @var string
+     */
+    protected $class;
+
+    /**
      * @var \Doctrine\Common\Persistence\ObjectRepository
      */
     protected $entity_repository;
