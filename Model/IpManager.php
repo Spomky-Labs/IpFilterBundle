@@ -1,6 +1,6 @@
 <?php
 
-namespace Spomky\IpFilterBundle\Model;
+namespace SpomkyLabs\IpFilterBundle\Model;
 
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -9,48 +9,85 @@ class IpManager implements IpManagerInterface
     /**
      * @var \Doctrine\Common\Persistence\ObjectManager
      */
-    protected $manager;
+    protected $entity_manager;
 
     /**
-     * @var \Doctrine\ORM\EntityRepository
+     * @var string
      */
-    protected $repository;
+    protected $class;
+
+    /**
+     * @var \Doctrine\Common\Persistence\ObjectRepository
+     */
+    protected $entity_repository;
 
     public function __construct(RegistryInterface $registry, $class)
     {
-        $this->manager = $registry->getManager();
-
-        if (!in_array('Spomky\\IpFilterBundle\\Model\\IpInterface', class_implements($class))) {
-            throw new \Exception("The Ip class $class must implement Spomky\IpFilterBundle\Model\IpInterface");
-        }
-
-        $this->repository = $this->getManager()->getRepository($class);
-        if (!$this->repository instanceof IpRepositoryInterface) {
-            throw new \Exception("The repository of class $class must implement Spomky\IpFilterBundle\Model\IpRepositoryInterface");
-        }
+        $this->class = $class;
+        $this->entity_manager = $registry->getManagerForClass($class);
+        $this->entity_repository = $this->entity_manager->getRepository($class);
     }
 
     /**
      * @return \Doctrine\Common\Persistence\ObjectManager
      */
-    protected function getManager()
+    protected function getEntityManager()
     {
-        return $this->manager;
+        return $this->entity_manager;
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getRepository()
+    protected function getEntityRepository()
     {
-        return $this->repository;
+        return $this->entity_repository;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findIp($ip, $environment)
+    public function findIpAddress($ip, $environment)
     {
-        return $this->getRepository()->findByIp($ip, $environment);
+        return $this->getEntityRepository()->createQueryBuilder('r')
+            ->where('r.ip = :ip')
+            ->andWhere("r.environment LIKE :environment OR r.environment='a:0:{}'")
+            ->orderBy('r.authorized', 'DESC')
+            ->setParameter('ip', $ip)
+            ->setParameter('environment', "%$environment%")
+            ->getQuery()
+            ->execute();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createIp()
+    {
+        $class = $this->class;
+
+        return new $class();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function saveIp(IpInterface $ip)
+    {
+        $this->getEntityManager()->persist($ip);
+        $this->getEntityManager()->flush();
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function deleteIp(IpInterface $ip)
+    {
+        $this->getEntityManager()->remove($ip);
+        $this->getEntityManager()->flush();
+
+        return $this;
     }
 }

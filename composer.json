@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Symfony2 Ip Filter Bundle",
     "keywords": ["ip", "ipv4", "ipv6", "environment", "range", "filter", "Symfony2", "bundle"],
-    "homepage": "https://github.com/Spomky/SpomkyIpFilterBundle",
+    "homepage": "https://github.com/Spomky/SpomkyLabsIpFilterBundle",
     "license": "MIT",
     "authors": [
         {
@@ -13,25 +13,36 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/framework-bundle": "~2.3",
-        "doctrine/orm": ">=2.2,<2.5-dev"
+        "doctrine/doctrine-bundle": "~1.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.*",
-        "satooshi/php-coveralls": "0.*",
         "symfony/security-bundle": "~2.3",
         "symfony/finder": "~2.3",
         "symfony/class-loader": "~2.3",
         "symfony/yaml": "~2.3",
         "symfony/browser-kit": "~2.3",
         "symfony/expression-language": "~2.3",
-        "doctrine/doctrine-bundle": "~1.0",
-        "matthiasnoback/symfony-config-test": "0.*",
-        "doctrine/doctrine-fixtures-bundle": "*"
-    },
-    "suggest": {
+
+        "doctrine/doctrine-fixtures-bundle": "*@dev",
+        "vipsoft/doctrine-data-fixtures-extension": "3.*@dev",
+        "behat/behat": "3.*",
+        "behat/symfony2-extension": "*@dev",
+        "behat/mink": "*",
+        "behat/mink-extension": "*",
+        "behat/mink-browserkit-driver":  "*",
+        "doctrine/orm": ">=2.2,<2.5-dev"
     },
     "autoload": {
-        "psr-0": { "Spomky\\IpFilterBundle": "" }
+        "psr-4": { "SpomkyLabs\\IpFilterBundle\\": "" }
     },
-    "target-dir": "Spomky/IpFilterBundle"
+    "autoload-dev": {
+        "psr-4": {
+            "SpomkyLabs\\TestIpFilterBundle\\": "Tests/TestIpFilterBundle/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
+    }
 }

@@ -6,9 +6,9 @@ tools:
     php_code_sniffer: true
     php_analyzer: true
     sensiolabs_security_checker: true
-    php_code_coverage: true
+    php_code_coverage: false
     php_cpd: true
     php_pdepend:
-        excluded_dirs: [vendor/*, app/*, web/*, Test/*]
+        excluded_dirs: [vendor/*, Tests/*]
 filter:
-    excluded_paths: [vendor/*, app/*, web/*]
+    excluded_paths: [vendor/*, Tests/*]

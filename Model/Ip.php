@@ -1,17 +1,25 @@
 <?php
 
-namespace Spomky\IpFilterBundle\Model;
+namespace SpomkyLabs\IpFilterBundle\Model;
 
+use SpomkyLabs\IpFilterBundle\Tool\IpConverter;
 
-abstract class Ip implements IpInterface
+class Ip implements IpInterface
 {
     protected $ip;
-    protected $environment;
+    protected $environment = array();
     protected $authorized;
 
     public function getIp()
     {
-        return $this->ip;
+        return IpConverter::fromHexToIp($this->ip);
+    }
+
+    public function setIp($ip)
+    {
+        $this->ip = IpConverter::fromIpToHex($ip);
+
+        return $this;
     }
 
     public function getEnvironment()
@@ -19,8 +27,22 @@ abstract class Ip implements IpInterface
         return $this->environment;
     }
 
+    public function setEnvironment(array $environment)
+    {
+        $this->environment = $environment;
+
+        return $this;
+    }
+
     public function isAuthorized()
     {
         return $this->authorized;
+    }
+
+    public function setAuthorized($authorized)
+    {
+        $this->authorized = $authorized;
+
+        return $this;
     }
 }

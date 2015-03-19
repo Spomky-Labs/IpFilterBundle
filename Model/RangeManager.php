@@ -1,6 +1,6 @@
 <?php
 
-namespace Spomky\IpFilterBundle\Model;
+namespace SpomkyLabs\IpFilterBundle\Model;
 
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -9,48 +9,81 @@ class RangeManager implements RangeManagerInterface
     /**
      * @var \Doctrine\Common\Persistence\ObjectManager
      */
-    protected $manager;
+    protected $entity_manager;
 
     /**
-     * @var \Doctrine\ORM\EntityRepository
+     * @var \Doctrine\Common\Persistence\ObjectRepository
      */
-    protected $repository;
+    protected $entity_repository;
 
     public function __construct(RegistryInterface $registry, $class)
     {
-        $this->manager = $registry->getManager();
+        $this->class = $class;
+        $this->entity_manager = $registry->getManagerForClass($class);
+        $this->entity_repository = $this->entity_manager->getRepository($class);
+    }
 
-        if (!in_array('Spomky\\IpFilterBundle\\Model\\RangeInterface', class_implements($class))) {
-            throw new \Exception("The Range class $class must implement Spomky\IpFilterBundle\Model\RangeInterface");
-        }
-
-        $this->repository = $this->getManager()->getRepository($class);
-        if (!$this->repository instanceof RangeRepositoryInterface) {
-            throw new \Exception("The repository of class $class must implement Spomky\IpFilterBundle\Model\RangeRepositoryInterface");
-        }
+    /**
+     * {@inheritdoc}
+     */
+    public function findByIpAddress($ip, $environment)
+    {
+        return $this->getEntityRepository()->createQueryBuilder('r')
+            ->where('r.start_ip <= :ip')
+            ->andWhere('r.end_ip >= :ip')
+            ->andWhere("r.environment LIKE :environment OR r.environment='a:0:{}'")
+            ->orderBy('r.authorized', 'DESC')
+            ->setParameter('ip', $ip)
+            ->setParameter('environment', "%$environment%")
+            ->getQuery()
+            ->execute();
     }
 
     /**
      * @return \Doctrine\Common\Persistence\ObjectManager
      */
-    protected function getManager()
+    protected function getEntityManager()
     {
-        return $this->manager;
+        return $this->entity_manager;
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getRepository()
+    protected function getEntityRepository()
     {
-        return $this->repository;
+        return $this->entity_repository;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findByIp($ip, $environment)
+    public function createRange()
     {
-        return $this->getRepository()->findByIp($ip, $environment);
+        $class = $this->class;
+
+        return new $class();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function saveRange(RangeInterface $range)
+    {
+        $this->getEntityManager()->persist($range);
+        $this->getEntityManager()->flush();
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function deleteRange(RangeInterface $range)
+    {
+        $this->getEntityManager()->remove($range);
+        $this->getEntityManager()->flush();
+
+        return $this;
     }
 }

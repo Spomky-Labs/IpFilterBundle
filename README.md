@@ -1,9 +1,9 @@
-Ip Filter
-=========
+Ip Filter Bundle
+================
 
-[![Build Status](https://travis-ci.org/Spomky-Labs/SpomkyIpFilterBundle.png?branch=master)](https://travis-ci.org/Spomky-Labs/SpomkyIpFilterBundle)
-[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/Spomky-Labs/SpomkyIpFilterBundle/badges/quality-score.png?s=801f9afe962a2ef962fa13e5bba55d2e57aa68f8)](https://scrutinizer-ci.com/g/Spomky-Labs/SpomkyIpFilterBundle/)
-[![Code Coverage](https://scrutinizer-ci.com/g/Spomky-Labs/SpomkyIpFilterBundle/badges/coverage.png?s=1dcac5b56c9321b1b010d1205ae44519441952c9)](https://scrutinizer-ci.com/g/Spomky-Labs/SpomkyIpFilterBundle/)
+[![Build Status](https://travis-ci.org/Spomky-Labs/SpomkyLabsIpFilterBundle.png?branch=master)](https://travis-ci.org/Spomky-Labs/SpomkyLabsIpFilterBundle)
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/Spomky-Labs/SpomkyLabsIpFilterBundle/badges/quality-score.png?s=801f9afe962a2ef962fa13e5bba55d2e57aa68f8)](https://scrutinizer-ci.com/g/Spomky-Labs/SpomkyLabsIpFilterBundle/)
+[![HHVM Status](http://hhvm.h4cc.de/badge/spomky-labs/ip-filter-bundle.png)](http://hhvm.h4cc.de/package/spomky-labs/ip-filter-bundle)
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/db8b8cee-6f7c-4e50-8058-4d6edcbc636b/big.png)](https://insight.sensiolabs.com/projects/db8b8cee-6f7c-4e50-8058-4d6edcbc636b)
 
@@ -18,38 +18,40 @@ It supports both `IPv4` and `IPv6` addresses and multiple environments.
 
 For example, you can grant access of a range of addresses from `192.168.1.1` to `192.168.1.100` on `dev` and `test` environments and deny all others.
 
+**Please note that this bundle has bad results in term of performance compared to similar functionality offered by a `.htaccess` file for example.** 
+
 # Prerequisites #
 
-This version of the bundle requires `Symfony 2.4`.
-It only supports `Doctrine ORM`.
+This version of the bundle requires at least `Symfony 2.3`.
+It requires `Doctrine`. `Doctrine ORM` is supported, but it may be easy to use `Doctrine ODM` for example.
 
-At has been tested using `PHP 5.3` to `PHP 5.5` and `Symfony 2.4` to `Symfony 2.6)`.
+At has been tested using `PHP 5.3` to `PHP 5.6` and `HHVM` using `Symfony 2.3` to `Symfony 2.6)`.
 
 # Policy #
 
 Please note that authorized IPs have a higher priority than unauthorized ones.
-For example, if range `192.168.1.10` to `192.168.1.100` is **unauthorized** and `192.168.1.20` is **authorized**, `192.168.1.20` will be granted. 
+For example, if range `192.168.1.10` to `192.168.1.100` is **unauthorized** and `192.168.1.20` is **authorized**, then `192.168.1.20` will be granted. 
 
 # Installation #
 
 Installation is a quick 4 steps process:
 
-* Download `SpomkyIpFilterBundle`
+* Download the bundle`
 * Enable the Bundle
 * Create your model class
-* Configure the `SpomkyIpFilterBundle`
+* Configure the application
 
-##Step 1: Install SpomkyIpFilterBundle##
+##Step 1: Install the bundle##
 
-The preferred way to install this bundle is to rely on Composer. Just check on Packagist the version you want to install (in the following example, we used "dev-master") and add it to your `composer.json`:
+The preferred way to install this bundle is to rely on Composer:
 
 ```sh
-composer require "spomky-labs/ip-filter-bundle" "~1.2"
+composer require "spomky-labs/ip-filter-bundle" "~2.0"
 ```
 
 ##Step 2: Enable the bundle##
 
-Finally, enable the bundle in the kernel:
+Enable the bundle in the kernel:
 
 ```php
 <?php
@@ -59,26 +61,22 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
-        new Spomky\IpFilterBundle\SpomkyIpFilterBundle(),
+        new SpomkyLabs\IpFilterBundle\SpomkyLabsIpFilterBundle(),
     );
 }
 ```
 
 ##Step 3: Create IP and Range classes##
 
-This bundle needs to persist filtered IPs and ranges to a database:
+This bundle needs a database to persist filtered IPs and ranges.
 
-Your first job, then, is to create these classes for your application.
+Your first job, then, is to create `Ip` and `Range` classes for your application.
 These classes can look and act however you want: add any properties or methods you find useful.
 
 In the following sections, you'll see an example of how your classes should look.
 
-Your classe can live inside any bundle in your application.
+Your classes can live inside any bundle in your application.
 For example, if you work at "Acme" company, then you might create a bundle called `AcmeIpBundle` and place your classes in it.
-
-`IpRepository` and `RangeRepository` classes are important. You can use those provided with this bundle or extend them to include your own classes, but you must implement `Spomky\IpFilterBundle\Model\IpRepositoryInterface` and `Spomky\IpFilterBundle\Model\RangeRepositoryInterface`.
-
-The IP field type must be `ipaddress`.
 
 ###Ip class:###
 
@@ -88,14 +86,13 @@ The IP field type must be `ipaddress`.
 
 namespace Acme\IpBundle\Entity;
 
-use Spomky\IpFilterBundle\Model\Ip as BaseIp;
+use SpomkyLabs\IpFilterBundle\Entity\Ip as BaseIp;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Ip
  *
  * @ORM\Table(name="ips")
- * @ORM\Entity(repositoryClass="Spomky\IpFilterBundle\Model\IpRepository")
  */
 class Ip extends BaseIp
 {
@@ -108,48 +105,15 @@ class Ip extends BaseIp
      */
     protected $id;
 
-    /**
-     * @var ipaddress $ip
-     *
-     * @ORM\Column(name="ip", type="ipaddress")
-     */
-    protected $ip;
-
-    /**
-     * @var string $environment
-     *
-     * @ORM\Column(name="environment", type="string", length=10, nullable=true)
-     */
-    protected $environment;
-
-    /**
-     * @var boolean $authorized
-     *
-     * @ORM\Column(name="authorized", type="boolean")
-     */
-    protected $authorized;
-
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
-    }
-
-    public function setIp($ip) {
-        $this->ip = $ip;
-        return $this;
-    }
-
-    public function setEnvironment($environment) {
-        $this->environment = $environment;
-        return $this;
-    }
-
-    public function setAuthorized($authorized) {
-        $this->authorized = $authorized;
-        return $this;
     }
 }
 ```
 
+
+**Easy!**
 -
 
 ```php
@@ -158,14 +122,13 @@ class Ip extends BaseIp
 
 namespace Acme\IpBundle\Entity;
 
-use Spomky\IpFilterBundle\Model\Range as BaseRange;
+use SpomkyLabs\IpFilterBundle\Entity\Range as BaseRange;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Range
  *
  * @ORM\Table(name="ranges")
- * @ORM\Entity(repositoryClass="Spomky\IpFilterBundle\Model\RangeRepository")
  */
 class Range extends BaseRange
 {
@@ -178,56 +141,9 @@ class Range extends BaseRange
      */
     protected $id;
 
-    /**
-     * @var ipaddress $start_ip
-     *
-     * @ORM\Column(name="start_ip", type="ipaddress")
-     */
-    protected $start_ip;
-
-    /**
-     * @var ipaddress $end_ip
-     *
-     * @ORM\Column(name="end_ip", type="ipaddress")
-     */
-    protected $end_ip;
-
-    /**
-     * @var string $environment
-     *
-     * @ORM\Column(name="environment", type="string", length=10, nullable=true)
-     */
-    protected $environment;
-
-    /**
-     * @var boolean $authorized
-     *
-     * @ORM\Column(name="authorized", type="boolean")
-     */
-    protected $authorized;
-
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
-    }
-
-    public function setStartIp($start_ip) {
-        $this->start_ip = $start_ip;
-        return $this;
-    }
-
-    public function setEndIp($end_ip) {
-        $this->end_ip = $end_ip;
-        return $this;
-    }
-
-    public function setEnvironment($environment) {
-        $this->environment = $environment;
-        return $this;
-    }
-
-    public function setAuthorized($authorized) {
-        $this->authorized = $authorized;
-        return $this;
     }
 }
 ```
@@ -238,20 +154,19 @@ class Range extends BaseRange
 
 ```yml
 # app/config/config.yml
-spomky_ip_filter:
-    db_driver: orm        # Driver available: orm
+sl_ip_filter:
     ip_class:             Acme\IpBundle\Entity\Ip
     range_class:          Acme\IpBundle\Entity\Range
 ```
 
-If you have your own managers, you can use them. They just need to implement `Spomky\IpFilterBundle\Model\IpManagerInterface` or `Spomky\IpFilterBundle\Model\RangeManagerInterface`.
+If you have your own managers, you can use them. They just need to implement `SpomkyLabs\IpFilterBundle\Model\IpManagerInterface` or `SpomkyLabs\IpFilterBundle\Model\RangeManagerInterface`.
 
 ```yml
 # app/config/config.yml
-spomky_ip_filter:
+sl_ip_filter:
     ...
-    ip_manager: my.custom.ip.manager
-    range_manager: my.custom.range.manager
+    ip_manager: my.custom.ip.entity_manager
+    range_manager: my.custom.range.entity_manager
 ```
 
 ###Security Strategy###
@@ -284,154 +199,53 @@ How to grant access for `192.168.1.10` on `dev` and `test` environments and deny
 ```php
 <?php
 
-use Acme\IpBundle\Entity\Ip;
-use Acme\IpBundle\Entity\Range;
+$ip_manager    = $this->container->get('sl_ip_filter.ip_manager'); //Use this line, even if you use a custom IP manager
+$range_manager = $this->container->get('sl_ip_filter.range_manager'); //Use this line, even if you use a custom Range manager
 
 //Create your IP
-$ip = new Ip;
-$ip->setIp('192.168.1.10');
-$ip->setEnvironment('dev,test');
-$ip->setAuthorized(true);
+$ip = $ip_manager->createIp();
+$ip->setIp('192.168.1.10')
+   ->setEnvironment('dev,test')
+   ->setAuthorized(true);
+$ip_manager->saveIp($ip);
 
 //Create your range
-$range = new Range;
-$range->setStartIp('0.0.0.1');
-$range->setEndIp('255.255.254');
-$range->setEnvironment('dev,test');
-$range->setAuthorized(false);
-
-//Get your managers
-$ip_manager = $container->get("spomky_ip_filter.ip_manager");
-$range_manager = $container->get("spomky_ip_filter.range_manager");
-
-
-// TIPS: create your own managers to handle the following method in a nicer way. e.g.: $ip_manager->save($ip)
-//Persist entities
-$ip_manager->getRepository()->persist($ip);
-$range_manager->getRepository()->persist($range);
-
-//And flush
-$ip_manager->getRepository()->flush();
-$range_manager->getRepository()->flush();
+$range = $range_manager->createRange();
+$range->setStartIp('0.0.0.1')
+      ->setEndIp('255.255.254')
+      ->setEnvironment('dev,test')
+      ->setAuthorized(false);
+$range_manager->saveRange($range);
 ```
 
 ## Network support ##
 
-Network can be supported using a Range object. You just need to get first and last IP addresses.
+Networks can be supported using a Range object. You just need to get first and last IP addresses.
 This bundle provides a range calculator, so you can easily extend your range entity using it.
 
 ```php
 <?php
-// src/Acme/IpBundle/Entity/Range.php
 
-namespace Acme\IpBundle\Entity;
+$range_manager = $this->container->get('sl_ip_filter.range_manager');
 
-use Spomky\IpFilterBundle\Model\Range as BaseRange;
-use Doctrine\ORM\Mapping as ORM;
-
-use Spomky\IpFilterBundle\Tool\Network;
-
-…
-    public function setNetwork($network) {
-
-        $range = Network::getRange($network);
-        $this->setStartIp($range['start']);
-        $this->setEndIp($range['end']);
-    }
-…
-```
-
-Now, you can allow or deny a whole network. In the following example, we will deny access of all IP addresses except our local network.
-
-```php
-//All IP addresses
-$all = new Range;
-$all->setNetwork('0.0.0.0/0');
-$all->setEnvironment('dev,test');
-$all->setAuthorized(false);
+//All addresses (IPv4)
+$range1 = $range_manager->createRange();
+$range1->setNetwork('0.0.0.0/0')
+       ->setEnvironment('dev,test')
+       ->setAuthorized(false);
+$range_manager->saveRange($range1);
 
 /My local network (IPv4)
-$local = new Range;
-$local->setNetwork('192.168.0.0/16');
-$local->setEnvironment('dev,test');
-$local->setAuthorized(true);
+$range2 = $range_manager->createRange();
+$range2->setNetwork('192.168.0.0/16')
+       ->setEnvironment('dev,test')
+       ->setAuthorized(true);
+$range_manager->saveRange($range2);
 
 /Another local network (IPv6)
-$local_6 = new Range;
-$local_6->setNetwork('fe80::/64');
-$local_6->setEnvironment('dev,test');
-$local_6->setAuthorized(true);
-
-//Get Doctrine entity manager
-$em = $this->getDoctrine()->getManager();
-
-//Persist entities
-$em->persist($all);
-$em->persist($local);
-$em->persist($local_6);
-
-//And flush
-$em->flush();
-```
-
-## app_dev.php ##
-
-In the Symfony2 Standard Edition, `app_dev.php` restrict access of the `dev` environment:
-
-```php
-…
-if (isset($_SERVER['HTTP_CLIENT_IP'])
-    || isset($_SERVER['HTTP_X_FORWARDED_FOR'])
-    || !in_array(@$_SERVER['REMOTE_ADDR'], array('127.0.0.1', 'fe80::1', '::1'))
-) {
-    header('HTTP/1.0 403 Forbidden');
-    exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
-}
-…
-```
-
-You can do exactly the same using this bundle:
-
-```php
-//All IP addresses are denied
-$all = new Range;
-$all->setNetwork('0.0.0.0/0');
-$all->setEnvironment('dev');
-$all->setAuthorized(false);
-
-$all6 = new Range;
-$all6->setNetwork('::/0');
-$all6->setEnvironment('dev');
-$all6->setAuthorized(false);
-
-//127.0.0.1 (IPv4 localhost)
-$localhost = new Ip;
-$localhost->setIp('127.0.0.1');
-$localhost->setEnvironment('dev');
-$localhost->setAuthorized(true);
-
-//::1 (IPv6 localhost)
-$localhost6 = new Ip;
-$localhost6->setIp('::1');
-$localhost6->setEnvironment('dev');
-$localhost6->setAuthorized(true);
-
-//fe80::1 (IPv6 local link)
-$locallink6 = new Ip;
-$locallink6->setIp('fe80::1');
-$locallink6->setEnvironment('dev');
-$locallink6->setAuthorized(true);
-
-//Get Doctrine entity manager
-$em = $this->getDoctrine()->getManager();
-
-//Persist entities
-$em->persist($all);
-$em->persist($all6);
-$em->persist($localhost);
-$em->persist($localhost6);
-$em->persist($locallink6);
-
-//And flush
-$em->flush();
+$range3 = $range_manager->createRange();
+$range3->setNetwork('fe80::/64')
+       ->setEnvironment('dev,test')
+       ->setAuthorized(true);
+$range_manager->saveRange($range3);
 ```

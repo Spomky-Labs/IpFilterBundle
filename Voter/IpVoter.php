@@ -1,12 +1,13 @@
 <?php
-namespace Spomky\IpFilterBundle\Voter;
+namespace SpomkyLabs\IpFilterBundle\Voter;
 
+use SpomkyLabs\IpFilterBundle\Tool\IpConverter;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\HttpKernel\Kernel;
-use Spomky\IpFilterBundle\Model\IpManagerInterface;
-use Spomky\IpFilterBundle\Model\RangeManagerInterface;
+use SpomkyLabs\IpFilterBundle\Model\IpManagerInterface;
+use SpomkyLabs\IpFilterBundle\Model\RangeManagerInterface;
 
 class IpVoter implements VoterInterface
 {
@@ -41,12 +42,19 @@ class IpVoter implements VoterInterface
             throw new \Exception('No request found.');
         }
 
-        $ip = $request->getClientIp();
+        $from = IpConverter::fromIpToHex($request->getClientIp());
 
         $env = $this->kernel->getEnvironment();
 
-        $ips = $this->im->findIp($ip, $env);
-        $ranges = $this->rm->findByIp($ip, $env);
+        $ips = $this->im->findIpAddress($from, $env);
+        $ranges = $this->rm->findByIpAddress($from, $env);
+
+        if (count($ips)) {
+            var_dump($ips);
+        }
+        if (count($ranges)) {
+            var_dump($ranges);
+        }
 
         if (count($ips) === 0 && count($ranges) === 0) {
             return VoterInterface::ACCESS_ABSTAIN;
