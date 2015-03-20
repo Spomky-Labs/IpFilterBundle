@@ -2,24 +2,25 @@
 namespace SpomkyLabs\IpFilterBundle\Voter;
 
 use SpomkyLabs\IpFilterBundle\Tool\IpConverter;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use SpomkyLabs\IpFilterBundle\Model\IpManagerInterface;
 use SpomkyLabs\IpFilterBundle\Model\RangeManagerInterface;
 
-class IpVoter implements VoterInterface
+class OldIpVoter implements VoterInterface
 {
     protected $environment;
-    protected $request_stack;
+    protected $request;
     protected $im;
     protected $rm;
     protected $policy;
 
-    public function __construct($environment, RequestStack $request_stack, IpManagerInterface $im, RangeManagerInterface $rm)
+    public function __construct($environment, Request $request, IpManagerInterface $im, RangeManagerInterface $rm)
     {
-        $this->environment        = $environment;
-        $this->request_stack = $request_stack;
+        $this->environment   = $environment;
+        $this->request       = $request;
         $this->im            = $im;
         $this->rm            = $rm;
     }
@@ -36,7 +37,7 @@ class IpVoter implements VoterInterface
 
     public function vote(TokenInterface $token, $object, array $attributes)
     {
-        $request = $this->request_stack->getCurrentRequest();
+        $request = $this->request;
         if (!$request) {
             throw new \Exception('No request found.');
         }

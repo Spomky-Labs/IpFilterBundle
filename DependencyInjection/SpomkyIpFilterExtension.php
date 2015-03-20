@@ -7,6 +7,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\HttpKernel\Kernel;
 
 class SpomkyIpFilterExtension extends Extension
 {
@@ -28,7 +29,11 @@ class SpomkyIpFilterExtension extends Extension
         $config = $processor->processConfiguration($configuration, $configs);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('service.xml');
+        if ("2.4" > Kernel::VERSION) {
+            $loader->load('service_2.3.xml');
+        } else {
+            $loader->load('service.xml');
+        }
 
         $container->setAlias($this->getAlias().'.ip_manager', $config['ip_manager']);
         $container->setParameter($this->getAlias().'.ip.class', $config['ip_class']);
