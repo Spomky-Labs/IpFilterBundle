@@ -5,7 +5,6 @@ namespace SpomkyLabs\IpFilterBundle\Features\Context;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\MinkExtension\Context\MinkContext;
-use Behat\Symfony2Extension\Context\KernelDictionary;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Exception\InsufficientAuthenticationException;
 

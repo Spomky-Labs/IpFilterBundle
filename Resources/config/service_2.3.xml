@@ -14,9 +14,9 @@
             <argument>%sl_ip_filter.range.class%</argument>
         </service>
 
-        <service id="sl_ip_filter.ip_voter" class="SpomkyLabs\IpFilterBundle\Voter\OldIpVoter" public="false" scope="request">
+        <service id="sl_ip_filter.ip_voter" class="SpomkyLabs\IpFilterBundle\Voter\OldIpVoter" public="false">
             <argument>%kernel.environment%</argument>
-            <argument type="service" id="request" />
+            <argument type="service" id="service_container" />
             <argument type="service" id="sl_ip_filter.ip_manager"/>
             <argument type="service" id="sl_ip_filter.range_manager"/>
             <tag name="security.voter" />
