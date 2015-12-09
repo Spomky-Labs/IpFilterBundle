@@ -1,13 +1,22 @@
 <?php
 
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2014-2015 Spomky-Labs
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ */
+
 namespace SpomkyLabs\TestIpFilterBundle\DataFixtures\ORM;
 
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
 class LoadIpData extends AbstractFixture implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
@@ -17,7 +26,7 @@ class LoadIpData extends AbstractFixture implements FixtureInterface, ContainerA
     private $container;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setContainer(ContainerInterface $container = null)
     {
@@ -25,7 +34,7 @@ class LoadIpData extends AbstractFixture implements FixtureInterface, ContainerA
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getOrder()
     {
@@ -33,7 +42,7 @@ class LoadIpData extends AbstractFixture implements FixtureInterface, ContainerA
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function load(ObjectManager $manager)
     {
@@ -51,47 +60,47 @@ class LoadIpData extends AbstractFixture implements FixtureInterface, ContainerA
 
     protected function getIps()
     {
-        return array(
-            array(
+        return [
+            [
                 'ip'          => '192.168.1.1',
-                'environment' => array(),
+                'environment' => [],
                 'authorized'  => false,
-            ),
-            array(
+            ],
+            [
                 'ip'          => '192.168.1.1',
-                'environment' => array('test','prod','dev'),
+                'environment' => ['test', 'prod', 'dev'],
                 'authorized'  => true,
-            ),
-            array(
+            ],
+            [
                 'ip'          => '192.168.1.2',
-                'environment' => array(),
+                'environment' => [],
                 'authorized'  => false,
-            ),
-            array(
+            ],
+            [
                 'ip'          => '192.168.1.20',
-                'environment' => array('test','prod','dev'),
+                'environment' => ['test', 'prod', 'dev'],
                 'authorized'  => false,
-            ),
-            array(
+            ],
+            [
                 'ip'          => 'fe80::2:0',
-                'environment' => array(),
+                'environment' => [],
                 'authorized'  => false,
-            ),
-            array(
+            ],
+            [
                 'ip'          => 'fe80::2:0',
-                'environment' => array('test','prod','dev'),
+                'environment' => ['test', 'prod', 'dev'],
                 'authorized'  => true,
-            ),
-            array(
+            ],
+            [
                 'ip'          => 'fe80::2:10',
-                'environment' => array(),
+                'environment' => [],
                 'authorized'  => false,
-            ),
-            array(
+            ],
+            [
                 'ip'          => 'fe80::2:11',
-                'environment' => array('test','prod','dev'),
+                'environment' => ['test', 'prod', 'dev'],
                 'authorized'  => false,
-            ),
-        );
+            ],
+        ];
     }
 }

@@ -1,9 +1,19 @@
 <?php
+
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2014-2015 Spomky-Labs
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ */
+
 namespace SpomkyLabs\IpFilterBundle\Voter;
 
-use Symfony\Component\HttpFoundation\RequestStack;
 use SpomkyLabs\IpFilterBundle\Model\IpManagerInterface;
 use SpomkyLabs\IpFilterBundle\Model\RangeManagerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class IpVoter extends BaseIpVoter
 {
@@ -14,10 +24,10 @@ class IpVoter extends BaseIpVoter
 
     public function __construct($environment, RequestStack $request_stack, IpManagerInterface $im, RangeManagerInterface $rm)
     {
-        $this->environment   = $environment;
+        $this->environment = $environment;
         $this->request_stack = $request_stack;
-        $this->im            = $im;
-        $this->rm            = $rm;
+        $this->im = $im;
+        $this->rm = $rm;
     }
 
     protected function getRequest()
