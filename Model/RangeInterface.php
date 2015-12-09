@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2014-2015 Spomky-Labs
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ */
+
 namespace SpomkyLabs\IpFilterBundle\Model;
 
 interface RangeInterface
@@ -8,6 +17,7 @@ interface RangeInterface
      * @return string
      */
     public function getStartIp();
+
     /**
      * @param string $start_ip The start IP address
      *
@@ -40,15 +50,14 @@ interface RangeInterface
     public function setEnvironment(array $environment);
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isAuthorized();
 
     /**
-     * @param boolean $authorized
+     * @param bool $authorized
      *
      * @return self
      */
     public function setAuthorized($authorized);
-
 }

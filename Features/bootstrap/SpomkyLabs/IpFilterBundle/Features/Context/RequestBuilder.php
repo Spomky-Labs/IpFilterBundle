@@ -1,16 +1,25 @@
 <?php
 
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2014-2015 Spomky-Labs
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ */
+
 namespace SpomkyLabs\IpFilterBundle\Features\Context;
 
 use Symfony\Component\HttpFoundation\Request;
 
 class RequestBuilder
 {
-    private $query = array();
-    private $fragment = array();
-    private $server = array();
-    private $header = array();
-    private $content_parameter = array();
+    private $query = [];
+    private $fragment = [];
+    private $server = [];
+    private $header = [];
+    private $content_parameter = [];
     private $content = null;
     private $method = 'GET';
     private $uri = '/';
@@ -18,23 +27,23 @@ class RequestBuilder
     public function getUri()
     {
         $parse_url = parse_url($this->uri);
-        $parse_url["query"] = array_merge(isset($parse_url["query"]) ? $parse_url["query"] : array(), $this->query);
-        $parse_url["fragment"] = array_merge(isset($parse_url["fragment"]) ? $parse_url["fragment"] : array(), $this->fragment);
-        if (count($parse_url["query"]) === 0) {
-            unset($parse_url["query"]);
+        $parse_url['query'] = array_merge(isset($parse_url['query']) ? $parse_url['query'] : [], $this->query);
+        $parse_url['fragment'] = array_merge(isset($parse_url['fragment']) ? $parse_url['fragment'] : [], $this->fragment);
+        if (count($parse_url['query']) === 0) {
+            unset($parse_url['query']);
         }
-        if (count($parse_url["fragment"]) === 0) {
-            unset($parse_url["fragment"]);
+        if (count($parse_url['fragment']) === 0) {
+            unset($parse_url['fragment']);
         }
 
         return
-            ((isset($parse_url["scheme"])) ? $parse_url["scheme"]."://" : "")
-            .((isset($parse_url["user"])) ? $parse_url["user"].((isset($parse_url["pass"])) ? ":".$parse_url["pass"] : "")."@" : "")
-            .((isset($parse_url["host"])) ? $parse_url["host"] : "")
-            .((isset($parse_url["port"])) ? ":".$parse_url["port"] : "")
-            .((isset($parse_url["path"])) ? $parse_url["path"] : "")
-            .((isset($parse_url["query"])) ? "?".http_build_query($parse_url["query"]) : "")
-            .((isset($parse_url["fragment"])) ? "#".http_build_query($parse_url["fragment"]) : "");
+            ((isset($parse_url['scheme'])) ? $parse_url['scheme'].'://' : '')
+            .((isset($parse_url['user'])) ? $parse_url['user'].((isset($parse_url['pass'])) ? ':'.$parse_url['pass'] : '').'@' : '')
+            .((isset($parse_url['host'])) ? $parse_url['host'] : '')
+            .((isset($parse_url['port'])) ? ':'.$parse_url['port'] : '')
+            .((isset($parse_url['path'])) ? $parse_url['path'] : '')
+            .((isset($parse_url['query'])) ? '?'.http_build_query($parse_url['query']) : '')
+            .((isset($parse_url['fragment'])) ? '#'.http_build_query($parse_url['fragment']) : '');
     }
 
     public function addFragmentParameter($key, $value)
@@ -174,9 +183,9 @@ class RequestBuilder
         return Request::create(
             $this->getUri(),
             $this->method,
-            array(),
-            array(),
-            array(),
+            [],
+            [],
+            [],
             $this->getServerParameters(),
             $this->getContent()
         );

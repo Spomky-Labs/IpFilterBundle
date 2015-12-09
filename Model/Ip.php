@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2014-2015 Spomky-Labs
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ */
+
 namespace SpomkyLabs\IpFilterBundle\Model;
 
 use SpomkyLabs\IpFilterBundle\Tool\IpConverter;
@@ -7,7 +16,7 @@ use SpomkyLabs\IpFilterBundle\Tool\IpConverter;
 class Ip implements IpInterface
 {
     protected $ip;
-    protected $environment = array();
+    protected $environment = [];
     protected $authorized;
 
     public function getIp()
