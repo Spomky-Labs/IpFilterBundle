@@ -1,3 +1,0 @@
-spomky_test:
-    path:   /
-    defaults:  { _controller: SpomkyLabsTestIpFilterBundle:Test:index }

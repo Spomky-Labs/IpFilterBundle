@@ -1,0 +1,3 @@
+spomky_test:
+    resource: ../src/Controller/
+    type: annotation

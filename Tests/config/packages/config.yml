@@ -1,0 +1,3 @@
+sl_ip_filter:
+    ip_class: SpomkyLabs\AppIpFilterBundle\Entity\Ip
+    range_class: SpomkyLabs\AppIpFilterBundle\Entity\Range

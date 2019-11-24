@@ -5,11 +5,11 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="sl_ip_filter.ip_manager.default" class="SpomkyLabs\IpFilterBundle\Model\IpManager">
+        <service id="sl_ip_filter.ip_manager.default" class="SpomkyLabs\IpFilterBundle\Model\IpManager" public="true">
             <argument type="service" id="doctrine" />
             <argument>%sl_ip_filter.ip.class%</argument>
         </service>
-        <service id="sl_ip_filter.range_manager.default" class="SpomkyLabs\IpFilterBundle\Model\RangeManager">
+        <service id="sl_ip_filter.range_manager.default" class="SpomkyLabs\IpFilterBundle\Model\RangeManager" public="true">
             <argument type="service" id="doctrine" />
             <argument>%sl_ip_filter.range.class%</argument>
         </service>
