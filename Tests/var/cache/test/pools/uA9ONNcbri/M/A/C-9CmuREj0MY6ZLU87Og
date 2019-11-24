@@ -1,0 +1,82 @@
+<?php //%255BSpomkyLabs%255CIpFilterBundle%255CEntity%255CRange%2524CLASSMETADATA%255D%255B1%255D
+
+namespace Symfony\Component\VarExporter\Internal;
+
+return $getExpiry ? PHP_INT_MAX : Hydrator::hydrate(
+    $o = [
+        clone (($p = &Registry::$prototypes)['Doctrine\\ORM\\Mapping\\ClassMetadata'] ?? Registry::p('Doctrine\\ORM\\Mapping\\ClassMetadata')),
+        clone ($p['Doctrine\\ORM\\Id\\AssignedGenerator'] ?? Registry::p('Doctrine\\ORM\\Id\\AssignedGenerator')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'name' => [
+                'SpomkyLabs\\IpFilterBundle\\Entity\\Range',
+            ],
+            'namespace' => [
+                'SpomkyLabs\\IpFilterBundle\\Entity',
+            ],
+            'rootEntityName' => [
+                'SpomkyLabs\\IpFilterBundle\\Entity\\Range',
+            ],
+            'isMappedSuperclass' => [
+                true,
+            ],
+            'fieldMappings' => [
+                [
+                    'start_ip' => [
+                        'fieldName' => 'start_ip',
+                        'type' => 'string',
+                        'columnName' => 'start_ip',
+                        'length' => 32,
+                        'nullable' => false,
+                    ],
+                    'end_ip' => [
+                        'fieldName' => 'end_ip',
+                        'type' => 'string',
+                        'columnName' => 'end_ip',
+                        'length' => 32,
+                        'nullable' => false,
+                    ],
+                    'environment' => [
+                        'fieldName' => 'environment',
+                        'type' => 'array',
+                        'columnName' => 'environment',
+                    ],
+                    'authorized' => [
+                        'fieldName' => 'authorized',
+                        'type' => 'boolean',
+                        'columnName' => 'authorized',
+                        'nullable' => false,
+                    ],
+                ],
+            ],
+            'fieldNames' => [
+                [
+                    'start_ip' => 'start_ip',
+                    'end_ip' => 'end_ip',
+                    'environment' => 'environment',
+                    'authorized' => 'authorized',
+                ],
+            ],
+            'columnNames' => [
+                [
+                    'start_ip' => 'start_ip',
+                    'end_ip' => 'end_ip',
+                    'environment' => 'environment',
+                    'authorized' => 'authorized',
+                ],
+            ],
+            'table' => [
+                [
+                    'name' => 'Range',
+                ],
+            ],
+            'idGenerator' => [
+                $o[1],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+);

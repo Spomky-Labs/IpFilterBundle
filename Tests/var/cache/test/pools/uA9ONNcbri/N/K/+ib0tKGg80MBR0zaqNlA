@@ -1,0 +1,89 @@
+<?php //%255BSpomkyLabs%255CTestIpFilterBundle%255CEntity%255CIp%2524CLASSMETADATA%255D%255B1%255D
+
+namespace Symfony\Component\VarExporter\Internal;
+
+return $getExpiry ? PHP_INT_MAX : Hydrator::hydrate(
+    $o = [
+        clone (($p = &Registry::$prototypes)['Doctrine\\ORM\\Mapping\\ClassMetadata'] ?? Registry::p('Doctrine\\ORM\\Mapping\\ClassMetadata')),
+        clone ($p['Doctrine\\ORM\\Id\\IdentityGenerator'] ?? Registry::p('Doctrine\\ORM\\Id\\IdentityGenerator')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'name' => [
+                'SpomkyLabs\\TestIpFilterBundle\\Entity\\Ip',
+            ],
+            'namespace' => [
+                'SpomkyLabs\\TestIpFilterBundle\\Entity',
+            ],
+            'rootEntityName' => [
+                'SpomkyLabs\\TestIpFilterBundle\\Entity\\Ip',
+            ],
+            'identifier' => [
+                [
+                    'id',
+                ],
+            ],
+            'generatorType' => [
+                4,
+            ],
+            'fieldMappings' => [
+                [
+                    'ip' => [
+                        'fieldName' => 'ip',
+                        'type' => 'string',
+                        'columnName' => 'ip',
+                        'length' => 32,
+                        'nullable' => false,
+                        'declared' => 'SpomkyLabs\\IpFilterBundle\\Entity\\Ip',
+                    ],
+                    'environment' => [
+                        'fieldName' => 'environment',
+                        'type' => 'array',
+                        'columnName' => 'environment',
+                        'declared' => 'SpomkyLabs\\IpFilterBundle\\Entity\\Ip',
+                    ],
+                    'authorized' => [
+                        'fieldName' => 'authorized',
+                        'type' => 'boolean',
+                        'columnName' => 'authorized',
+                        'nullable' => false,
+                        'declared' => 'SpomkyLabs\\IpFilterBundle\\Entity\\Ip',
+                    ],
+                    'id' => [
+                        'id' => true,
+                        'fieldName' => 'id',
+                        'type' => 'integer',
+                        'columnName' => 'id',
+                    ],
+                ],
+            ],
+            'fieldNames' => [
+                [
+                    'ip' => 'ip',
+                    'environment' => 'environment',
+                    'authorized' => 'authorized',
+                    'id' => 'id',
+                ],
+            ],
+            'columnNames' => [
+                [
+                    'ip' => 'ip',
+                    'environment' => 'environment',
+                    'authorized' => 'authorized',
+                    'id' => 'id',
+                ],
+            ],
+            'table' => [
+                [
+                    'name' => 'ips',
+                ],
+            ],
+            'idGenerator' => [
+                $o[1],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+);

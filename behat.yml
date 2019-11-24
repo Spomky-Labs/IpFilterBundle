@@ -1,6 +1,4 @@
 default:
-    autoload:
-        '': %paths.base%/Features/bootstrap
     extensions:
         Behat\Symfony2Extension:
             kernel:
@@ -8,9 +6,6 @@ default:
                 debug: true
                 path: Tests/app/AppKernel.php
                 bootstrap: vendor/autoload.php
-        VIPSoft\DoctrineDataFixturesExtension\Extension:
-            lifetime:    feature
-            autoload:    true
         Behat\MinkExtension:
             sessions:
                 default:

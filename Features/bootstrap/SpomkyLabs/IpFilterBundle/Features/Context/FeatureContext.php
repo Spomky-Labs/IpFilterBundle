@@ -14,6 +14,7 @@ namespace SpomkyLabs\IpFilterBundle\Features\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\MinkExtension\Context\MinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
+use DAMA\DoctrineTestBundle\Doctrine\DBAL\StaticDriver;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Exception\InsufficientAuthenticationException;
 
@@ -165,5 +166,37 @@ class FeatureContext extends MinkContext implements KernelAwareContext, SnippetA
         if ($this->exception !== null) {
             throw $this->exception;
         }
+    }
+
+    /**
+     * @BeforeSuite
+     */
+    public static function beforeSuite()
+    {
+        StaticDriver::setKeepStaticConnections(true);
+    }
+
+    /**
+     * @BeforeScenario
+     */
+    public function beforeScenario()
+    {
+        StaticDriver::beginTransaction();
+    }
+
+    /**
+     * @AfterScenario
+     */
+    public function afterScenario()
+    {
+        StaticDriver::rollBack();
+    }
+
+    /**
+     * @AfterSuite
+     */
+    public static function afterSuite()
+    {
+        StaticDriver::setKeepStaticConnections(false);
     }
 }

@@ -21,7 +21,6 @@ class AppKernel extends Kernel
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-
             new SpomkyLabs\IpFilterBundle\SpomkyLabsIpFilterBundle(),
             new SpomkyLabs\TestIpFilterBundle\SpomkyLabsTestIpFilterBundle(),
         ];

@@ -1,6 +1,8 @@
 Ip Filter Bundle
 ================
 
+**This project was forked from [Spomky-Labs/IpFilterBundle](https://github.com/Spomky-Labs/IpFilterBundle) because is abandoned.**
+
 [![Build Status](https://travis-ci.org/Spomky-Labs/IpFilterBundle.png?branch=master)](https://travis-ci.org/Spomky-Labs/IpFilterBundle)
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/Spomky-Labs/IpFilterBundle/badges/quality-score.png?s=801f9afe962a2ef962fa13e5bba55d2e57aa68f8)](https://scrutinizer-ci.com/g/Spomky-Labs/IpFilterBundle/)
 [![HHVM Status](http://hhvm.h4cc.de/badge/spomky-labs/ip-filter-bundle.png)](http://hhvm.h4cc.de/package/spomky-labs/ip-filter-bundle)
